@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5o8p5awx0oo6"]
+
+[ext_resource type="Script" path="res://scenes/player/player_sprite.gd" id="1_vmigj"]
+[ext_resource type="Texture2D" uid="uid://blg0x1widlh8j" path="res://assets/sprites/knight1.png" id="1_ywvf0"]
+[ext_resource type="PackedScene" uid="uid://esre1adlxt1m" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_1h6kq"]
+[ext_resource type="Texture2D" uid="uid://dtiv5fmh3lui0" path="res://assets/sprites/knight2.png" id="2_fxer2"]
+[ext_resource type="Texture2D" uid="uid://lv2vvotqjpf" path="res://assets/sprites/knight3.png" id="3_yoxgo"]
+[ext_resource type="Texture2D" uid="uid://6l7srkpkftmg" path="res://assets/sprites/knight4.png" id="4_x2qel"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f0ig7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ywvf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fxer2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yoxgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x2qel")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vp2na"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 0
+script = ExtResource("1_vmigj")
+
+[node name="AbilityManager" type="Node" parent="."]
+
+[node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_1h6kq")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f0ig7")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_vp2na")
