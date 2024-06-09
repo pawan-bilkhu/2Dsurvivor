@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const MAX_SPEED: float = 200.0
+const ACCELERATION_SMOOTHING = 25
+const MAX_SPEED: float = 150.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -9,9 +10,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var direction_vector: Vector2 = get_movement_vector().normalized()
-	velocity = direction_vector*MAX_SPEED
+	var target_velocity = direction_vector*MAX_SPEED
+	
+	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING)) 
 	move_and_slide()
 
 

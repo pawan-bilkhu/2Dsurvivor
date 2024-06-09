@@ -10,7 +10,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	aquire_target()
-	global_position = global_position.lerp(target_position, 1.0 - exp(-delta * 10))
+	global_position = global_position.lerp(target_position, 1.0 - exp(-delta * 20))
 
 
 func aquire_target() -> void:

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://3dwdsp6ync6u"]
+
+[ext_resource type="Script" path="res://scenes/Manager/enemy_manager.gd" id="1_nodua"]
+[ext_resource type="PackedScene" uid="uid://bd7xdlbqnwbaj" path="res://scenes/basic_enemy/basic_enemy.tscn" id="2_qraa5"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_nodua")
+basic_enemy_scene = ExtResource("2_qraa5")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
