@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player") as CharacterBody2D
-	if !player:
+	if not player:
 		return
 	
 	var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))

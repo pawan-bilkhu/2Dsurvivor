@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://3olnnkslbd7"]
+[gd_scene load_steps=3 format=3 uid="uid://3olnnkslbd7"]
 
 [ext_resource type="Script" path="res://scenes/ui/area_time_ui.gd" id="1_gg4rw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h8flv"]
+font_size = 20
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="AreaTimeUI" type="CanvasLayer"]
 script = ExtResource("1_gg4rw")
@@ -20,3 +24,4 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "test"
+label_settings = SubResource("LabelSettings_h8flv")
