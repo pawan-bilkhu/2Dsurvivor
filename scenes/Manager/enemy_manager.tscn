@@ -8,6 +8,7 @@ script = ExtResource("1_nodua")
 basic_enemy_scene = ExtResource("2_qraa5")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

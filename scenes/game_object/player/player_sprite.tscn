@@ -1,14 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5o8p5awx0oo6"]
+[gd_scene load_steps=14 format=3 uid="uid://c5o8p5awx0oo6"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player_sprite.gd" id="1_vmigj"]
 [ext_resource type="Texture2D" uid="uid://blg0x1widlh8j" path="res://assets/sprites/knight1.png" id="1_ywvf0"]
 [ext_resource type="PackedScene" uid="uid://esre1adlxt1m" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_1h6kq"]
+[ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_fb370"]
 [ext_resource type="Texture2D" uid="uid://dtiv5fmh3lui0" path="res://assets/sprites/knight2.png" id="2_fxer2"]
 [ext_resource type="Texture2D" uid="uid://lv2vvotqjpf" path="res://assets/sprites/knight3.png" id="3_yoxgo"]
 [ext_resource type="Texture2D" uid="uid://6l7srkpkftmg" path="res://assets/sprites/knight4.png" id="4_x2qel"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rynui"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocetk"]
+bg_color = Color(0.262745, 0.882353, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc8jo"]
 radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fk20n"]
+radius = 7.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f0ig7"]
 animations = [{
@@ -38,22 +53,56 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_vmigj")
 
+[node name="HealthComponent" parent="." instance=ExtResource("2_fb370")]
+
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_1h6kq")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(32, 6)
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 16.0
+offset_bottom = -17.0
+pivot_offset = Vector2(16, 3)
+theme_override_styles/background = SubResource("StyleBoxFlat_rynui")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ocetk")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
 shape = SubResource("CircleShape2D_pc8jo")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_fk20n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_f0ig7")
 offset = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_vp2na")
+
+[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="body_entered" from="CollisionArea2D" to="." method="_on_collision_area_2d_body_entered"]
+[connection signal="body_exited" from="CollisionArea2D" to="." method="_on_collision_area_2d_body_exited"]
