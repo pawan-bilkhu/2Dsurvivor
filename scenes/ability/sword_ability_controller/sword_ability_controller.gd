@@ -13,8 +13,6 @@ func _ready() -> void:
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 
-
-
 func _on_timer_timeout() -> void:
 	var player: CharacterBody2D = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	if not player:
