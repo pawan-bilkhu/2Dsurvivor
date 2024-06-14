@@ -1,2 +1,2 @@
 # 2Dsurvivor
-A 2D area survival roguelike game made in Godot 4
+A 2D arena survival roguelike game made in Godot 4
