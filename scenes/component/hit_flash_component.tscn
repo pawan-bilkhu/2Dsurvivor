@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj36wbtxyvehs"]
+
+[ext_resource type="Script" path="res://scenes/component/hit_flash_component.gd" id="1_i0xvu"]
+[ext_resource type="Material" uid="uid://d3ttam8qdhi5j" path="res://scenes/component/hit_flash_component_material.tres" id="2_da6dn"]
+
+[node name="HitFlashComponent" type="Node"]
+script = ExtResource("1_i0xvu")
+hit_flash_material = ExtResource("2_da6dn")

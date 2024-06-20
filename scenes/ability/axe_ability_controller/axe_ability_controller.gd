@@ -2,8 +2,11 @@ extends Node
 
 @export var axe_ability_scene: PackedScene
 
-var damage: int = 10
+var base_damage: float = 10
+var additional_damage_percent: float = 1
 
+func _ready() -> void:
+	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 func _on_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Node2D
@@ -17,4 +20,8 @@ func _on_timer_timeout() -> void:
 	var axe_ability_instance = axe_ability_scene.instantiate() as Node2D
 	foreground_layer.add_child(axe_ability_instance)
 	axe_ability_instance.global_position = player.global_position
-	axe_ability_instance.hitbox_component.damage = damage
+	axe_ability_instance.hitbox_component.damage = base_damage * additional_damage_percent
+
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:
+	if upgrade.id == "axe_damage":
+		additional_damage_percent = 1 + (current_upgrades["axe_damage"]["quantity"] * 0.1)

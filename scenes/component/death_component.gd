@@ -23,7 +23,3 @@ func on_died() -> void:
 	
 	global_position = spawn_position
 	animation_player.play("default")
-	
-	
-	
-	
