@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+@onready var hit_random_audio_player_2d_component: AudioStreamPlayer2D = $HitRandomAudioPlayer2DComponent
 
 
 func _ready() -> void:
@@ -23,3 +24,5 @@ func on_died() -> void:
 	
 	global_position = spawn_position
 	animation_player.play("default")
+	hit_random_audio_player_2d_component.play_random()
+	

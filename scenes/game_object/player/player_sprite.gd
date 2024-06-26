@@ -6,14 +6,15 @@ extends CharacterBody2D
 @onready var abilities: Node = $Abilities
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var visuals: Node2D = $Visuals
+@onready var velocity_component: Node = $VelocityComponent
+@onready var hit_random_stream_player_2d_component: AudioStreamPlayer2D = $HitRandomStreamPlayer2DComponent
 
-const ACCELERATION_SMOOTHING = 25
-const MAX_SPEED: float = 150.0
 
 var number_colliding_bodies: int = 0
-
+var base_speed: float = 0.0
 
 func _ready() -> void:
+	base_speed = velocity_component.max_speed
 	health_component.health_changed.connect(on_health_changed)
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 	update_health_display()
@@ -22,10 +23,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var movement_vector = get_movement_vector()
 	var direction_vector: Vector2 = movement_vector.normalized()
-	var target_velocity = direction_vector*MAX_SPEED
-	
-	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING)) 
-	move_and_slide()
+	velocity_component.accelerate_in_direction(direction_vector)
+	velocity_component.move(self)
 	
 	if movement_vector.length_squared() > 0:
 		animation_player.play("walk")
@@ -55,7 +54,9 @@ func update_health_display() -> void:
 
 
 func on_health_changed() -> void:
+	GameEvents.emit_player_damaged()
 	update_health_display()
+	hit_random_stream_player_2d_component.play_random()
 
 
 func _on_collision_area_2d_body_entered(body: Node2D) -> void:
@@ -72,8 +73,9 @@ func _on_damage_interval_timer_timeout() -> void:
 
 
 func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:
-	if not ability_upgrade is Ability:
-		return
-	
-	var new_ability = ability_upgrade.ability_controller_scene.instantiate()
-	abilities.add_child(new_ability)
+	if ability_upgrade is Ability:
+		var new_ability = ability_upgrade.ability_controller_scene.instantiate()
+		abilities.add_child(new_ability)
+	elif ability_upgrade.id == "player_speed":
+		var percent_increase = current_upgrades["player_speed"]["quantity"] * 0.2
+		velocity_component.max_speed = base_speed*(1 + percent_increase)

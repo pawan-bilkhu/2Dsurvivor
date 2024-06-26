@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var random_stream_player_2d_component: AudioStreamPlayer2D = $RandomStreamPlayer2DComponent
 
 
 func tween_collect(percent: float, start_position: Vector2) -> void:
@@ -35,5 +36,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	tween.tween_property(sprite_2d, "scale", Vector2.ZERO, 0.1).set_delay(.41)
 	tween.chain()
 	tween.tween_callback(collect)
-
+	random_stream_player_2d_component.play_random()
 

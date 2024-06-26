@@ -1,8 +1,9 @@
 extends Area2D
 class_name HurtboxComponent
 
-@export var heatlh_component: Node
+signal hit
 
+@export var heatlh_component: Node
 @export var floating_text_scene: PackedScene
 
 
@@ -27,3 +28,4 @@ func _on_area_entered(area: Area2D) -> void:
 		format_string = "%0.0f"
 	floating_text.start(format_string % hitbox_component.damage)
 	
+	hit.emit()

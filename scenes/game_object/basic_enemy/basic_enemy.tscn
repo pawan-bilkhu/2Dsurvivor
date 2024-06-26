@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bd7xdlbqnwbaj"]
+[gd_scene load_steps=22 format=3 uid="uid://bd7xdlbqnwbaj"]
 
 [ext_resource type="Texture2D" uid="uid://btetbf74aftjm" path="res://assets/sprites/rat1.png" id="1_ds2im"]
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_xkkyo"]
@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://b7py1vjt6exo3" path="res://scenes/component/velocity_component.tscn" id="4_ya61l"]
 [ext_resource type="PackedScene" uid="uid://cj36wbtxyvehs" path="res://scenes/component/hit_flash_component.tscn" id="6_t0sso"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_ylusq"]
+[ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="10_e1226"]
+[ext_resource type="AudioStream" uid="uid://c0f6egobmah1o" path="res://assets/audio/footstep_carpet_000.ogg" id="10_qf6e4"]
+[ext_resource type="AudioStream" uid="uid://c8265gb4fut6j" path="res://assets/audio/footstep_carpet_001.ogg" id="12_rajsn"]
+[ext_resource type="AudioStream" uid="uid://cenu8ua07yaq4" path="res://assets/audio/footstep_carpet_002.ogg" id="13_1vihi"]
+[ext_resource type="AudioStream" uid="uid://d0l3gblsphhwu" path="res://assets/audio/footstep_carpet_003.ogg" id="14_bkpma"]
+[ext_resource type="AudioStream" uid="uid://ddswtosvfwiak" path="res://assets/audio/footstep_carpet_004.ogg" id="15_cokie"]
 
 [sub_resource type="Animation" id="Animation_bt1ba"]
 length = 0.001
@@ -114,10 +120,16 @@ hit_flash_material = SubResource("ShaderMaterial_ho8xy")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
 
-[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("heatlh_component") instance=ExtResource("4_n0akw")]
+[node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("10_e1226")]
+autoplay = true
+max_distance = 300.0
+bus = &"Master"
+streams = Array[AudioStream]([ExtResource("10_qf6e4"), ExtResource("12_rajsn"), ExtResource("13_1vihi"), ExtResource("14_bkpma"), ExtResource("15_cokie")])
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("heatlh_component") instance=ExtResource("4_n0akw")]
 heatlh_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_1ue8r")
 debug_color = Color(0.849542, 0.15867, 0.822389, 0.42)
