@@ -3,6 +3,7 @@ extends Node2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var random_stream_player_2d_component: AudioStreamPlayer2D = $RandomStreamPlayer2DComponent
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func tween_collect(percent: float, start_position: Vector2) -> void:
@@ -27,7 +28,7 @@ func disable_collision() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	Callable(disable_collision).call_deferred()
-	
+	animation_player.stop()
 	var tween = create_tween()
 	tween.set_parallel()
 	tween.tween_method(tween_collect.bind(global_position), 0.0, 1.0, 0.5)\
