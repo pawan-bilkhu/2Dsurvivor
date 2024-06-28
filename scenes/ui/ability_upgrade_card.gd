@@ -6,6 +6,7 @@ signal selected
 @onready var description_label: Label = %DescriptionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hover_animation_player: AnimationPlayer = $HoverAnimationPlayer
+@onready var texture_rect: TextureRect = %TextureRect
 
 var disabled: bool = false
 
@@ -21,6 +22,7 @@ func play_discard() -> void:
 
 func set_ability_upgrade(upgrade: AbilityUpgrade) -> void:
 	name_label.text = upgrade.name
+	texture_rect.texture = upgrade.icon
 	description_label.text = upgrade.description
 
 

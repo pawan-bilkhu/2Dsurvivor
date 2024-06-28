@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=4 format=3 uid="uid://07eyku85o1oc"]
+
+[ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_15aft"]
+[ext_resource type="PackedScene" uid="uid://dgelw2d80a4gw" path="res://scenes/ability/dagger_ability_controller/dagger_ability_controller.tscn" id="1_27iuk"]
+[ext_resource type="Script" path="res://resources/upgrades/ability.gd" id="3_pfkef"]
+
+[resource]
+script = ExtResource("3_pfkef")
+ability_controller_scene = ExtResource("1_27iuk")
+id = "dagger"
+icon = ExtResource("1_15aft")
+max_quantity = 1
+name = "Dagger"
+description = "Gain the ability to slash enemies with a dagger."

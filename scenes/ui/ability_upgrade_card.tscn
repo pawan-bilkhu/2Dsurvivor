@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdq3milmijr0q"]
+[gd_scene load_steps=22 format=3 uid="uid://bdq3milmijr0q"]
 
 [ext_resource type="Script" path="res://scenes/ui/ability_upgrade_card.gd" id="1_xdmoc"]
 [ext_resource type="PackedScene" uid="uid://dknk1e36wn2or" path="res://scenes/component/random_stream_player_component.tscn" id="2_d5bd4"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cc7413toickxt" path="res://assets/audio/switch8.ogg" id="10_io1mf"]
 [ext_resource type="AudioStream" uid="uid://chr513vdqfpyk" path="res://assets/audio/switch9.ogg" id="11_1wwq6"]
 [ext_resource type="AudioStream" uid="uid://dxp81ugweea81" path="res://assets/audio/switch10.ogg" id="12_kdoej"]
+[ext_resource type="Texture2D" uid="uid://blg0x1widlh8j" path="res://assets/sprites/knight1.png" id="13_6mjnb"]
 
 [sub_resource type="Animation" id="Animation_allvt"]
 length = 0.001
@@ -237,12 +238,22 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("13_6mjnb")
+expand_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"AlternatePanelContainer"
 
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)

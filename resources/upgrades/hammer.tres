@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=4 format=3 uid="uid://dikye562011ov"]
+
+[ext_resource type="PackedScene" uid="uid://bbbhtvqpq5u8v" path="res://scenes/ability/hammer_ability_controller/hammer_ability_controller.tscn" id="1_2yr5k"]
+[ext_resource type="Texture2D" uid="uid://bor1gl2qbfrx6" path="res://assets/weapons/hammer.png" id="2_fbmlh"]
+[ext_resource type="Script" path="res://resources/upgrades/ability.gd" id="2_ktxqy"]
+
+[resource]
+script = ExtResource("2_ktxqy")
+ability_controller_scene = ExtResource("1_2yr5k")
+id = "hammer"
+icon = ExtResource("2_fbmlh")
+max_quantity = 1
+name = "Hammer"
+description = "Gain the ability to smash enemies with a hammer"

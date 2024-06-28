@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7mtu04g72wtn"]
+
+[ext_resource type="Script" path="res://scenes/ability/dagger_ability/dagger_ability.gd" id="1_35v2b"]
+[ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_d563t"]
+[ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_jx15n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhho"]
+size = Vector2(4, 6)
+
+[node name="DaggerAbility" type="Node2D"]
+script = ExtResource("1_35v2b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d563t")
+offset = Vector2(0, -2)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_jx15n")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_pqhho")

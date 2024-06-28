@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://1mim3i82qhqf"]
+
+[ext_resource type="Texture2D" uid="uid://bor1gl2qbfrx6" path="res://assets/weapons/hammer.png" id="1_judyq"]
+[ext_resource type="Script" path="res://resources/upgrades/ability_upgrade.gd" id="1_miyws"]
+
+[resource]
+script = ExtResource("1_miyws")
+id = "hammer_damage"
+icon = ExtResource("1_judyq")
+max_quantity = 0
+name = "Hammer Damage"
+description = "Increases hammer damage by 10%"

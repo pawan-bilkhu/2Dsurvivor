@@ -164,7 +164,6 @@ sprite = NodePath("../Visuals/Sprite2D")
 
 [node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("8_beatn")]
 autoplay = true
-max_distance = 300.0
 bus = &"Master"
 streams = Array[AudioStream]([ExtResource("9_nb03m"), ExtResource("10_lwaw7"), ExtResource("11_rjuow"), ExtResource("12_oyj7x"), ExtResource("13_0tp3q")])
 

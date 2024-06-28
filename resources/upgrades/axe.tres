@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://cvdun70jloqo7"]
+[gd_resource type="Resource" script_class="Ability" load_steps=4 format=3 uid="uid://cvdun70jloqo7"]
 
 [ext_resource type="PackedScene" uid="uid://b68moxpatcdhr" path="res://scenes/ability/axe_ability_controller/axe_ability_controller.tscn" id="1_u4xv1"]
 [ext_resource type="Script" path="res://resources/upgrades/ability.gd" id="2_4c8gc"]
+[ext_resource type="Texture2D" uid="uid://rvcshgbt5dbq" path="res://assets/weapons/double_bladed_axe.png" id="2_l78bf"]
 
 [resource]
 script = ExtResource("2_4c8gc")
 ability_controller_scene = ExtResource("1_u4xv1")
 id = "axe"
+icon = ExtResource("2_l78bf")
 max_quantity = 1
 name = "Axe"
 description = "Gain the ability to periodically send out spinning axes"

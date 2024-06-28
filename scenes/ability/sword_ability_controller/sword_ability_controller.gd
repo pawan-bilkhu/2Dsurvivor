@@ -21,7 +21,7 @@ func _on_timer_timeout() -> void:
 		
 	var enemies: Array = get_tree().get_nodes_in_group("enemy")
 	
-		
+	# find all enemies within a certain radius (defined by max range)
 	enemies = enemies.filter(func(enemy: CharacterBody2D): 
 		return enemy.global_position.distance_squared_to(player.global_position) < pow(max_range, 2)	
 	)
@@ -29,6 +29,7 @@ func _on_timer_timeout() -> void:
 	if enemies.size() == 0:
 		return
 	
+	# sort those enemies by distance to the player (closest first)
 	enemies.sort_custom(func(a: Node2D, b: Node2D):
 		var a_distance = a.global_position.distance_squared_to(player.global_position)
 		var b_distance = b.global_position.distance_squared_to(player.global_position)
@@ -52,5 +53,5 @@ func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Diction
 		timer.wait_time = base_wait_time * (1 - percent_reduction)
 		timer.start()
 	elif upgrade.id == "sword_damage":
-		additional_damage_percent = 1 + (current_upgrades["sword_damage"]["quantity"] * .15)
+		additional_damage_percent = 1 + (current_upgrades["sword_damage"]["quantity"] * 0.15)
 
