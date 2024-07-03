@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://cm710rmmkoeey"]
+
+[ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_p6ihy"]
+[ext_resource type="Script" path="res://resources/upgrades/ability_upgrade.gd" id="2_yr7bc"]
+
+[resource]
+script = ExtResource("2_yr7bc")
+id = "javelin_quantity"
+icon = ExtResource("1_p6ihy")
+max_quantity = 10
+name = "Javelin Blitz"
+description = "Increases the amount of javelins that spawn during each attack"

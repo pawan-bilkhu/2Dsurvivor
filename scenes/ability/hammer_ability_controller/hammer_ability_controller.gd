@@ -20,21 +20,16 @@ func _on_timer_timeout() -> void:
 	if not player:
 		return
 		
-	var enemies: Array = get_tree().get_nodes_in_group("enemy")
+	var enemies: Array = GameEvents.nearest_target_group("enemy", player, max_range)
+	if enemies.size() == 0:
+		return
 	
-		
-	enemies = enemies.filter(func(enemy: CharacterBody2D): 
-		return enemy.global_position.distance_squared_to(player.global_position) < pow(max_range, 2)	
-	)
+	
 	
 	if enemies.size() == 0:
 		return
 	
-	enemies.sort_custom(func(a: Node2D, b: Node2D):
-		var a_distance = a.global_position.distance_squared_to(player.global_position)
-		var b_distance = b.global_position.distance_squared_to(player.global_position)
-		return a_distance < b_distance
-	)
+
 	
 	var hammer_instance = hammer_ability.instantiate() as HammerAbility
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")

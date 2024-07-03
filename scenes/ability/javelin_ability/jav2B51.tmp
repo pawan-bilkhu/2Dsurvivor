@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dimr7gwp2j4jj"]
+
+[ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_3fdwj"]
+[ext_resource type="Script" path="res://scenes/ability/javelin_ability/javelin_ability.gd" id="1_jm15i"]
+[ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="2_5tgjm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbvpq"]
+size = Vector2(6, 16)
+
+[node name="javelin_ability" type="Node2D"]
+script = ExtResource("1_jm15i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3fdwj")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_5tgjm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_hbvpq")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -8)

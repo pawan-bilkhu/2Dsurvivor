@@ -28,4 +28,7 @@ func _on_area_entered(area: Area2D) -> void:
 		format_string = "%0.0f"
 	floating_text.start(format_string % hitbox_component.damage)
 	
+	if hitbox_component.is_in_group("throwable"):
+		hitbox_component.owner.destroy()
+	
 	hit.emit()

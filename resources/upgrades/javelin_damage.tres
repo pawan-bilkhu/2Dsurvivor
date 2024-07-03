@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=3 format=3 uid="uid://osyc6w24m7e3"]
+
+[ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_joi0p"]
+[ext_resource type="Script" path="res://resources/upgrades/ability_upgrade.gd" id="2_0e0x3"]
+
+[resource]
+script = ExtResource("2_0e0x3")
+id = "javelin_damage"
+icon = ExtResource("1_joi0p")
+max_quantity = 0
+name = "Javelin Damage"
+description = "Increases javelin damage by 30%"

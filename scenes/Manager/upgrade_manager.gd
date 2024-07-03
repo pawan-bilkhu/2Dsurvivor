@@ -22,14 +22,21 @@ var upgrade_hammer_rate = preload("res://resources/upgrades/hammer_rate.tres")
 var upgrade_dagger = preload("res://resources/upgrades/dagger.tres")
 var upgrade_dagger_damage = preload("res://resources/upgrades/dagger_damage.tres")
 var upgrade_dagger_rate = preload("res://resources/upgrades/dagger_rate.tres")
-var upgrade_dagger_amount = preload("res://resources/upgrades/dagger_amount.tres")
+var upgrade_dagger_quantity = preload("res://resources/upgrades/dagger_quantity.tres")
+
+var upgrade_javelin = preload("res://resources/upgrades/javelin.tres")
+var upgrade_javelin_damage = preload("res://resources/upgrades/javelin_damage.tres")
+var upgrade_javelin_rate = preload("res://resources/upgrades/javelin_rate.tres")
+var upgrade_javelin_quantity = preload("res://resources/upgrades/javelin_quantity.tres")
 
 var upgrade_player_speed = preload("res://resources/upgrades/player_speed.tres")
 
 func _ready() -> void:
 	upgrade_pool.add_item(upgrade_axe, 3)
-	upgrade_pool.add_item(upgrade_hammer, 3)
-	upgrade_pool.add_item(upgrade_dagger, 10000)
+	upgrade_pool.add_item(upgrade_hammer, 10)
+	upgrade_pool.add_item(upgrade_dagger, 10)
+	upgrade_pool.add_item(upgrade_javelin, 1000)
+	
 	upgrade_pool.add_item(upgrade_sword_rate, 10)
 	upgrade_pool.add_item(upgrade_sword_damage, 15)
 	upgrade_pool.add_item(upgrade_player_speed, 7)
@@ -46,6 +53,7 @@ func apply_upgrade(upgrade: AbilityUpgrade) -> void:
 		}
 	else:
 		current_upgrades[upgrade.id]["quantity"] += 1
+	
 	
 	if upgrade.max_quantity > 0:
 		var current_quantity = current_upgrades[upgrade.id]["quantity"]
@@ -66,7 +74,12 @@ func update_upgrade_pool(chosen_upgrade: AbilityUpgrade) -> void:
 	if chosen_upgrade.id == upgrade_dagger.id:
 		upgrade_pool.add_item(upgrade_dagger_damage, 12)
 		upgrade_pool.add_item(upgrade_dagger_rate, 10)
-		upgrade_pool.add_item(upgrade_dagger_amount, 1000)
+		upgrade_pool.add_item(upgrade_dagger_quantity, 10)
+	if chosen_upgrade.id == upgrade_javelin.id:
+		upgrade_pool.add_item(upgrade_javelin_damage, 12)
+		upgrade_pool.add_item(upgrade_javelin_rate, 10)
+		upgrade_pool.add_item(upgrade_javelin_quantity, 1000)
+
 
 func pick_upgrades() -> Array:
 	var chosen_upgrades: Array[AbilityUpgrade] = []

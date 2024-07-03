@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://blg0x1widlh8j" path="res://assets/sprites/knight1.png" id="1_ywvf0"]
 [ext_resource type="PackedScene" uid="uid://b7py1vjt6exo3" path="res://scenes/component/velocity_component.tscn" id="2_8xjmy"]
 [ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_fb370"]
-[ext_resource type="PackedScene" uid="uid://esre1adlxt1m" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="4_ef5r0"]
+[ext_resource type="PackedScene" uid="uid://dgelw2d80a4gw" path="res://scenes/ability/dagger_ability_controller/dagger_ability_controller.tscn" id="4_q4a16"]
 [ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="5_wt6s7"]
 [ext_resource type="AudioStream" uid="uid://bm8nmfddic6hm" path="res://assets/audio/impactMining_000.ogg" id="6_jo8kl"]
 [ext_resource type="AudioStream" uid="uid://dd6qq17h15iwm" path="res://assets/audio/impactMining_001.ogg" id="7_c0f04"]
@@ -133,7 +133,7 @@ acceleration = 25.0
 
 [node name="Abilities" type="Node" parent="."]
 
-[node name="SwordAbilityController" parent="Abilities" instance=ExtResource("4_ef5r0")]
+[node name="DaggerAbilityController" parent="Abilities" instance=ExtResource("4_q4a16")]
 
 [node name="HitRandomStreamPlayer2DComponent" parent="." instance=ExtResource("5_wt6s7")]
 streams = Array[AudioStream]([ExtResource("6_jo8kl"), ExtResource("7_c0f04"), ExtResource("8_0coma"), ExtResource("9_juq0p"), ExtResource("10_mvxdf")])
@@ -155,7 +155,6 @@ value = 0.5
 show_percentage = false
 
 [node name="PickupArea2D" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, -5)
 collision_layer = 16
 collision_mask = 0
@@ -164,7 +163,6 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_pc8jo")
 
 [node name="CollisionArea2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 

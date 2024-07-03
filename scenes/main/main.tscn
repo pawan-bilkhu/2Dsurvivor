@@ -51,3 +51,4 @@ unique_name_in_owner = true
 position = Vector2(404, 217)
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
+position = Vector2(-1, 1)

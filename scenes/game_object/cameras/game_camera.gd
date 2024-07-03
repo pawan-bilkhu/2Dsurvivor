@@ -24,21 +24,21 @@ func _process(delta: float) -> void:
 		
 		offset = random_offset()
 
+
 func apply_shake(hammer_global_position: Vector2) -> void:
 	var player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	if not player:
 		return
 	var distance_to_player: float = hammer_global_position.distance_squared_to(player.global_position)
-	if distance_to_player > 0:
-		shake_strength = (pow(shake_range, 2) / distance_to_player) * random_strength
-		return
-	shake_strength = random_strength
+	shake_strength = (pow(shake_range, 2) / max(1, distance_to_player)) * random_strength
+
 
 func aquire_target() -> void:
 	var player_nodes: Array = get_tree().get_nodes_in_group("player")
 	if player_nodes.size() > 0:
 		var player: CharacterBody2D = player_nodes[0] as CharacterBody2D
 		target_position = player.global_position
+
 
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))

@@ -3,26 +3,43 @@ class_name DaggerAbility
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
-@export var target_enemy: Node2D
+@export var target_position: Vector2
+
 @export var radius: float = 70.0
 
 var starting_position: Vector2
 
+
 func _ready() -> void:
+	var player: Node2D = get_tree().get_first_node_in_group("player")
+	if not player:
+		return
+	
+	var player_direction: Vector2 = (player.global_position - target_position).normalized()
+	starting_position = target_position + 30*Vector2.UP
+	rotation = (target_position - global_position).angle() + PI
+	
 	scale = Vector2.ZERO
-	global_position = target_enemy.global_position
-	global_position += Vector2.RIGHT.rotated(randf_range(0, TAU)) * 50.0
+	global_position = starting_position
 	
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
-	
-	tween.tween_method(tween_strike.bind(global_position), 0.0 , 1.0, 0.4)
-	tween.tween_callback(queue_free).set_delay(0.6)
+	tween.set_parallel()
+	tween.tween_property(self, "scale", Vector2.ONE, 0.2)\
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 
-func tween_strike(percent: float, start_position: Vector2) -> void:
-	if not target_enemy:
-		return
-	global_position = start_position.lerp(target_enemy.global_position, percent)
-	var direction_from_start: Vector2 = target_enemy.global_position - start_position
-	var target_rotation: float = direction_from_start.angle() + deg_to_rad(90)
-	rotation = lerp_angle(rotation, target_rotation, 1 - exp(-10 * get_process_delta_time()))
+	
+	tween.tween_method(tween_method.bind(global_position), 0.0 , 1.0, 0.4)\
+	.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUART).set_delay(0.2)
+	
+	tween.tween_property(self, "scale", Vector2.ZERO, 0.5)\
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_delay(1.0)
+	tween.chain()
+	tween.tween_callback(queue_free)
+
+
+
+func tween_method(percent: float, start_position: Vector2) -> void:
+	global_position = start_position.lerp(Vector2(global_position.x, target_position.y), percent)
+	
+	
+

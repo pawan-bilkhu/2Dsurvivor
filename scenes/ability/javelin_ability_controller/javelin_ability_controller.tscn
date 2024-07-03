@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0r3shnxf45xq"]
+
+[ext_resource type="Script" path="res://scenes/ability/javelin_ability_controller/javelin_ability_controller.gd" id="1_0lciv"]
+[ext_resource type="PackedScene" uid="uid://dimr7gwp2j4jj" path="res://scenes/ability/javelin_ability/javelin_ability.tscn" id="2_ldwjb"]
+
+[node name="JavelinAbilityController" type="Node"]
+script = ExtResource("1_0lciv")
+javelin_ability = ExtResource("2_ldwjb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
