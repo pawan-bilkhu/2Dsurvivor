@@ -33,7 +33,6 @@ func _ready() -> void:
 
 func tween_method(percent: float) -> void:
 
-
 	var enemy_direction: Vector2 = target_position - starting_position
 	var midpoint: Vector2 = starting_position + enemy_direction.orthogonal()
 

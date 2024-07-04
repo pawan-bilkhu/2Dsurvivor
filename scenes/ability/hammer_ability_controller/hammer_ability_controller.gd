@@ -23,12 +23,6 @@ func _on_timer_timeout() -> void:
 	var enemies: Array = GameEvents.nearest_target_group("enemy", player, max_range)
 	if enemies.size() == 0:
 		return
-	
-	
-	
-	if enemies.size() == 0:
-		return
-	
 
 	
 	var hammer_instance = hammer_ability.instantiate() as HammerAbility

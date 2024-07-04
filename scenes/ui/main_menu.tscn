@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjrcxsyxlpkrc"]
+[gd_scene load_steps=5 format=3 uid="uid://bjrcxsyxlpkrc"]
 
 [ext_resource type="TileSet" uid="uid://bdnqqncmhiuei" path="res://resources/tile_set.tres" id="1_gq3ij"]
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_j6svg"]
+[ext_resource type="PackedScene" uid="uid://bbs0hyawjshss" path="res://scenes/ui/vignette.tscn" id="2_kabd4"]
 [ext_resource type="PackedScene" uid="uid://b8r6mlhd6vom5" path="res://scenes/ui/sound_button.tscn" id="2_tbpi7"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_j6svg")
+
+[node name="Vignette" parent="." instance=ExtResource("2_kabd4")]
+layer = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, -1)
@@ -28,6 +32,7 @@ size_flags_vertical = 4
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
@@ -38,6 +43,7 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_font_sizes/font_size = 32
 text = "The Arena"
 

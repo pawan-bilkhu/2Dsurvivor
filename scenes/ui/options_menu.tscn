@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://chvj7e3b3n81v"]
+[gd_scene load_steps=5 format=3 uid="uid://chvj7e3b3n81v"]
 
 [ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_iijdi"]
+[ext_resource type="PackedScene" uid="uid://bbs0hyawjshss" path="res://scenes/ui/vignette.tscn" id="2_7nw72"]
 [ext_resource type="TileSet" uid="uid://bdnqqncmhiuei" path="res://resources/tile_set.tres" id="2_m7ovo"]
 [ext_resource type="PackedScene" uid="uid://b8r6mlhd6vom5" path="res://scenes/ui/sound_button.tscn" id="3_6i3uw"]
 
 [node name="OptionsMenu" type="CanvasLayer"]
 process_mode = 3
+layer = 2
 script = ExtResource("1_iijdi")
+
+[node name="Vignette" parent="." instance=ExtResource("2_7nw72")]
+layer = 3
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, -1)
@@ -29,6 +34,7 @@ size_flags_vertical = 4
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
@@ -41,6 +47,7 @@ theme_override_constants/separation = 24
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_font_sizes/font_size = 32
 text = "Options
 "
@@ -55,6 +62,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/SFXOptionContainer"]
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 text = "SFX Volume"
 
 [node name="SFXSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/SFXOptionContainer"]
@@ -68,6 +76,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MusicOptionContainer"]
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MusicOptionContainer"]
@@ -75,12 +84,14 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
+value = 0.5
 
 [node name="WindowOptionContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/WindowOptionContainer"]
 layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
 text = "Window Mode"
 
 [node name="WindowButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/WindowOptionContainer" instance=ExtResource("3_6i3uw")]

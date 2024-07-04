@@ -107,10 +107,7 @@ theme_override_constants/separation = 16
 [node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "Victory"
@@ -120,10 +117,7 @@ vertical_alignment = 1
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_type_variation = &"BlueOutlineLabel"
 theme_override_constants/outline_size = 8
 text = "You Won!"
 
@@ -138,7 +132,7 @@ text = "Restart"
 [node name="QuitButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_vf3ie")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Quit
+text = "Quit To Menu
 "
 
 [node name="VictoryStreamPlayer" type="AudioStreamPlayer" parent="."]

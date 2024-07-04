@@ -11,16 +11,13 @@ var starting_position: Vector2
 
 
 func _ready() -> void:
-	var player: Node2D = get_tree().get_first_node_in_group("player")
-	if not player:
-		return
 	
-	var player_direction: Vector2 = (player.global_position - target_position).normalized()
 	starting_position = target_position + 30*Vector2.UP
-	rotation = (target_position - global_position).angle() + PI
+	global_position = starting_position
+	rotation = (target_position - global_position).angle() + PI/2
 	
 	scale = Vector2.ZERO
-	global_position = starting_position
+	
 	
 	var tween = create_tween()
 	tween.set_parallel()

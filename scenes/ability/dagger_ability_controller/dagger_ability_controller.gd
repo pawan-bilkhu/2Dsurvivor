@@ -19,21 +19,31 @@ func _on_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	if not player:
 		return
-		
+	
 	var enemies: Array = GameEvents.nearest_target_group("enemy", player, max_range)
 	
 	if enemies.size() == 0:
 		return
 	
-	var enemy_position = enemies[0].global_position + 10*(dagger_quantity / 2)*Vector2.LEFT
-	var distance_to_player: Vector2 = (player.global_position - enemy_position).normalized()
+	var enemy_position = enemies[0].global_position
+	var enemy_velocity = enemies[0].velocity
 	
+	var length: float = 20.0 * float(dagger_quantity)
+	var dagger_spacing: float = length / dagger_quantity
 	
 	for i in dagger_quantity:
 		var dagger_instance = dagger_ability.instantiate() as DaggerAbility
 		var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
 		
-		dagger_instance.target_position = enemy_position + (i)*10*(dagger_quantity / 2)*Vector2.RIGHT
+		var direction: Vector2 = Vector2.ZERO
+		
+		if enemy_velocity.x >= 0:
+			direction = Vector2.RIGHT
+		else:
+			direction = Vector2.LEFT
+		
+		dagger_instance.target_position = enemy_position  + (i) * (dagger_spacing) * direction
+		
 		foreground_layer.add_child(dagger_instance)
 		dagger_instance.hitbox_component.damage = base_damage * additional_damage_percent
 		await get_tree().create_timer(0.1).timeout

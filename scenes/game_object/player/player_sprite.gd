@@ -13,6 +13,7 @@ extends CharacterBody2D
 var number_colliding_bodies: int = 0
 var base_speed: float = 0.0
 
+
 func _ready() -> void:
 	base_speed = velocity_component.max_speed
 	health_component.health_changed.connect(on_health_changed)
