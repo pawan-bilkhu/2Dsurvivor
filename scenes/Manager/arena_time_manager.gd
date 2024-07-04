@@ -27,3 +27,4 @@ func _on_timer_timeout() -> void:
 	var end_screen_instance = end_screen_scene.instantiate()
 	add_child(end_screen_instance)
 	end_screen_instance.play_jingle()
+	MetaProgression.save()
