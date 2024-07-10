@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var arena_time_manager: Node
+
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var damage_interval_timer: Timer = $DamageIntervalTimer
 @onready var health_bar: ProgressBar = $HealthBar
@@ -15,7 +17,11 @@ var base_speed: float = 0.0
 
 
 func _ready() -> void:
+	health_component.set_max_health(health_component.max_health * (1 + MetaProgression.get_upgrade_count("health_maximum")))
+	# print(health_component.current_health)
+	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased)
 	base_speed = velocity_component.max_speed
+	health_component.health_decreased.connect(on_health_decreased)
 	health_component.health_changed.connect(on_health_changed)
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 	update_health_display()
@@ -48,17 +54,20 @@ func check_deal_damage() -> void:
 		return
 	health_component.damage(1)
 	damage_interval_timer.start()
-	print(health_component.current_health)
+	# print(health_component.current_health)
 
 
 func update_health_display() -> void:
 	health_bar.value = health_component.get_health_percent()
 
 
-func on_health_changed() -> void:
+func on_health_decreased() -> void:
 	GameEvents.emit_player_damaged()
-	update_health_display()
 	hit_random_stream_player_2d_component.play_random()
+
+
+func on_health_changed() -> void:
+	update_health_display()
 
 
 func _on_collision_area_2d_body_entered(body: Node2D) -> void:
@@ -72,6 +81,14 @@ func _on_collision_area_2d_body_exited(body: Node2D) -> void:
 
 func _on_damage_interval_timer_timeout() -> void:
 	check_deal_damage()
+
+
+func on_arena_difficulty_increased(difficulty: int) -> void:
+	var health_regen_quantity = MetaProgression.get_upgrade_count("health_regeneration")
+	if health_regen_quantity > 0:
+		var is_thirty_second_interval = (difficulty % 6) == 0
+		if is_thirty_second_interval:
+			health_component.heal(health_regen_quantity)
 
 
 func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:

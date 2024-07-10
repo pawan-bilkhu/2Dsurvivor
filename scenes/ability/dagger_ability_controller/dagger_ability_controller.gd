@@ -8,7 +8,7 @@ extends Node
 var base_damage: float = 3
 var additional_damage_percent: float = 1
 var base_wait_time: float
-var dagger_quantity: int = 5
+var dagger_quantity: int = 1
 
 func _ready() -> void:
 	base_wait_time = timer.wait_time

@@ -1,8 +1,8 @@
 extends Node2D
 class_name HammerAbility
 
-@onready var hitbox_component: HitboxComponent = $Contents/HitboxComponent
-@onready var visuals: Node2D = $Contents/Visuals
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var visuals: Node2D = $Visuals
 
 
 
@@ -12,5 +12,5 @@ func set_facing_direction(direction: int) -> void:
 	visuals.scale.x = direction
 
 
-func emit_hammer_smash() -> void:
-	GameEvents.emit_hammer_smash(global_position)
+func emit_camera_shake() -> void:
+	GameEvents.emit_camera_shake(global_position)

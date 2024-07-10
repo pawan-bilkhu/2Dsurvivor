@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3b0nkckxvffo"]
+
+[ext_resource type="Script" path="res://scenes/autoload/game_stats.gd" id="1_1vmtt"]
+
+[node name="WeaponStats" type="Node"]
+script = ExtResource("1_1vmtt")

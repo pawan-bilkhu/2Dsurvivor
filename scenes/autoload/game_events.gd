@@ -3,7 +3,7 @@ extends Node
 signal experience_vial_collected(number: float)
 signal ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary)
 signal player_damaged
-signal hammer_smash(global_position: Vector2)
+signal camera_shake(global_position: Vector2)
 
 
 func emit_experience_vial_collected(number: float) -> void:
@@ -18,8 +18,8 @@ func emit_player_damaged() -> void:
 	player_damaged.emit()
 
 
-func emit_hammer_smash(global_positon: Vector2) -> void:
-	hammer_smash.emit(global_positon)
+func emit_camera_shake(global_positon: Vector2) -> void:
+	camera_shake.emit(global_positon)
 
 
 func nearest_target_group(group: StringName, target: Node2D, max_range: float) -> Array:

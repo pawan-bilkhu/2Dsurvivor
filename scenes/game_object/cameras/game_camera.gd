@@ -1,7 +1,7 @@
 extends Camera2D
 
 var target_position: Vector2 = Vector2.ZERO
-@export var random_strength: float = 50.0
+@export var random_strength: float = 15.0
 @export var shake_fade: float = 5.0
 
 var rng = RandomNumberGenerator.new()
@@ -10,7 +10,7 @@ var shake_range: float = 50.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameEvents.hammer_smash.connect(on_hammer_smash)
+	GameEvents.camera_shake.connect(on_camera_shake)
 	make_current()
 
 
@@ -44,5 +44,5 @@ func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
 
 
-func on_hammer_smash(hammer_global_position: Vector2) -> void:
+func on_camera_shake(hammer_global_position: Vector2) -> void:
 	apply_shake(hammer_global_position)

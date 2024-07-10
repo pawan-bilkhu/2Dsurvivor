@@ -7,35 +7,48 @@ extends Node
 var current_upgrades = {}
 var upgrade_pool: WeightedTable = WeightedTable.new()
 
-
+# axe ability and upgrades
 var upgrade_axe = preload("res://resources/upgrades/axe.tres")
 var upgrade_axe_damage = preload("res://resources/upgrades/axe_damage.tres")
 var upgrade_axe_rate = preload("res://resources/upgrades/axe_rate.tres")
 
+# sword upgrades
 var upgrade_sword_damage = preload("res://resources/upgrades/sword_damage.tres")
 var upgrade_sword_rate = preload("res://resources/upgrades/sword_rate.tres")
 
+
+# hammer ability and upgrades
 var upgrade_hammer = preload("res://resources/upgrades/hammer.tres")
 var upgrade_hammer_damage = preload("res://resources/upgrades/hammer_damage.tres")
 var upgrade_hammer_rate = preload("res://resources/upgrades/hammer_rate.tres")
 
+# dagger ability and upgrades
 var upgrade_dagger = preload("res://resources/upgrades/dagger.tres")
 var upgrade_dagger_damage = preload("res://resources/upgrades/dagger_damage.tres")
 var upgrade_dagger_rate = preload("res://resources/upgrades/dagger_rate.tres")
 var upgrade_dagger_quantity = preload("res://resources/upgrades/dagger_quantity.tres")
 
+# javelin ability and upgrades
 var upgrade_javelin = preload("res://resources/upgrades/javelin.tres")
 var upgrade_javelin_damage = preload("res://resources/upgrades/javelin_damage.tres")
 var upgrade_javelin_rate = preload("res://resources/upgrades/javelin_rate.tres")
 var upgrade_javelin_quantity = preload("res://resources/upgrades/javelin_quantity.tres")
 
+# anvil ability and upgrades
+var upgrade_anvil = preload("res://resources/upgrades/anvil.tres")
+var upgrade_anvil_quantity = preload("res://resources/upgrades/anvil_quantity.tres")
+
+# hammer upgrades
 var upgrade_player_speed = preload("res://resources/upgrades/player_speed.tres")
 
+
 func _ready() -> void:
-	upgrade_pool.add_item(upgrade_axe, 3)
+	# Abilities
+	upgrade_pool.add_item(upgrade_axe, 10)
 	upgrade_pool.add_item(upgrade_hammer, 10)
 	upgrade_pool.add_item(upgrade_dagger, 10)
-	upgrade_pool.add_item(upgrade_javelin, 1000)
+	upgrade_pool.add_item(upgrade_javelin, 10)
+	upgrade_pool.add_item(upgrade_anvil, 10)
 	
 	upgrade_pool.add_item(upgrade_sword_rate, 10)
 	upgrade_pool.add_item(upgrade_sword_damage, 15)
@@ -68,17 +81,19 @@ func update_upgrade_pool(chosen_upgrade: AbilityUpgrade) -> void:
 	if chosen_upgrade.id == upgrade_axe.id:
 		upgrade_pool.add_item(upgrade_axe_damage, 12)
 		upgrade_pool.add_item(upgrade_axe_rate, 10)
-	if chosen_upgrade.id == upgrade_hammer.id:
+	elif chosen_upgrade.id == upgrade_hammer.id:
 		upgrade_pool.add_item(upgrade_hammer_damage, 12)
 		upgrade_pool.add_item(upgrade_hammer_rate, 10)
-	if chosen_upgrade.id == upgrade_dagger.id:
+	elif chosen_upgrade.id == upgrade_dagger.id:
 		upgrade_pool.add_item(upgrade_dagger_damage, 12)
 		upgrade_pool.add_item(upgrade_dagger_rate, 10)
 		upgrade_pool.add_item(upgrade_dagger_quantity, 10)
-	if chosen_upgrade.id == upgrade_javelin.id:
+	elif chosen_upgrade.id == upgrade_javelin.id:
 		upgrade_pool.add_item(upgrade_javelin_damage, 12)
 		upgrade_pool.add_item(upgrade_javelin_rate, 10)
-		upgrade_pool.add_item(upgrade_javelin_quantity, 1000)
+		upgrade_pool.add_item(upgrade_javelin_quantity, 10)
+	elif chosen_upgrade.id == upgrade_anvil.id:
+		upgrade_pool.add_item(upgrade_anvil_quantity, 12)
 
 
 func pick_upgrades() -> Array:

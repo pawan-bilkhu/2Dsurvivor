@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://bx3my1c87ql7t"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="1_7b85f"]
+[ext_resource type="Texture2D" uid="uid://ymhyhryjnbtu" path="res://assets/weapons/long_sword.png" id="1_xuk1s"]
+
+[resource]
+script = ExtResource("1_7b85f")
+id = "sword"
+title = "Sword Upgrade"
+icon = ExtResource("1_xuk1s")
+max_quantity = 10
+experience_cost = 500
+damage_increase = 1.0
+critcal_chance_increase = 0.02
+critcal_damage_increase = 0.04
+attack_interval_decrease = 0.2

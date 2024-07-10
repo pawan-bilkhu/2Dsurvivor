@@ -67,6 +67,7 @@ func on_options_back_pressed(options_menu) -> void:
 
 
 func on_quit_pressed() -> void:
+	MetaProgression.save()
 	get_tree().paused = false
 	ScreenTransition.transition()
 	await ScreenTransition.transition_halfway

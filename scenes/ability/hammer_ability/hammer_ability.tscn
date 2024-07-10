@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmklodi0aty0b"]
+[gd_scene load_steps=20 format=3 uid="uid://bmklodi0aty0b"]
 
 [ext_resource type="Script" path="res://scenes/ability/hammer_ability/hammer_ability.gd" id="1_0e4k3"]
 [ext_resource type="Texture2D" uid="uid://bor1gl2qbfrx6" path="res://assets/weapons/hammer.png" id="1_w5jev"]
@@ -9,13 +9,42 @@
 [ext_resource type="AudioStream" uid="uid://b0bmccj0ji8el" path="res://assets/audio/impactPunch_heavy_002.ogg" id="7_4tym0"]
 [ext_resource type="AudioStream" uid="uid://b6u3dw8hmgxwq" path="res://assets/audio/impactPunch_heavy_003.ogg" id="8_txthf"]
 [ext_resource type="AudioStream" uid="uid://etj2pdk2e460" path="res://assets/audio/impactPunch_heavy_004.ogg" id="9_4pr42"]
+[ext_resource type="Texture2D" uid="uid://dfdjsp28kahek" path="res://assets/particle_effects/particle.png" id="10_x7veq"]
+
+[sub_resource type="Gradient" id="Gradient_pwrpp"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.206651)
+colors = PackedColorArray(0.545098, 0.607843, 0.705882, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bw0ph"]
+gradient = SubResource("Gradient_pwrpp")
+
+[sub_resource type="Curve" id="Curve_gxcyn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.126949, 1), 0.0, 0.0, 0, 0, Vector2(0.659271, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_54l7r"]
+curve = SubResource("Curve_gxcyn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcqd2"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_54l7r")
+color_initial_ramp = SubResource("GradientTexture1D_bw0ph")
 
 [sub_resource type="Animation" id="Animation_f3l1a"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Contents/Visuals/Sprite2D:scale")
+tracks/0/path = NodePath("Visuals/Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +56,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Contents/Visuals/Sprite2D:rotation")
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +68,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Contents/HitboxComponent/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -51,48 +80,48 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Contents:position")
+tracks/3/path = NodePath("Visuals/Sprite2D:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Contents/Visuals/Sprite2D:modulate")
+tracks/4/path = NodePath("GPUParticles2D:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ybm02"]
 resource_name = "smash"
-length = 1.4
+length = 1.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Contents/Visuals/Sprite2D:scale")
+tracks/0/path = NodePath("Visuals/Sprite2D:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.450625, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(1, 1)]
+"values": [Vector2(0, 0), Vector2(1.5, 1.5), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Contents/Visuals/Sprite2D:rotation")
+tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -118,7 +147,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Contents/HitboxComponent/CollisionShape2D:disabled")
+tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -130,14 +159,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Contents:position")
+tracks/4/path = NodePath("Visuals:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0.65, 0.95),
 "transitions": PackedFloat32Array(-2, 2),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 40)]
+"values": [Vector2(0, -40), Vector2(0, 0)]
 }
 tracks/5/type = "method"
 tracks/5/imported = false
@@ -150,7 +179,7 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"emit_hammer_smash"
+"method": &"emit_camera_shake"
 }]
 }
 tracks/6/type = "method"
@@ -170,14 +199,26 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Contents/Visuals/Sprite2D:modulate")
+tracks/7/path = NodePath("Visuals/Sprite2D:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(1, 1.2),
+"times": PackedFloat32Array(1.2, 1.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GPUParticles2D:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.9375),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c2dm6"]
@@ -192,25 +233,34 @@ radius = 33.23
 [node name="HammerAbility" type="Node2D"]
 script = ExtResource("1_0e4k3")
 
-[node name="Contents" type="Node2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_qcqd2")
+texture = ExtResource("10_x7veq")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 0
+interpolate = false
+trail_lifetime = 0.5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Contents"]
-root_node = NodePath("../..")
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("1_w5jev")
+offset = Vector2(0, -4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_c2dm6")
 }
 autoplay = "smash"
 
-[node name="Visuals" type="Node2D" parent="Contents"]
+[node name="HitboxComponent" parent="." instance=ExtResource("3_53jnq")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Contents/Visuals"]
-texture = ExtResource("1_w5jev")
-offset = Vector2(0, -4)
-
-[node name="HitboxComponent" parent="Contents" instance=ExtResource("3_53jnq")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Contents/HitboxComponent"]
-position = Vector2(-1, -3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_fibu1")
 
 [node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("4_ik5d8")]

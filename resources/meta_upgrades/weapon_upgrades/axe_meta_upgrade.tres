@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://b64ko0jl0rwsr"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="1_3x44e"]
+[ext_resource type="Texture2D" uid="uid://rvcshgbt5dbq" path="res://assets/weapons/double_bladed_axe.png" id="1_jwxdl"]
+
+[resource]
+script = ExtResource("1_3x44e")
+id = "axe"
+title = "Axe Upgrade"
+icon = ExtResource("1_jwxdl")
+max_quantity = 5
+experience_cost = 1000
+damage_increase = 3.0
+critcal_chance_increase = 0.05
+critcal_damage_increase = 0.05
+attack_interval_decrease = 0.1

@@ -7,6 +7,10 @@ func _ready() -> void:
 	pass
 
 
+func set_critical_text() -> void:
+	modulate = Color.RED
+
+
 func start(text: String) -> void:
 	label.text = text
 	

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://cwjv1n6ik2me2"]
+
+[ext_resource type="Texture2D" uid="uid://bor1gl2qbfrx6" path="res://assets/weapons/hammer.png" id="1_a21sp"]
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="2_plk6h"]
+
+[resource]
+script = ExtResource("2_plk6h")
+id = "hammer"
+title = "Hammer Upgrade"
+icon = ExtResource("1_a21sp")
+max_quantity = 20
+experience_cost = 1500
+damage_increase = 4.0
+critcal_chance_increase = 0.1
+critcal_damage_increase = 0.5
+attack_interval_decrease = 0.4

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var restart_button: Button = %RestartButton
+@onready var continue_button: Button = %ContinueButton
 @onready var quit_button: Button = %QuitButton
 @onready var title_label: Label = %TitleLabel
 @onready var description_label: Label = %DescriptionLabel
@@ -11,7 +11,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	restart_button.pressed.connect(on_restart_button_pressed)
+	continue_button.pressed.connect(on_continue_button_pressed)
 	quit_button.pressed.connect(on_quit_button_pressed)
 	panel_container.pivot_offset = panel_container.size / 2
 	
@@ -36,17 +36,16 @@ func play_jingle(defeat: bool = false) -> void:
 		victory_stream_player.play()
 
 
-func on_restart_button_pressed() -> void:
+func on_continue_button_pressed() -> void:
 	ScreenTransition.transition()
 	await ScreenTransition.transition_halfway
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/meta_menu.tscn")
 
 
 func on_quit_button_pressed() -> void:
-	ScreenTransition.transition()
+	ScreenTransition.transition_to_scene("res://scenes/ui/main_menu.tscn")
 	await ScreenTransition.transition_halfway
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 

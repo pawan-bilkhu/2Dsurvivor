@@ -1,4 +1,5 @@
 extends Node2D
+class_name AxeAbility
 
 const MAX_RADIUS = 100
 

@@ -5,7 +5,6 @@ extends CharacterBody2D
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 @onready var hit_random_audio_player_2d_component: AudioStreamPlayer2D = $HitRandomAudioPlayer2DComponent
 
-
 var is_moving: bool = false
 
 func _ready() -> void:
