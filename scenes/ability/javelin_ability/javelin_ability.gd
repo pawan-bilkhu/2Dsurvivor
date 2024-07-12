@@ -13,10 +13,14 @@ var starting_position: Vector2
 func _ready() -> void:
 	scale = Vector2.ZERO
 	
-	starting_position = target_position + 30 * Vector2.RIGHT.rotated(randf_range(0, TAU))
+	var player: Node2D = get_tree().get_first_node_in_group("player") as Node2D
+	if not player:
+		return
+	
+	starting_position = player.global_position + 15 * Vector2.RIGHT.rotated(randf_range(0, TAU))
 	global_position = starting_position
 	
-	rotation = Vector2.RIGHT.angle()
+	rotation = (target_position - starting_position).angle()
 	
 	tween = create_tween()
 	
@@ -34,7 +38,7 @@ func _ready() -> void:
 func tween_method(percent: float) -> void:
 
 	var enemy_direction: Vector2 = target_position - starting_position
-	var midpoint: Vector2 = starting_position + enemy_direction.orthogonal()
+	var midpoint: Vector2 = starting_position + (enemy_direction / 2) + enemy_direction.orthogonal()
 
 	global_position = _quadratic_bezier(starting_position, midpoint, target_position, percent)
 	var target_vector: Vector2 = global_position.bezier_derivative(starting_position, midpoint, target_position, percent)

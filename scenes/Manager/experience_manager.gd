@@ -7,7 +7,7 @@ const TARGET_EXPERIENCE_GROWTH = 5
 
 var current_experience = 0
 var current_level = 1
-var target_experience = 1
+var target_experience = 10
 
 
 

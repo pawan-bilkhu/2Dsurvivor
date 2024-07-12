@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbpyoe8tvoq03"]
+[gd_scene load_steps=18 format=3 uid="uid://bbpyoe8tvoq03"]
 
 [ext_resource type="Script" path="res://scenes/ui/meta_menu.gd" id="1_wap1o"]
 [ext_resource type="PackedScene" uid="uid://bbs0hyawjshss" path="res://scenes/ui/vignette.tscn" id="2_nmt1n"]
@@ -11,13 +11,26 @@
 [ext_resource type="Resource" uid="uid://b64ko0jl0rwsr" path="res://resources/meta_upgrades/weapon_upgrades/axe_meta_upgrade.tres" id="6_ovp06"]
 [ext_resource type="Resource" uid="uid://cwjv1n6ik2me2" path="res://resources/meta_upgrades/weapon_upgrades/hammer_meta_upgrade.tres" id="7_66x03"]
 [ext_resource type="PackedScene" uid="uid://cdybp5fwjbdrw" path="res://scenes/ui/weapon_upgrade_card.tscn" id="7_wf2ax"]
+[ext_resource type="Resource" uid="uid://d0nq1nckrb3pk" path="res://resources/meta_upgrades/weapon_upgrades/dagger_meta_upgrade.tres" id="8_7xxx6"]
+[ext_resource type="Resource" uid="uid://btep13m2n0y65" path="res://resources/meta_upgrades/weapon_upgrades/javelin_meta_upgrade.tres" id="9_ncrbg"]
+[ext_resource type="Resource" uid="uid://dgmetkwtp5o2q" path="res://resources/meta_upgrades/weapon_upgrades/anvil_meta_upgrade.tres" id="10_fc8uj"]
+[ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="11_bnrec"]
+[ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="11_hmu5y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jqc7"]
+texture = ExtResource("11_hmu5y")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
 
 [node name="MetaMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 2
 script = ExtResource("1_wap1o")
 meta_upgrades = Array[Resource("res://resources/meta_upgrades/meta_upgrade.gd")]([ExtResource("2_y8ifg"), ExtResource("4_leoah"), ExtResource("3_2l4bd")])
-weapon_upgrades = Array[Resource("res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd")]([ExtResource("5_72w14"), ExtResource("7_66x03"), ExtResource("6_ovp06")])
+weapon_upgrades = Array[Resource("res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd")]([ExtResource("5_72w14"), ExtResource("6_ovp06"), ExtResource("7_66x03"), ExtResource("8_7xxx6"), ExtResource("9_ncrbg"), ExtResource("10_fc8uj")])
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, -1)
@@ -35,7 +48,7 @@ horizontal_scroll_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 size_flags_vertical = 3
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -45,9 +58,7 @@ theme_override_constants/margin_bottom = 16
 [node name="MetaGridContainer" type="GridContainer" parent="ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 18
-theme_override_constants/v_separation = 18
-columns = 3
+theme_override_constants/v_separation = 20
 
 [node name="WeaponUpgradeCard" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("7_wf2ax")]
 layout_mode = 2
@@ -59,34 +70,39 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MetaUpgradeCard" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("4_37tmb")]
+visible = false
 layout_mode = 2
 
 [node name="MetaUpgradeCard2" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("4_37tmb")]
+visible = false
 layout_mode = 2
 
 [node name="MetaUpgradeCard3" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("4_37tmb")]
+visible = false
 layout_mode = 2
 
 [node name="MetaUpgradeCard4" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("4_37tmb")]
+visible = false
 layout_mode = 2
 
 [node name="MetaUpgradeCard5" parent="ScrollContainer/MarginContainer/MetaGridContainer" instance=ExtResource("4_37tmb")]
+visible = false
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="BackMarginContainer" type="MarginContainer" parent="."]
 offset_right = 98.0
 offset_bottom = 53.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
-[node name="Control" type="Control" parent="MarginContainer"]
+[node name="BackControl" type="Control" parent="BackMarginContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="MarginContainer/Control"]
+[node name="BackButton" type="Button" parent="BackMarginContainer/BackControl"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -97,6 +113,37 @@ offset_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Back"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -85.0
+offset_right = -11.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8jqc7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("11_bnrec")
+
+[node name="CurrencyLabel" type="Label" parent="PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_type_variation = &"BlueOutlineLabel"
+text = "50000"
 
 [node name="Vignette" parent="." instance=ExtResource("2_nmt1n")]
 layer = 3

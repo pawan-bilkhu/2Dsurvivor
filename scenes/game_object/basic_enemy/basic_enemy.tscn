@@ -104,6 +104,7 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_vklkh")]
+max_health = 14.0
 
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_8cbbd")]
 drop_percent = 0.35

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://d0nq1nckrb3pk"]
+
+[ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_1t1u2"]
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="1_o24h6"]
+
+[resource]
+script = ExtResource("1_o24h6")
+id = "dagger"
+title = "Dagger Upgrades"
+icon = ExtResource("1_1t1u2")
+damage_increase = 1.0
+damage_cost = 200.0
+damage_max_quantity = 0
+critcal_chance_increase = 0.02
+critical_chance_cost = 150.0
+critical_chance_max_quantity = 49
+critcal_damage_increase = 0.05
+critical_damage_cost = 75.0
+critical_damage_max_quantity = 0
+attack_interval_decrease = 0.1
+attack_interval_cost = 100.0
+attack_interval_max_quantity = 15

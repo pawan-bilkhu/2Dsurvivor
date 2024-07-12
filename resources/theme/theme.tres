@@ -154,6 +154,7 @@ bg_color = Color(0.247059, 0.14902, 0.192157, 1)
 [resource]
 default_font = ExtResource("1_ao0el")
 default_font_size = 16
+AlternateGridContainer/base_type = &"GridContainer"
 AlternatePanelContainer/base_type = &"PanelContainer"
 AlternatePanelContainer/styles/panel = SubResource("StyleBoxTexture_un86x")
 BlueOutlineLabel/base_type = &"Label"

@@ -4,6 +4,7 @@ signal experience_vial_collected(number: float)
 signal ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary)
 signal player_damaged
 signal camera_shake(global_position: Vector2)
+signal meta_upgrade_purchased
 
 
 func emit_experience_vial_collected(number: float) -> void:
@@ -20,6 +21,10 @@ func emit_player_damaged() -> void:
 
 func emit_camera_shake(global_positon: Vector2) -> void:
 	camera_shake.emit(global_positon)
+
+
+func emit_meta_upgrade_purchased() -> void:
+	meta_upgrade_purchased.emit()
 
 
 func nearest_target_group(group: StringName, target: Node2D, max_range: float) -> Array:
