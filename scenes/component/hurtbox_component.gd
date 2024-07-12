@@ -35,7 +35,7 @@ func _on_area_entered(area: Area2D) -> void:
 	floating_damage_text.start(format_string(damage_amount))
 	
 	
-	if hitbox_component.is_in_group("throwable"):
+	if hitbox_component.is_in_group("javelin"):
 		hitbox_component.owner.destroy()
 	
 	hit.emit()

@@ -3,31 +3,116 @@ extends Node
 const SAVE_FILE_PATH = "user://weapon_stats.json"
 
 var weapon_stats: Dictionary = {
-	"weapons": {
-		"sword" : { 
-			"base_damage" : 5.0,
-			"critical_chance" : 0.05,
-			"critical_damage" : 1.0,
-			"attack_interval" :  3.0,
-			"upgrade_quantity" : 0,
+	"sword" : {
+		"damage" : {
+			"magnitude" : 2.0,
+			"current_upgrade_quantity" : 0,
 		},
-		"axe" : { 
-			"base_damage" : 7.0,
-			"critical_chance" : 0.10,
-			"critical_damage" : 1.5,
-			"attack_interval" :  5.0,
-			"upgrade_quantity" : 0,
+		"critical_chance" : {
+			"magnitude" : 0.05,
+			"current_upgrade_quantity" : 0,
 		},
-		"hammer" : { 
-			"base_damage" : 15.0,
-			"critical_chance" : 0.10,
-			"critical_damage" : 2.0,
-			"attack_interval" :  8.0,
-			"upgrade_quantity" : 0,
-		}
-		
-	}
+		"critical_damage" : {
+			"magnitude": 1.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" :  {
+			"magnitude": 1.75,
+			"current_upgrade_quantity" : 0,
+		},
+	},
+	"axe" : {
+		"damage" : {
+			"magnitude": 4.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_chance" : {
+			"magnitude" : 0.08,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_damage" : {
+			"magnitude" : 1.15,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" : {
+			"magnitude" : 7.0,
+			"current_upgrade_quantity" : 0,
+		},	
+	},
+ 	"hammer" : {
+		"damage" : { 
+			"magnitude" : 9.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_chance" : {
+			"magnitude": 0.12,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_damage" : {
+			"magnitude" : 2.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" :  {
+			"magnitude" : 10.0,
+			"current_upgrade_quantity" : 0,
+		},
+	},
+	"dagger" : {
+		"damage" : { 
+			"magnitude" : 1.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_chance" : {
+			"magnitude": 0.03,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_damage" : {
+			"magnitude" : 1.1,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" :  {
+			"magnitude" : 3.0,
+			"current_upgrade_quantity" : 0,
+		},
+	},
+	"javelin" : {
+		"damage" : { 
+			"magnitude" : 1.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_chance" : {
+			"magnitude": 0.05,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_damage" : {
+			"magnitude" : 1.05,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" :  {
+			"magnitude" : 5.0,
+			"current_upgrade_quantity" : 0,
+		},
+	},
+	"anvil" : {
+		"damage" : { 
+			"magnitude" : 10.0,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_chance" : {
+			"magnitude": 0.14,
+			"current_upgrade_quantity" : 0,
+		},
+		"critical_damage" : {
+			"magnitude" : 2.5,
+			"current_upgrade_quantity" : 0,
+		},
+		"attack_interval" :  {
+			"magnitude" : 12.0,
+			"current_upgrade_quantity" : 0,
+		},
+	},
 }
+
 
 func _ready() -> void:
 	load_weapon_stats()
@@ -47,24 +132,21 @@ func save_weapon_stats() -> void:
 	file.store_var(weapon_stats)
 
 
-func update_weapon_stats(upgrade: WeaponUpgrade) -> void:
-	var stats = get_weapon_stats(upgrade.id)
+func add_weapon_stat(weapon_id: String, stat_id: String, stat_value: float) -> void:
+	var stats = get_weapon_stats(weapon_id)
 	if stats.is_empty():
 		print("Could not upgrade non-existent weapon")
 		return
 	
-	stats["base_damage"] += upgrade.damage_increase
-	stats["critical_chance"] += upgrade.critcal_chance_increase
-	stats["critical_damage"] += upgrade.critcal_damage_increase
-	stats["attack_interval"] -= upgrade.attack_interval_decrease
-	stats["upgrade_quantity"] += 1
-		
-	weapon_stats["weapons"][upgrade.id] = stats
+	stats[stat_id]["magnitude"] += stat_value
+	stats[stat_id]["current_upgrade_quantity"] += 1
+	
+	weapon_stats[weapon_id] = stats
 	save_weapon_stats()
 
 
-func get_weapon_stats(upgrade_id: String) -> Dictionary:
+func get_weapon_stats(weapon_id: String) -> Dictionary:
 	var stats: Dictionary = { }
-	if weapon_stats["weapons"].has(upgrade_id):
-		stats = weapon_stats["weapons"][upgrade_id]
+	if weapon_stats.has(weapon_id):
+		stats = weapon_stats[weapon_id]
 	return stats

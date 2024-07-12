@@ -8,7 +8,7 @@ script = ExtResource("1_tbufy")
 sword_ability = ExtResource("2_faqhs")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

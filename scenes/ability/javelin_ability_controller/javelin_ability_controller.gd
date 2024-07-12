@@ -1,18 +1,30 @@
 extends Node
 
-@onready var timer: Timer = $Timer
-
 @export var max_range: float = 200.0
 @export var javelin_ability: PackedScene
 
-var base_wait_time: float
+@onready var timer: Timer = $Timer
+
 var base_damage: float = 2.0
+var critical_chance: float = 0
+var critical_damage: float = 0
+
 var additional_damage_percent: float = 1.0
+var base_wait_time: float
 var javelin_quantity: int = 1
 
+var stats: Dictionary = {}
 
 func _ready() -> void:
-	base_wait_time = timer.wait_time
+	stats = GameStats.get_weapon_stats("javelin")
+	
+	if not stats.is_empty():
+		base_damage = stats["damage"]["magnitude"]
+		critical_chance = min(stats["critical_chance"]["magnitude"], 1.0)
+		critical_damage = stats["critical_damage"]["magnitude"]
+		base_wait_time = max(stats["attack_interval"]["magnitude"], 0.05)
+		
+	timer.wait_time = base_wait_time
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 func _on_timer_timeout() -> void:
@@ -39,8 +51,9 @@ func _on_timer_timeout() -> void:
 		
 		await get_tree().create_timer(0.4).timeout
 		foreground_layer.add_child(javelin_instance)
-		
 		javelin_instance.hitbox_component.damage = base_damage * additional_damage_percent
+		javelin_instance.hitbox_component.critical_chance = critical_chance
+		javelin_instance.hitbox_component.critical_damage = critical_damage
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:

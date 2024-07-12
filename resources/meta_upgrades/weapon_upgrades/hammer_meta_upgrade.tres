@@ -6,11 +6,17 @@
 [resource]
 script = ExtResource("2_plk6h")
 id = "hammer"
-title = "Hammer Upgrade"
+title = "Hammer Upgrades"
 icon = ExtResource("1_a21sp")
-max_quantity = 20
-experience_cost = 1500
 damage_increase = 4.0
-critcal_chance_increase = 0.1
-critcal_damage_increase = 0.5
+damage_cost = 350.0
+damage_max_quantity = 0
+critcal_chance_increase = 0.07
+critical_chance_cost = 300.0
+critical_chance_max_quantity = 13
+critcal_damage_increase = 0.05
+critical_damage_cost = 125.0
+critical_damage_max_quantity = 0
 attack_interval_decrease = 0.4
+attack_interval_cost = 250.0
+attack_interval_max_quantity = 10

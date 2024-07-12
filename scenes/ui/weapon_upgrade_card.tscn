@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://dxp81ugweea81" path="res://assets/audio/switch10.ogg" id="11_mwvia"]
 [ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="12_mippf"]
 [ext_resource type="Texture2D" uid="uid://ymhyhryjnbtu" path="res://assets/weapons/long_sword.png" id="12_tugp1"]
+[ext_resource type="PackedScene" uid="uid://b8r6mlhd6vom5" path="res://scenes/ui/sound_button.tscn" id="14_uogsh"]
 
 [sub_resource type="Animation" id="Animation_allvt"]
 length = 0.001
@@ -41,18 +42,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_xvwqo"]
 resource_name = "selected"
@@ -65,30 +54,18 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.4),
+"times": PackedFloat32Array(0, 0.05, 0.15),
 "transitions": PackedFloat32Array(1, 2.07053, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 2
+tracks/1/path = NodePath("ClickStreamPlayerComponent")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.174533, 0.0872665, 0.0]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ClickStreamPlayerComponent")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -103,20 +80,11 @@ _data = {
 "selected": SubResource("Animation_xvwqo")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1jlv"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.458824, 0.890196, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.8, 0.8, 0)
-
 [node name="WeaponUpgradeCard" type="PanelContainer" groups=["meta_upgrade_card"]]
 custom_minimum_size = Vector2(170, 0)
-offset_right = 224.0
-offset_bottom = 226.0
+offset_right = 349.0
+offset_bottom = 184.0
+pivot_offset = Vector2(175, 92)
 script = ExtResource("1_7s86o")
 
 [node name="ClickStreamPlayerComponent" parent="." instance=ExtResource("1_maio6")]
@@ -131,14 +99,14 @@ libraries = {
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 4
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 13
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -167,8 +135,8 @@ vertical_alignment = 2
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 9
-columns = 3
+theme_override_constants/h_separation = 12
+columns = 6
 
 [node name="DamageLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -180,6 +148,7 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "Damage:"
+vertical_alignment = 1
 
 [node name="DamageValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -192,6 +161,7 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "5.0 HP
 "
+vertical_alignment = 1
 
 [node name="DamageBuff" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -203,7 +173,54 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
-text = "+10.0"
+text = "+10.0 HP"
+vertical_alignment = 1
+
+[node name="DamageMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="DamageCost" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/DamageMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+text = "x50"
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer/DamageMarginContainer/DamageCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GridContainer/DamageMarginContainer/DamageCost/Control"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 17.0
+texture = ExtResource("12_mippf")
+
+[node name="DamageButton" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("14_uogsh")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+text = "Upgrade"
+
+[node name="DamageUpgradeCountLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"BlueOutlineLabel"
+text = "x0
+"
 
 [node name="CriticalChanceLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -215,6 +232,7 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "Critical Chance:"
+vertical_alignment = 1
 
 [node name="CriticalChanceValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -226,6 +244,7 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "5.0 %"
+vertical_alignment = 1
 
 [node name="CriticalChanceBuff" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -237,9 +256,55 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
-text = "+2.0"
+text = "+2.0 %"
+vertical_alignment = 1
 
-[node name="CriticalChanceDamageLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="CriticalChanceMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="CriticalChanceCost" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/CriticalChanceMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+text = "x50"
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer/CriticalChanceMarginContainer/CriticalChanceCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GridContainer/CriticalChanceMarginContainer/CriticalChanceCost/Control"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 17.0
+texture = ExtResource("12_mippf")
+
+[node name="CritChanceButton" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("14_uogsh")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrade"
+
+[node name="CriticalChanceUpgradeCountLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"BlueOutlineLabel"
+text = "x0
+"
+
+[node name="CriticalDamageLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -249,8 +314,9 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "Critical Damage:"
+vertical_alignment = 1
 
-[node name="CriticalChanceDamageValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="CriticalDamageValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -260,8 +326,9 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "150.0 %"
+vertical_alignment = 1
 
-[node name="CriticalChanceDamageBuff" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+[node name="CriticalDamageBuff" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -271,7 +338,53 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
-text = "+4.0"
+text = "+4.0 %"
+vertical_alignment = 1
+
+[node name="CriticalDamageMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="CriticalDamageCost" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/CriticalDamageMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+text = "x50"
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer/CriticalDamageMarginContainer/CriticalDamageCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GridContainer/CriticalDamageMarginContainer/CriticalDamageCost/Control"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 17.0
+texture = ExtResource("12_mippf")
+
+[node name="CritDamageButton" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("14_uogsh")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrade"
+
+[node name="CriticalDamageUpgradeCountLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_type_variation = &"BlueOutlineLabel"
+text = "x0
+"
 
 [node name="AttackIntervalLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -283,6 +396,7 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "Attack Rate:"
+vertical_alignment = 1
 
 [node name="AttackIntervalValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -294,6 +408,7 @@ theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 text = "5.0 s"
+vertical_alignment = 1
 
 [node name="AttackIntervalBuff" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -305,62 +420,50 @@ theme_override_colors/font_color = Color(0.909804, 0.270588, 0.215686, 1)
 theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
-text = "-0.5"
+text = "-0.5 s"
+vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="IntervalMarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 3
+theme_override_constants/margin_left = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ProgressLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="AttackIntervalCost" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/IntervalMarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_type_variation = &"BlueOutlineLabel"
-text = "50/200"
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+text = "x50"
+vertical_alignment = 1
 
-[node name="CountLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer/IntervalMarginContainer/AttackIntervalCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GridContainer/IntervalMarginContainer/AttackIntervalCost/Control"]
+layout_mode = 0
+offset_left = -15.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 17.0
+texture = ExtResource("12_mippf")
+
+[node name="AttackInvtervalButton" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("14_uogsh")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrade"
+
+[node name="AttackInvervalUpgradeCountLabel" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 theme_type_variation = &"BlueOutlineLabel"
 text = "x0
 "
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_p1jlv")
-max_value = 1.0
-value = 0.5
-show_percentage = false
-
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Control"]
-layout_mode = 2
-offset_left = -9.0
-offset_top = -5.0
-offset_right = 7.0
-offset_bottom = 11.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-mouse_filter = 2
-texture = ExtResource("12_mippf")
-
-[node name="PurchaseButton" type="Button" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Purchase"

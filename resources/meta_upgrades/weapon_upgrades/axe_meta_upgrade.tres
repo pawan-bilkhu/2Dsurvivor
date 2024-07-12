@@ -6,11 +6,17 @@
 [resource]
 script = ExtResource("1_3x44e")
 id = "axe"
-title = "Axe Upgrade"
+title = "Axe Upgrades"
 icon = ExtResource("1_jwxdl")
-max_quantity = 5
-experience_cost = 1000
-damage_increase = 3.0
-critcal_chance_increase = 0.05
-critcal_damage_increase = 0.05
+damage_increase = 2.0
+damage_cost = 250.0
+damage_max_quantity = 0
+critcal_chance_increase = 0.03
+critical_chance_cost = 150.0
+critical_chance_max_quantity = 31
+critcal_damage_increase = 0.04
+critical_damage_cost = 100.0
+critical_damage_max_quantity = 0
 attack_interval_decrease = 0.1
+attack_interval_cost = 50.0
+attack_interval_max_quantity = 20

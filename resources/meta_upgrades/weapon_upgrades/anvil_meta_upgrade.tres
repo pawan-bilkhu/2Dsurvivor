@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://dgmetkwtp5o2q"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="1_lm8ys"]
+[ext_resource type="Texture2D" uid="uid://diiea2jso11lw" path="res://assets/weapons/anvil.png" id="1_mguot"]
+
+[resource]
+script = ExtResource("1_lm8ys")
+id = "anvil"
+title = "Anvil Upgrades"
+icon = ExtResource("1_mguot")
+damage_increase = 5.0
+damage_cost = 450.0
+damage_max_quantity = 0
+critcal_chance_increase = 0.05
+critical_chance_cost = 275.0
+critical_chance_max_quantity = 17
+critcal_damage_increase = 0.1
+critical_damage_cost = 200.0
+critical_damage_max_quantity = 0
+attack_interval_decrease = 0.4
+attack_interval_cost = 500.0
+attack_interval_max_quantity = 18

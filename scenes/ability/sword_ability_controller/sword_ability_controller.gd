@@ -1,8 +1,8 @@
 extends Node
 
 @export var max_range: float = 150
-
 @export var sword_ability: PackedScene
+
 @onready var timer: Timer = $Timer
 
 var base_damage: float = 5
@@ -18,12 +18,12 @@ func _ready() -> void:
 	stats = GameStats.get_weapon_stats("sword")
 	
 	if not stats.is_empty():
-		base_damage = stats["base_damage"]
-		critical_chance = stats["critical_chance"]
-		critical_damage = stats["critical_damage"]
-		base_wait_time = max(stats["attack_interval"], 0.05)
+		base_damage = stats["damage"]["magnitude"]
+		critical_chance = min(stats["critical_chance"]["magnitude"], 1.0)
+		critical_damage = stats["critical_damage"]["magnitude"]
+		base_wait_time = max(stats["attack_interval"]["magnitude"], 0.05)
 		
-	base_wait_time = timer.wait_time
+	timer.wait_time = base_wait_time
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 

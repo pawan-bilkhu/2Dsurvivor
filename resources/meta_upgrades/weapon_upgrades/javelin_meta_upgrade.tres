@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponUpgrade" load_steps=3 format=3 uid="uid://btep13m2n0y65"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd" id="1_5evvo"]
+[ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_a6exl"]
+
+[resource]
+script = ExtResource("1_5evvo")
+id = "javelin"
+title = "Javelin Upgrades"
+icon = ExtResource("1_a6exl")
+damage_increase = 2.0
+damage_cost = 400.0
+damage_max_quantity = 0
+critcal_chance_increase = 0.01
+critical_chance_cost = 100.0
+critical_chance_max_quantity = 95
+critcal_damage_increase = 0.05
+critical_damage_cost = 250.0
+critical_damage_max_quantity = 0
+attack_interval_decrease = 0.1
+attack_interval_cost = 75.0
+attack_interval_max_quantity = 20

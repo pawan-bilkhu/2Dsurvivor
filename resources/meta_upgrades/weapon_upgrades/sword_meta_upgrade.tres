@@ -6,11 +6,17 @@
 [resource]
 script = ExtResource("1_7b85f")
 id = "sword"
-title = "Sword Upgrade"
+title = "Sword Upgrades"
 icon = ExtResource("1_xuk1s")
-max_quantity = 10
-experience_cost = 500
 damage_increase = 1.0
+damage_cost = 200.0
+damage_max_quantity = 0
 critcal_chance_increase = 0.02
-critcal_damage_increase = 0.04
-attack_interval_decrease = 0.2
+critical_chance_cost = 150.0
+critical_chance_max_quantity = 48
+critcal_damage_increase = 0.01
+critical_damage_cost = 75.0
+critical_damage_max_quantity = 0
+attack_interval_decrease = 0.05
+attack_interval_cost = 50.0
+attack_interval_max_quantity = 15

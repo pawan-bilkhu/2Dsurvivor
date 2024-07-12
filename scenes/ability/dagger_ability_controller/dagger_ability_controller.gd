@@ -6,12 +6,25 @@ extends Node
 @onready var timer: Timer = $Timer
 
 var base_damage: float = 3
+var critical_chance: float = 0
+var critical_damage: float = 0
+
 var additional_damage_percent: float = 1
 var base_wait_time: float
 var dagger_quantity: int = 1
 
+var stats: Dictionary = {}
+
 func _ready() -> void:
-	base_wait_time = timer.wait_time
+	stats = GameStats.get_weapon_stats("dagger")
+	
+	if not stats.is_empty():
+		base_damage = stats["damage"]["magnitude"]
+		critical_chance = min(stats["critical_chance"]["magnitude"], 1.0)
+		critical_damage = stats["critical_damage"]["magnitude"]
+		base_wait_time = max(stats["attack_interval"]["magnitude"], 0.05)
+	
+	timer.wait_time = base_wait_time
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 
@@ -42,10 +55,13 @@ func _on_timer_timeout() -> void:
 		else:
 			direction = Vector2.LEFT
 		
-		dagger_instance.target_position = enemy_position  + (i) * (dagger_spacing) * direction
+		dagger_instance.target_position = enemy_position  + (i+1) * (dagger_spacing) * direction
 		
 		foreground_layer.add_child(dagger_instance)
 		dagger_instance.hitbox_component.damage = base_damage * additional_damage_percent
+		dagger_instance.hitbox_component.critical_chance = critical_chance
+		dagger_instance.hitbox_component.critical_damage = critical_damage
+		
 		await get_tree().create_timer(0.1).timeout
 	
 	
