@@ -11,7 +11,7 @@ var critical_damage: float = 0
 
 var additional_damage_percent: float = 1
 var base_wait_time: float
-var dagger_quantity: int = 1
+var dagger_quantity: int = 5
 
 var stats: Dictionary = {}
 
@@ -55,14 +55,14 @@ func _on_timer_timeout() -> void:
 		else:
 			direction = Vector2.LEFT
 		
-		dagger_instance.target_position = enemy_position  + (i+1) * (dagger_spacing) * direction
+		dagger_instance.target_position = enemy_position  + (i) * (dagger_spacing) * direction
 		
 		foreground_layer.add_child(dagger_instance)
 		dagger_instance.hitbox_component.damage = base_damage * additional_damage_percent
 		dagger_instance.hitbox_component.critical_chance = critical_chance
 		dagger_instance.hitbox_component.critical_damage = critical_damage
 		
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 	
 	
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:

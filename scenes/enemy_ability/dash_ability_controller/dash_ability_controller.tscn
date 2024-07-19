@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://byajqa6x2qy6a"]
+
+[ext_resource type="Script" path="res://scenes/enemy_ability/dash_ability_controller/dash_ability_controller.gd" id="1_k8tao"]
+
+[node name="DashAbilityController" type="Node"]
+script = ExtResource("1_k8tao")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 50)
+width = 0.0
+default_color = Color(0.909804, 0.270588, 0.215686, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc2blln7sj4ch"]
+
+[ext_resource type="Script" path="res://scenes/manager/arena_time_tracker_manager.gd" id="1_7yce2"]
+
+[node name="ArenaTimeTrackerManager" type="Node"]
+script = ExtResource("1_7yce2")

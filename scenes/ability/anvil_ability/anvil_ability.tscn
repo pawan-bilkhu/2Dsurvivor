@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dr1hx2bqj3mpy"]
+[gd_scene load_steps=21 format=3 uid="uid://dr1hx2bqj3mpy"]
 
 [ext_resource type="Texture2D" uid="uid://diiea2jso11lw" path="res://assets/weapons/anvil.png" id="1_d5jsu"]
 [ext_resource type="Script" path="res://scenes/ability/anvil_ability/anvil_ability.gd" id="1_y5yn0"]
 [ext_resource type="Texture2D" uid="uid://dfdjsp28kahek" path="res://assets/particle_effects/particle.png" id="2_mh3x6"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="2_y7sgk"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="3_h5rwp"]
 [ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="5_feilr"]
 [ext_resource type="AudioStream" uid="uid://bvnh4fktcea1c" path="res://assets/audio/impactPunch_heavy_000.ogg" id="6_gbtof"]
 [ext_resource type="AudioStream" uid="uid://267567fbv0fq" path="res://assets/audio/impactPunch_heavy_001.ogg" id="7_olrh4"]
@@ -61,6 +62,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShadowSprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.4, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShadowSprite2D:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShadowSprite2D:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.784314)]
+}
 
 [sub_resource type="Animation" id="Animation_8nd1k"]
 resource_name = "default"
@@ -73,7 +110,7 @@ tracks/0/path = NodePath("Visuals:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.25, 0.35),
+"times": PackedFloat32Array(0.075, 0.2, 0.25, 0.35),
 "transitions": PackedFloat32Array(1.68179, 1, 1.7411, 1),
 "update": 0,
 "values": [Vector2(0, -96), Vector2(0, 0), Vector2(0, -6), Vector2(0, 0)]
@@ -145,6 +182,42 @@ tracks/5/keys = {
 "method": &"play_random"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShadowSprite2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ShadowSprite2D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.2, 0.25, 0.35, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 1.6), Vector2(1.4, 1), Vector2(1.6, 1.2), Vector2(1.4, 1), Vector2(1.4, 1), Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ShadowSprite2D:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.35, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.627451), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.72549), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wakip"]
 _data = {
@@ -202,6 +275,12 @@ one_shot = true
 explosiveness = 0.9
 fixed_fps = 0
 interpolate = false
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.784314)
+scale = Vector2(1.4, 1)
+texture = ExtResource("3_h5rwp")
+offset = Vector2(0, -2)
 
 [node name="Visuals" type="Node2D" parent="."]
 

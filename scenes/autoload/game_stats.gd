@@ -41,7 +41,7 @@ var weapon_stats: Dictionary = {
 	},
  	"hammer" : {
 		"damage" : { 
-			"magnitude" : 9.0,
+			"magnitude" : 6.0,
 			"current_upgrade_quantity" : 0,
 		},
 		"critical_chance" : {
@@ -95,7 +95,7 @@ var weapon_stats: Dictionary = {
 	},
 	"anvil" : {
 		"damage" : { 
-			"magnitude" : 10.0,
+			"magnitude" : 8.0,
 			"current_upgrade_quantity" : 0,
 		},
 		"critical_chance" : {

@@ -1,0 +1,218 @@
+[gd_scene load_steps=15 format=3 uid="uid://ddqixned7q02e"]
+
+[ext_resource type="Script" path="res://scenes/manager/wave_manager.gd" id="1_rbqkq"]
+[ext_resource type="PackedScene" uid="uid://bd7xdlbqnwbaj" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="2_fkstn"]
+[ext_resource type="PackedScene" uid="uid://lc25pwulr0b" path="res://scenes/game_object/wizard_enemy/wizard_enemy.tscn" id="3_ml4b6"]
+[ext_resource type="PackedScene" uid="uid://diasdpxec5op7" path="res://scenes/game_object/bat_enemy/bat_enemy.tscn" id="4_bbr4c"]
+[ext_resource type="PackedScene" uid="uid://cob66xj14dupp" path="res://scenes/ui/end_screen.tscn" id="5_8q0n0"]
+[ext_resource type="PackedScene" uid="uid://k8s606i2kxvn" path="res://scenes/game_object/crab_enemy/crab_enemy.tscn" id="5_gxkyh"]
+[ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="6_2snvy"]
+[ext_resource type="PackedScene" uid="uid://bwthytsinp4uh" path="res://scenes/game_object/slime_enemy/slime_enemy.tscn" id="6_8asvi"]
+[ext_resource type="PackedScene" uid="uid://bfjgwxk46gets" path="res://scenes/game_object/cyclops_enemy/cyclops_enemy.tscn" id="7_33gab"]
+
+[sub_resource type="Animation" id="Animation_awcii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(290, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_81sac"]
+resource_name = "in"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4),
+"transitions": PackedFloat32Array(3.13834, 0.659752, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(250, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4pnd3"]
+resource_name = "out"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 0.68302, 0.68302),
+"update": 0,
+"values": [Vector2(250, 0), Vector2(200, 0), Vector2(800, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.261799, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_noeie"]
+_data = {
+"RESET": SubResource("Animation_awcii"),
+"in": SubResource("Animation_81sac"),
+"out": SubResource("Animation_4pnd3")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nrkub"]
+texture = ExtResource("6_2snvy")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
+
+[node name="WaveManager" type="Node"]
+script = ExtResource("1_rbqkq")
+basic_enemy_scene = ExtResource("2_fkstn")
+wizard_enemy_scene = ExtResource("3_ml4b6")
+bat_enemy_scene = ExtResource("4_bbr4c")
+crab_enemy_scene = ExtResource("5_gxkyh")
+slime_enemy_scene = ExtResource("6_8asvi")
+cyclops_enemy_scene = ExtResource("7_33gab")
+end_screen_scene = ExtResource("5_8q0n0")
+
+[node name="WaveUI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="WaveUI"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 102.0
+offset_bottom = 94.0
+grow_horizontal = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(66, 42)
+theme_override_constants/margin_top = 30
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveUI/MarginContainer"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_noeie")
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="WaveUI/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="WaveUI/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="CurrentWaveLabel" type="Label" parent="WaveUI/MarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Wave 1"
+
+[node name="PanelContainer" type="PanelContainer" parent="WaveUI"]
+offset_left = 553.0
+offset_top = 1.0
+offset_right = 639.0
+offset_bottom = 30.0
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nrkub")
+
+[node name="EnemeyMarginContainer" type="MarginContainer" parent="WaveUI/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EnemyCountLabel" type="Label" parent="WaveUI/PanelContainer/EnemeyMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+text = "Enemies: 1000"
