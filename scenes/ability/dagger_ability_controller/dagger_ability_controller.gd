@@ -11,7 +11,7 @@ var critical_damage: float = 0
 
 var additional_damage_percent: float = 1
 var base_wait_time: float
-var dagger_quantity: int = 5
+var dagger_quantity: int = 1
 
 var stats: Dictionary = {}
 
