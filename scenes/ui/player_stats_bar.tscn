@@ -1,0 +1,274 @@
+[gd_scene load_steps=11 format=3 uid="uid://dffb245mi52ni"]
+
+[ext_resource type="Script" path="res://scenes/ui/player_stats_bar.gd" id="1_5xxjl"]
+[ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="2_57na8"]
+[ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="2_oksa8"]
+[ext_resource type="Texture2D" uid="uid://djtdp2jgwr33a" path="res://assets/ui/Heart.png" id="4_vk6x0"]
+[ext_resource type="Texture2D" uid="uid://3xmv6syau3fc" path="res://assets/ui/tile_0136.png" id="5_mctbe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rv36j"]
+texture = ExtResource("2_oksa8")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6636q"]
+bg_color = Color(0.458824, 0.890196, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yd42a"]
+bg_color = Color(0.909804, 0.270588, 0.215686, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8622l"]
+texture = ExtResource("2_oksa8")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4joo"]
+bg_color = Color(0.262745, 0.882353, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="PlayerStatsBar" type="CanvasLayer"]
+script = ExtResource("1_5xxjl")
+
+[node name="ExperienceContainer" type="PanelContainer" parent="."]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 176.0
+offset_bottom = 31.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rv36j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ExperienceContainer"]
+layout_mode = 2
+
+[node name="ExperienceMarginContainer" type="MarginContainer" parent="ExperienceContainer/HBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 8
+
+[node name="ExperienceProgressBar" type="ProgressBar" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_6636q")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Control" type="Control" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer/Control"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -5.0
+offset_right = 7.0
+offset_bottom = 11.0
+texture = ExtResource("2_57na8")
+
+[node name="MarginContainer" type="MarginContainer" parent="ExperienceContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_right = 5
+
+[node name="ExperienceAmountLabel" type="Label" parent="ExperienceContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+text = "100000"
+
+[node name="StatsPanelContainer" type="PanelContainer" parent="."]
+offset_left = 1.0
+offset_top = 317.0
+offset_right = 100.0
+offset_bottom = 359.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rv36j")
+
+[node name="ExperienceVBoxContainer" type="VBoxContainer" parent="StatsPanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GridMarginContainer" type="MarginContainer" parent="StatsPanelContainer/ExperienceVBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+
+[node name="GridContainer" type="GridContainer" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+columns = 2
+
+[node name="TotalDamageLabel" type="Label" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+text = "Damage:"
+
+[node name="TotalDamageValue" type="Label" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+text = "3000000"
+
+[node name="TotalEliminationsLabel" type="Label" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+text = "Kills:"
+
+[node name="TotalEliminationsValue" type="Label" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+text = "5"
+
+[node name="HealthPanelContainer" type="PanelContainer" parent="."]
+offset_left = 197.0
+offset_top = 339.0
+offset_right = 447.0
+offset_bottom = 359.0
+pivot_offset = Vector2(125, 10)
+theme_override_styles/panel = SubResource("StyleBoxTexture_rv36j")
+
+[node name="HealthMarginContainer" type="MarginContainer" parent="HealthPanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 2
+
+[node name="HealthProgressBar" type="ProgressBar" parent="HealthPanelContainer/HealthMarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_yd42a")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Control" type="Control" parent="HealthPanelContainer/HealthMarginContainer/HealthProgressBar"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 221.0
+offset_bottom = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="HealthPanelContainer/HealthMarginContainer/HealthProgressBar/Control"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -5.0
+offset_right = 8.0
+offset_bottom = 11.0
+texture = ExtResource("4_vk6x0")
+
+[node name="DashPanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -17.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8622l")
+
+[node name="GridContainer" type="GridContainer" parent="DashPanelContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = -64
+columns = 2
+
+[node name="IconMarginContainer" type="MarginContainer" parent="DashPanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Control" type="Control" parent="DashPanelContainer/GridContainer/IconMarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="DashPanelContainer/GridContainer/IconMarginContainer/Control"]
+layout_mode = 2
+offset_left = -5.0
+offset_top = -10.0
+offset_right = 27.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.523598
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_mctbe")
+
+[node name="DashMarginContainer" type="MarginContainer" parent="DashPanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="DashProgressBar" type="ProgressBar" parent="DashPanelContainer/GridContainer/DashMarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_l4joo")
+max_value = 1.0
+value = 0.5
+show_percentage = false

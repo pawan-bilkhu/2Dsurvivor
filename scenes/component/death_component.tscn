@@ -98,6 +98,5 @@ interpolate = false
 [node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("3_37m5d")]
 position = Vector2(8, 0)
 autoplay = true
-max_distance = 300.0
 bus = &"Master"
 streams = Array[AudioStream]([ExtResource("4_td27j"), ExtResource("5_bn7kv"), ExtResource("6_duncn"), ExtResource("7_vm7pr"), ExtResource("8_tv4qs")])

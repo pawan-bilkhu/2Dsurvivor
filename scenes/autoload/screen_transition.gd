@@ -26,3 +26,5 @@ func transition_to_scene(scene_path: String) -> void:
 	ScreenTransition.transition()
 	await ScreenTransition.transition_halfway
 	get_tree().change_scene_to_file(scene_path)
+	if get_tree().paused:
+		get_tree().paused = false

@@ -2,6 +2,7 @@ extends Node2D
 
 @export var health_component: HealthComponent
 @export var sprite: Sprite2D
+@export var particle_process_material: ParticleProcessMaterial
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
@@ -10,8 +11,8 @@ extends Node2D
 
 func _ready() -> void:
 	gpu_particles_2d.texture = sprite.texture
+	gpu_particles_2d.process_material = particle_process_material
 	health_component.died.connect(on_died)
-
 
 func on_died() -> void:
 	if not owner or not owner is Node2D:

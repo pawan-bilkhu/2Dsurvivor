@@ -26,6 +26,9 @@ func _ready() -> void:
 		
 	timer.wait_time = base_wait_time
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+	
+	
+
 
 func _on_timer_timeout() -> void:
 	var player: Node2D = get_tree().get_first_node_in_group("player")

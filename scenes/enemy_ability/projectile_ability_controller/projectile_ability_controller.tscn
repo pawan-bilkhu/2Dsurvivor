@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba86vpyfw4iju"]
+
+[ext_resource type="Script" path="res://scenes/enemy_ability/projectile_ability_controller/projectile_ability_controller.gd" id="1_mu13h"]
+[ext_resource type="PackedScene" uid="uid://3eetqyjaxx8x" path="res://scenes/enemy_ability/projectile_ability/projectile_ability.tscn" id="2_56lm4"]
+
+[node name="ProjectileAbilityController" type="Node"]
+script = ExtResource("1_mu13h")
+projectile_scene = ExtResource("2_56lm4")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Line2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 0, 50)
+width = 0.0
+default_color = Color(0.909804, 0.270588, 0.215686, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

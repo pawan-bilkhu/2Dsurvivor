@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bd7xdlbqnwbaj"]
+[gd_scene load_steps=26 format=3 uid="uid://bd7xdlbqnwbaj"]
 
 [ext_resource type="Texture2D" uid="uid://btetbf74aftjm" path="res://assets/sprites/rat1.png" id="1_ds2im"]
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_xkkyo"]
 [ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_vklkh"]
-[ext_resource type="PackedScene" uid="uid://gfdaeqcwa4ox" path="res://scenes/component/vial_drop_component.tscn" id="3_8cbbd"]
+[ext_resource type="PackedScene" uid="uid://gfdaeqcwa4ox" path="res://scenes/component/collectible_drop_component.tscn" id="3_70ypv"]
 [ext_resource type="PackedScene" uid="uid://c2s4v64lrud50" path="res://scenes/component/hurtbox_component.tscn" id="4_n0akw"]
 [ext_resource type="PackedScene" uid="uid://cq28gejbb8j1p" path="res://scenes/component/death_component.tscn" id="4_r04mv"]
 [ext_resource type="PackedScene" uid="uid://b7py1vjt6exo3" path="res://scenes/component/velocity_component.tscn" id="4_ya61l"]
@@ -83,6 +83,32 @@ resource_local_to_scene = true
 shader = ExtResource("6_ylusq")
 shader_parameter/lerp_percent = 0.0
 
+[sub_resource type="Curve" id="Curve_acaj5"]
+_data = [Vector2(0, 0.516483), 0.0, 0.0, 0, 0, Vector2(0.613043, 0.527472), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jvb5n"]
+curve = SubResource("Curve_acaj5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o2vp1"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 175.0
+initial_velocity_max = 250.0
+angular_velocity_min = -1440.0
+angular_velocity_max = 1440.0
+gravity = Vector3(0, 800, 0)
+scale_curve = SubResource("CurveTexture_jvb5n")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7liqw"]
+bg_color = Color(0.909804, 0.270588, 0.215686, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ue8r"]
 radius = 12.0
 
@@ -106,8 +132,8 @@ autoplay = "walk"
 [node name="HealthComponent" parent="." instance=ExtResource("2_vklkh")]
 max_health = 14.0
 
-[node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_8cbbd")]
-drop_percent = 0.35
+[node name="CollectibleDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_70ypv")]
+drop_percent = 0.4
 health_component = NodePath("../HealthComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_ya61l")]
@@ -120,11 +146,25 @@ hit_flash_material = SubResource("ShaderMaterial_ho8xy")
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("4_r04mv")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
+particle_process_material = SubResource("ParticleProcessMaterial_o2vp1")
 
 [node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("10_e1226")]
 autoplay = true
 bus = &"Master"
 streams = Array[AudioStream]([ExtResource("10_qf6e4"), ExtResource("12_rajsn"), ExtResource("13_1vihi"), ExtResource("14_bkpma"), ExtResource("15_cokie")])
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 6)
+offset_left = -12.0
+offset_top = -23.0
+offset_right = 12.0
+offset_bottom = -17.0
+pivot_offset = Vector2(12, 3)
+theme_override_styles/fill = SubResource("StyleBoxFlat_7liqw")
+max_value = 1.0
+value = 0.5
+show_percentage = false
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("heatlh_component") instance=ExtResource("4_n0akw")]
 heatlh_component = NodePath("../HealthComponent")
@@ -135,6 +175,8 @@ shape = SubResource("CircleShape2D_1ue8r")
 debug_color = Color(0.849542, 0.15867, 0.822389, 0.42)
 
 [node name="Visuals" type="Node2D" parent="."]
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_ds2im")

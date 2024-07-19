@@ -3,8 +3,13 @@ extends Node
 signal experience_vial_collected(number: float)
 signal ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary)
 signal player_damaged
+signal player_dashed(dash_duration: float)
+signal player_dash_cooldown(wait_time: float)
+signal player_current_health_updated
 signal camera_shake(global_position: Vector2)
 signal meta_upgrade_purchased
+signal damage_dealt(damage_amount: float)
+
 
 
 func emit_experience_vial_collected(number: float) -> void:
@@ -19,12 +24,33 @@ func emit_player_damaged() -> void:
 	player_damaged.emit()
 
 
+func emit_player_current_health_updated(current_health: float) -> void:
+	player_current_health_updated.emit(current_health)
+
+
+func emit_player_dashed(dash_duration: float) -> void:
+	player_dashed.emit(dash_duration)
+
+
+func emit_player_dash_cooldown(wait_time: float) -> void:
+	player_dash_cooldown.emit(wait_time)
+
+
 func emit_camera_shake(global_positon: Vector2) -> void:
 	camera_shake.emit(global_positon)
 
 
 func emit_meta_upgrade_purchased() -> void:
 	meta_upgrade_purchased.emit()
+
+
+func emit_damage_dealt(damage_amount: float) -> void:
+	damage_dealt.emit(damage_amount)
+
+
+func get_enemy_count() -> int:
+	var enemy_count: int = get_tree().get_nodes_in_group("enemy").size()
+	return enemy_count
 
 
 func nearest_target_group(group: StringName, target: Node2D, max_range: float) -> Array:

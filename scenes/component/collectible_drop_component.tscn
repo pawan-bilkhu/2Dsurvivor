@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://gfdaeqcwa4ox"]
+
+[ext_resource type="Script" path="res://scenes/component/collectible_drop_component.gd" id="1_l6gba"]
+[ext_resource type="PackedScene" uid="uid://b07x3pe403mme" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="2_ixlfr"]
+[ext_resource type="PackedScene" uid="uid://dncwbgkvh8uqy" path="res://scenes/game_object/experience_vial/large_experience_vial.tscn" id="3_mh781"]
+
+[node name="CollectibleDropComponent" type="Node"]
+script = ExtResource("1_l6gba")
+drop_percent = 0.516
+vial_scene = ExtResource("2_ixlfr")
+large_vial_scene = ExtResource("3_mh781")

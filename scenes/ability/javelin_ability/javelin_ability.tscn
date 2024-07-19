@@ -1,15 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dimr7gwp2j4jj"]
+[gd_scene load_steps=6 format=3 uid="uid://dimr7gwp2j4jj"]
 
 [ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_3fdwj"]
 [ext_resource type="Script" path="res://scenes/ability/javelin_ability/javelin_ability.gd" id="1_jm15i"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="2_5tgjm"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="2_py8ig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbvpq"]
 size = Vector2(6, 16)
 
 [node name="JavelinAbility" type="Node2D"]
-rotation = 1.5708
 script = ExtResource("1_jm15i")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.784314)
+position = Vector2(7, -2.53399e-05)
+rotation = 1.5708
+scale = Vector2(1.25, 0.5)
+texture = ExtResource("2_py8ig")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3fdwj")

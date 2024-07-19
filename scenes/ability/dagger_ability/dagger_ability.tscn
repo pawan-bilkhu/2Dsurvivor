@@ -1,21 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7mtu04g72wtn"]
+[gd_scene load_steps=6 format=3 uid="uid://b7mtu04g72wtn"]
 
 [ext_resource type="Script" path="res://scenes/ability/dagger_ability/dagger_ability.gd" id="1_35v2b"]
 [ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_d563t"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="2_kcis6"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_jx15n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhho"]
-size = Vector2(4, 6)
+size = Vector2(12, 9)
 
 [node name="DaggerAbility" type="Node2D"]
 script = ExtResource("1_35v2b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.784314)
+position = Vector2(0, -1)
+scale = Vector2(1, 0.5)
+texture = ExtResource("2_kcis6")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+rotation = -3.14159
 texture = ExtResource("1_d563t")
-offset = Vector2(0, -2)
+offset = Vector2(0, 6)
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_jx15n")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, -3)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_pqhho")
+disabled = true

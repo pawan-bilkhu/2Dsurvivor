@@ -24,6 +24,8 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	damage_amount += critical_damage
 	heatlh_component.damage(damage_amount)
+	GameEvents.emit_damage_dealt(damage_amount)
+	
 	
 	
 	var floating_damage_text = floating_text_scene.instantiate() as Node2D

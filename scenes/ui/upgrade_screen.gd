@@ -11,7 +11,6 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 
-
 func set_ability_upgrades(upgrades: Array[AbilityUpgrade]) -> void:
 	var delay: float = 0
 	for upgrade in upgrades:
