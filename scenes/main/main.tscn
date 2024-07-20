@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cy4abug66bilv" path="res://scenes/ui/floating_text.tscn" id="3_2gf2v"]
 [ext_resource type="PackedScene" uid="uid://bim5o2a7bapyk" path="res://scenes/game_object/cameras/game_camera.tscn" id="3_wva4u"]
 [ext_resource type="PackedScene" uid="uid://bbs0hyawjshss" path="res://scenes/ui/vignette.tscn" id="3_yrrcd"]
-[ext_resource type="PackedScene" uid="uid://vuhgd746v5mh" path="res://scenes/manager/experience_manager.tscn" id="4_vcwm5"]
-[ext_resource type="PackedScene" uid="uid://cf4taamnuchbb" path="res://scenes/manager/upgrade_manager.tscn" id="6_r0pig"]
-[ext_resource type="PackedScene" uid="uid://ddqixned7q02e" path="res://scenes/manager/wave_manager.tscn" id="7_8og2e"]
-[ext_resource type="PackedScene" uid="uid://bc2blln7sj4ch" path="res://scenes/manager/arena_time_tracker_manager.tscn" id="7_fiew3"]
+[ext_resource type="PackedScene" uid="uid://vuhgd746v5mh" path="res://scenes/Manager/experience_manager.tscn" id="4_vcwm5"]
+[ext_resource type="PackedScene" uid="uid://cf4taamnuchbb" path="res://scenes/Manager/upgrade_manager.tscn" id="6_r0pig"]
+[ext_resource type="PackedScene" uid="uid://ddqixned7q02e" path="res://scenes/Manager/wave_manager.tscn" id="7_8og2e"]
+[ext_resource type="PackedScene" uid="uid://bc2blln7sj4ch" path="res://scenes/Manager/arena_time_tracker_manager.tscn" id="7_fiew3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_lm64f")

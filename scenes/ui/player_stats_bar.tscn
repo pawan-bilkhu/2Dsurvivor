@@ -170,7 +170,7 @@ text = "5"
 
 [node name="HealthPanelContainer" type="PanelContainer" parent="."]
 offset_left = 197.0
-offset_top = 339.0
+offset_top = 337.0
 offset_right = 447.0
 offset_bottom = 359.0
 pivot_offset = Vector2(125, 10)
@@ -181,9 +181,9 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 2
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_bottom = 3
 
 [node name="HealthProgressBar" type="ProgressBar" parent="HealthPanelContainer/HealthMarginContainer"]
 unique_name_in_owner = true

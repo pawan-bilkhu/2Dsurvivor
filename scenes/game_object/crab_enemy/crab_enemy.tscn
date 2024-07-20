@@ -134,7 +134,7 @@ autoplay = "walk"
 max_health = 8.0
 
 [node name="CollectibleDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_yhkhi")]
-drop_percent = 0.4
+drop_percent = 0.3
 health_component = NodePath("../HealthComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_ksb4e")]

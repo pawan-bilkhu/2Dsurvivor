@@ -82,11 +82,14 @@ func generate_wave() -> void:
 	if current_wave == 7:
 		enemy_table.add_item(slime_enemy_scene, 16)
 		
-	if current_wave == 1:
-		while enemies.size() < 4:
-			enemies.append(cyclops_enemy_scene)
-	else:
-		while enemies.size() < current_wave_capacity:
+	#if current_wave == 1:
+		#while enemies.size() < 4:
+			#enemies.append(bat_enemy_scene)
+	#else:
+		#while enemies.size() < current_wave_capacity:
+			#enemies.append(enemy_table.pick_item())
+	
+	while enemies.size() < current_wave_capacity:
 			enemies.append(enemy_table.pick_item())
 	
 	var entities_layer: Node2D = get_tree().get_first_node_in_group("entities_layer") as Node2D

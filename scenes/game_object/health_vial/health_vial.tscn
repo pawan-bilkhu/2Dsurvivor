@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://2nguvc8lwcjc"]
+
+[ext_resource type="Script" path="res://scenes/game_object/health_vial/health_vial.gd" id="1_awt5a"]
+[ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="2_eswul"]
+[ext_resource type="AudioStream" uid="uid://be7kou2y7lplg" path="res://assets/audio/impactGeneric_light_000.ogg" id="3_ubwn8"]
+[ext_resource type="AudioStream" uid="uid://cyrfukla455x5" path="res://assets/audio/impactGeneric_light_001.ogg" id="4_gk48d"]
+[ext_resource type="AudioStream" uid="uid://c2knfftdenuji" path="res://assets/audio/impactGeneric_light_002.ogg" id="5_deg3c"]
+[ext_resource type="AudioStream" uid="uid://dxi0b1lllvjnd" path="res://assets/audio/impactGeneric_light_003.ogg" id="6_cgvrs"]
+[ext_resource type="AudioStream" uid="uid://cciycxsml2p2p" path="res://assets/audio/impactGeneric_light_004.ogg" id="7_x6ou0"]
+[ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="8_r8pfd"]
+
+[sub_resource type="Animation" id="Animation_xlv51"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_soqh4"]
+resource_name = "float"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ncivu"]
+_data = {
+"RESET": SubResource("Animation_xlv51"),
+"floating": SubResource("Animation_soqh4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rw7a4"]
+radius = 16.0
+
+[node name="HealthVial" type="Node2D"]
+script = ExtResource("1_awt5a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ncivu")
+}
+autoplay = "floating"
+
+[node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_eswul")]
+streams = Array[AudioStream]([ExtResource("3_ubwn8"), ExtResource("4_gk48d"), ExtResource("5_deg3c"), ExtResource("6_cgvrs"), ExtResource("7_x6ou0")])
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rw7a4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 1, 0, 1)
+scale = Vector2(1.00839, 0.951762)
+texture = ExtResource("8_r8pfd")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

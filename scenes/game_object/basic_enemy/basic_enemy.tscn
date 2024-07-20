@@ -84,7 +84,7 @@ shader = ExtResource("6_ylusq")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="Curve" id="Curve_acaj5"]
-_data = [Vector2(0, 0.516483), 0.0, 0.0, 0, 0, Vector2(0.613043, 0.527472), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.635568, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_jvb5n"]

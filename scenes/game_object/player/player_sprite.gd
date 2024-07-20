@@ -114,6 +114,10 @@ func on_health_changed() -> void:
 	GameEvents.emit_player_current_health_updated(health_component.get_health_percent())
 
 
+func heal(health_amount: float) -> void:
+	health_component.heal(health_amount)
+
+
 func _on_collision_area_2d_body_entered(body: Node2D) -> void:
 	number_colliding_bodies += 1
 	check_deal_damage()
