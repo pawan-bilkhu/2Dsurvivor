@@ -16,7 +16,6 @@ var upgrade_axe_rate = preload("res://resources/upgrades/axe_rate.tres")
 var upgrade_sword_damage = preload("res://resources/upgrades/sword_damage.tres")
 var upgrade_sword_rate = preload("res://resources/upgrades/sword_rate.tres")
 
-
 # hammer ability and upgrades
 var upgrade_hammer = preload("res://resources/upgrades/hammer.tres")
 var upgrade_hammer_damage = preload("res://resources/upgrades/hammer_damage.tres")
@@ -29,31 +28,34 @@ var upgrade_dagger_rate = preload("res://resources/upgrades/dagger_rate.tres")
 var upgrade_dagger_quantity = preload("res://resources/upgrades/dagger_quantity.tres")
 
 # javelin ability and upgrades
-var upgrade_javelin = preload("res://resources/upgrades/javelin.tres")
-var upgrade_javelin_damage = preload("res://resources/upgrades/javelin_damage.tres")
-var upgrade_javelin_rate = preload("res://resources/upgrades/javelin_rate.tres")
-var upgrade_javelin_quantity = preload("res://resources/upgrades/javelin_quantity.tres")
+# TODO: reintroduce these at a later state
+#var upgrade_javelin = preload("res://resources/upgrades/javelin.tres")
+#var upgrade_javelin_damage = preload("res://resources/upgrades/javelin_damage.tres")
+#var upgrade_javelin_rate = preload("res://resources/upgrades/javelin_rate.tres")
+#var upgrade_javelin_quantity = preload("res://resources/upgrades/javelin_quantity.tres")
 
 # anvil ability and upgrades
 var upgrade_anvil = preload("res://resources/upgrades/anvil.tres")
 var upgrade_anvil_quantity = preload("res://resources/upgrades/anvil_quantity.tres")
+var upgrade_anvil_damage = preload("res://resources/upgrades/anvil_damage.tres")
 
 # hammer upgrades
 var upgrade_player_speed = preload("res://resources/upgrades/player_speed.tres")
 
+var upgrade_screen_instance: CanvasLayer
 
 func _ready() -> void:
 	# Abilities
 	upgrade_pool.add_item(upgrade_axe, 10)
 	upgrade_pool.add_item(upgrade_hammer, 10)
 	upgrade_pool.add_item(upgrade_dagger, 10)
-	upgrade_pool.add_item(upgrade_javelin, 10)
+	#upgrade_pool.add_item(upgrade_javelin, 10)
 	upgrade_pool.add_item(upgrade_anvil, 10)
 	
 	upgrade_pool.add_item(upgrade_sword_rate, 10)
 	upgrade_pool.add_item(upgrade_sword_damage, 15)
 	upgrade_pool.add_item(upgrade_player_speed, 7)
-	
+	GameEvents.game_over.connect(on_game_over)
 	experience_manager.level_up.connect(on_level_up)
 
 
@@ -88,12 +90,13 @@ func update_upgrade_pool(chosen_upgrade: AbilityUpgrade) -> void:
 		upgrade_pool.add_item(upgrade_dagger_damage, 12)
 		upgrade_pool.add_item(upgrade_dagger_rate, 10)
 		upgrade_pool.add_item(upgrade_dagger_quantity, 10)
-	elif chosen_upgrade.id == upgrade_javelin.id:
-		upgrade_pool.add_item(upgrade_javelin_damage, 12)
-		upgrade_pool.add_item(upgrade_javelin_rate, 10)
-		upgrade_pool.add_item(upgrade_javelin_quantity, 10)
+	#elif chosen_upgrade.id == upgrade_javelin.id:
+		#upgrade_pool.add_item(upgrade_javelin_damage, 12)
+		#upgrade_pool.add_item(upgrade_javelin_rate, 10)
+		#upgrade_pool.add_item(upgrade_javelin_quantity, 10)
 	elif chosen_upgrade.id == upgrade_anvil.id:
-		upgrade_pool.add_item(upgrade_anvil_quantity, 12)
+		upgrade_pool.add_item(upgrade_anvil_damage, 12)
+		upgrade_pool.add_item(upgrade_anvil_quantity, 10)
 
 
 func pick_upgrades() -> Array:
@@ -111,8 +114,18 @@ func on_upgrade_selected(upgrade: AbilityUpgrade) -> void:
 
 
 func on_level_up(current_level: int) -> void:
-	var upgrade_screen_instance = upgrade_screen_scene.instantiate()
+	if GameEvents.is_game_over:
+		return
+	upgrade_screen_instance = upgrade_screen_scene.instantiate()
 	add_child(upgrade_screen_instance)
 	var chosen_upgrades = pick_upgrades()
 	upgrade_screen_instance.set_ability_upgrades(chosen_upgrades as Array[AbilityUpgrade])
 	upgrade_screen_instance.upgrade_selected.connect(on_upgrade_selected)
+
+
+func on_game_over() -> void:
+	if upgrade_screen_instance == null:
+		return
+	
+	upgrade_screen_instance.queue_free()
+

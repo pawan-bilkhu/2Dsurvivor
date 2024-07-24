@@ -13,6 +13,8 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
+	if randf() > 0.5:
+		return
 	
 	var player_group: Array = GameEvents.nearest_target_group("player", owner, RANGE)
 	

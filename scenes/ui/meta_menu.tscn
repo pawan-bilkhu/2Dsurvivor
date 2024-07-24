@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbpyoe8tvoq03"]
+[gd_scene load_steps=17 format=3 uid="uid://bbpyoe8tvoq03"]
 
 [ext_resource type="Script" path="res://scenes/ui/meta_menu.gd" id="1_wap1o"]
 [ext_resource type="PackedScene" uid="uid://bbs0hyawjshss" path="res://scenes/ui/vignette.tscn" id="2_nmt1n"]
@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://cwjv1n6ik2me2" path="res://resources/meta_upgrades/weapon_upgrades/hammer_meta_upgrade.tres" id="7_66x03"]
 [ext_resource type="PackedScene" uid="uid://cdybp5fwjbdrw" path="res://scenes/ui/weapon_upgrade_card.tscn" id="7_wf2ax"]
 [ext_resource type="Resource" uid="uid://d0nq1nckrb3pk" path="res://resources/meta_upgrades/weapon_upgrades/dagger_meta_upgrade.tres" id="8_7xxx6"]
-[ext_resource type="Resource" uid="uid://btep13m2n0y65" path="res://resources/meta_upgrades/weapon_upgrades/javelin_meta_upgrade.tres" id="9_ncrbg"]
 [ext_resource type="Resource" uid="uid://dgmetkwtp5o2q" path="res://resources/meta_upgrades/weapon_upgrades/anvil_meta_upgrade.tres" id="10_fc8uj"]
 [ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="11_bnrec"]
 [ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="11_hmu5y"]
@@ -30,7 +29,7 @@ process_mode = 3
 layer = 2
 script = ExtResource("1_wap1o")
 meta_upgrades = Array[Resource("res://resources/meta_upgrades/meta_upgrade.gd")]([ExtResource("2_y8ifg"), ExtResource("4_leoah"), ExtResource("3_2l4bd")])
-weapon_upgrades = Array[Resource("res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd")]([ExtResource("5_72w14"), ExtResource("6_ovp06"), ExtResource("7_66x03"), ExtResource("8_7xxx6"), ExtResource("9_ncrbg"), ExtResource("10_fc8uj")])
+weapon_upgrades = Array[Resource("res://resources/meta_upgrades/weapon_upgrades/weapon_meta_upgrade.gd")]([ExtResource("5_72w14"), ExtResource("6_ovp06"), ExtResource("7_66x03"), ExtResource("8_7xxx6"), ExtResource("10_fc8uj")])
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, -1)
@@ -89,8 +88,9 @@ visible = false
 layout_mode = 2
 
 [node name="BackMarginContainer" type="MarginContainer" parent="."]
+offset_top = 1.0
 offset_right = 98.0
-offset_bottom = 53.0
+offset_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
@@ -117,9 +117,10 @@ text = "Back"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -85.0
-offset_right = -11.0
-offset_bottom = 25.0
+offset_left = -84.0
+offset_top = 1.0
+offset_right = -10.0
+offset_bottom = 26.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_8jqc7")
 
@@ -142,6 +143,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_type_variation = &"BlueOutlineLabel"
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
 text = "50000"
 
 [node name="Vignette" parent="." instance=ExtResource("2_nmt1n")]

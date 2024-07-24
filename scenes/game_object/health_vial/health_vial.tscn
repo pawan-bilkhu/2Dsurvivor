@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c2knfftdenuji" path="res://assets/audio/impactGeneric_light_002.ogg" id="5_deg3c"]
 [ext_resource type="AudioStream" uid="uid://dxi0b1lllvjnd" path="res://assets/audio/impactGeneric_light_003.ogg" id="6_cgvrs"]
 [ext_resource type="AudioStream" uid="uid://cciycxsml2p2p" path="res://assets/audio/impactGeneric_light_004.ogg" id="7_x6ou0"]
-[ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="8_r8pfd"]
+[ext_resource type="Texture2D" uid="uid://dcl3alo3lsr2x" path="res://assets/collectibles/large_health_vial.png" id="8_mxpl8"]
 
 [sub_resource type="Animation" id="Animation_xlv51"]
 length = 0.001
@@ -52,6 +52,7 @@ radius = 16.0
 
 [node name="HealthVial" type="Node2D"]
 script = ExtResource("1_awt5a")
+heal_quantity = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -70,8 +71,7 @@ collision_mask = 16
 shape = SubResource("CircleShape2D_rw7a4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 1, 0, 1)
 scale = Vector2(1.00839, 0.951762)
-texture = ExtResource("8_r8pfd")
+texture = ExtResource("8_mxpl8")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

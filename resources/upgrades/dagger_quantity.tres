@@ -9,4 +9,4 @@ id = "dagger_quantity"
 icon = ExtResource("1_j3tqt")
 max_quantity = 10
 name = "Dagger Blitz"
-description = "Increases the amount of daggers that spawn during each attack"
+description = "Adds 1 additional Dagger."

@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cenu8ua07yaq4" path="res://assets/audio/footstep_carpet_002.ogg" id="11_rjuow"]
 [ext_resource type="AudioStream" uid="uid://d0l3gblsphhwu" path="res://assets/audio/footstep_carpet_003.ogg" id="12_oyj7x"]
 [ext_resource type="AudioStream" uid="uid://ddswtosvfwiak" path="res://assets/audio/footstep_carpet_004.ogg" id="13_0tp3q"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="14_by1vb"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="14_by1vb"]
 
 [sub_resource type="Animation" id="Animation_re6gr"]
 length = 0.001
@@ -160,7 +160,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1.25, 1), Vector2(1.25, 1), Vector2(2, 1), Vector2(1.25, 1)]
+"values": [Vector2(1.25, 1), Vector2(1.4, 1), Vector2(2.4, 1), Vector2(1.4, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -184,7 +184,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.862745), Color(1, 1, 1, 0.784314)]
+"values": [Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.823529), Color(1, 1, 1, 0.784314)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rlt0f"]
@@ -199,13 +199,13 @@ shader = ExtResource("6_1dyc8")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="Curve" id="Curve_acaj5"]
-_data = [Vector2(0, 0.516483), 0.0, 0.0, 0, 0, Vector2(0.613043, 0.527472), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.642994, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_jvb5n"]
 curve = SubResource("Curve_acaj5")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h7v0s"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gifga"]
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 30.0
@@ -217,7 +217,7 @@ gravity = Vector3(0, 800, 0)
 scale_curve = SubResource("CurveTexture_jvb5n")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3mo8"]
-bg_color = Color(0.262745, 0.882353, 0.701961, 1)
+bg_color = Color(0.909804, 0.270588, 0.215686, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -242,7 +242,7 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_jx53n")]
-max_health = 20.0
+max_health = 25.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_cmy3u")]
 max_speed = 60
@@ -260,7 +260,7 @@ hit_flash_material = SubResource("ShaderMaterial_iqbua")
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_o3iw8")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
-particle_process_material = SubResource("ParticleProcessMaterial_h7v0s")
+particle_process_material = SubResource("ParticleProcessMaterial_gifga")
 
 [node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("8_beatn")]
 autoplay = true

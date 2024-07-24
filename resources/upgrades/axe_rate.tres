@@ -9,4 +9,4 @@ id = "axe_rate"
 icon = ExtResource("1_5tb5q")
 max_quantity = 5
 name = "Axe Quickness"
-description = "Increases axe attack rate by 5%"
+description = "Increases Axe attack rate by 5%."

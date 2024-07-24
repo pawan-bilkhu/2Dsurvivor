@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://byajqa6x2qy6a"]
+[gd_scene load_steps=3 format=3 uid="uid://byajqa6x2qy6a"]
 
 [ext_resource type="Script" path="res://scenes/enemy_ability/dash_ability_controller/dash_ability_controller.gd" id="1_k8tao"]
+[ext_resource type="PackedScene" uid="uid://d1i70imhi0b3a" path="res://scenes/game_object/danger_warning/danger_warning.tscn" id="2_666e2"]
 
 [node name="DashAbilityController" type="Node"]
 script = ExtResource("1_k8tao")
+danger_warning_scene = ExtResource("2_666e2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true

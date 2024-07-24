@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var heal_quantity: float = 0.0
+
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var random_stream_player_2d_component: AudioStreamPlayer2D = $RandomStreamPlayer2DComponent
@@ -18,7 +20,7 @@ func tween_collect(percent: float, start_position: Vector2) -> void:
 
 
 func collect(node: Node2D) -> void:
-	node.heal(1.5)
+	node.heal(heal_quantity)
 	queue_free()
 
 

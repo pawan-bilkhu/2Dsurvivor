@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1i70imhi0b3a"]
+
+[ext_resource type="Script" path="res://scenes/game_object/danger_warning/danger_warning.gd" id="1_6v18u"]
+[ext_resource type="Shader" path="res://scenes/game_object/danger_warning/danger_warning.gdshader" id="2_y37tk"]
+[ext_resource type="Texture2D" uid="uid://cdhhp6mkmm5b5" path="res://assets/props/danger_warning.png" id="3_qq768"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vb5t"]
+shader = ExtResource("2_y37tk")
+shader_parameter/lerp_percent = 0.0
+
+[node name="DangerWarning" type="Node2D"]
+script = ExtResource("1_6v18u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2vb5t")
+position = Vector2(0, -2)
+scale = Vector2(5, 2)
+texture = ExtResource("3_qq768")

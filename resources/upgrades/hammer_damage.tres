@@ -9,4 +9,4 @@ id = "hammer_damage"
 icon = ExtResource("1_judyq")
 max_quantity = 0
 name = "Hammer Damage"
-description = "Increases hammer damage by 10%"
+description = "Increases Hammer damage by 10%."

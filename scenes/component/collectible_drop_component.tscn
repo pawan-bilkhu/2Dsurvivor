@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://gfdaeqcwa4ox"]
+[gd_scene load_steps=6 format=3 uid="uid://gfdaeqcwa4ox"]
 
 [ext_resource type="Script" path="res://scenes/component/collectible_drop_component.gd" id="1_l6gba"]
 [ext_resource type="PackedScene" uid="uid://b07x3pe403mme" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="2_ixlfr"]
 [ext_resource type="PackedScene" uid="uid://dncwbgkvh8uqy" path="res://scenes/game_object/experience_vial/large_experience_vial.tscn" id="3_mh781"]
 [ext_resource type="PackedScene" uid="uid://2nguvc8lwcjc" path="res://scenes/game_object/health_vial/health_vial.tscn" id="4_sdhd4"]
+[ext_resource type="PackedScene" uid="uid://bb2ldeie4r7p8" path="res://scenes/game_object/health_vial/large_health_vial.tscn" id="5_mjt3u"]
 
 [node name="CollectibleDropComponent" type="Node"]
 script = ExtResource("1_l6gba")
@@ -11,3 +12,4 @@ drop_percent = 0.516
 experience_vial_scene = ExtResource("2_ixlfr")
 large_experience_vial_scene = ExtResource("3_mh781")
 health_vial_scene = ExtResource("4_sdhd4")
+large_health_vial_scene = ExtResource("5_mjt3u")

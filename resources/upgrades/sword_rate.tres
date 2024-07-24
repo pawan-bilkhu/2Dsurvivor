@@ -9,4 +9,4 @@ id = "sword_rate"
 icon = ExtResource("1_vnx15")
 max_quantity = 5
 name = "Sword Quickness"
-description = "Increases sword attack rate by 10%"
+description = "Increases Sword attack rate by 10%"

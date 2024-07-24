@@ -11,4 +11,4 @@ id = "hammer"
 icon = ExtResource("2_fbmlh")
 max_quantity = 1
 name = "Hammer"
-description = "Gain the ability to smash enemies with a hammer"
+description = "Gain the ability to smash enemies with a Hammer."

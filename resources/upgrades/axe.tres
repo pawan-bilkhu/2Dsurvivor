@@ -11,4 +11,4 @@ id = "axe"
 icon = ExtResource("2_l78bf")
 max_quantity = 1
 name = "Axe"
-description = "Gain the ability to periodically send out spinning axes"
+description = "Gain the ability to periodically send out a spinning Axe."

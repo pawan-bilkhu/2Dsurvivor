@@ -1,18 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dffb245mi52ni"]
+[gd_scene load_steps=12 format=3 uid="uid://dffb245mi52ni"]
 
 [ext_resource type="Script" path="res://scenes/ui/player_stats_bar.gd" id="1_5xxjl"]
-[ext_resource type="Texture2D" uid="uid://dfcd021h0slex" path="res://assets/collectibles/experience_vial.png" id="2_57na8"]
+[ext_resource type="Texture2D" uid="uid://cthhide1uckho" path="res://assets/collectibles/tile_0141.png" id="2_lj0r6"]
 [ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="2_oksa8"]
-[ext_resource type="Texture2D" uid="uid://djtdp2jgwr33a" path="res://assets/ui/Heart.png" id="4_vk6x0"]
-[ext_resource type="Texture2D" uid="uid://3xmv6syau3fc" path="res://assets/ui/tile_0136.png" id="5_mctbe"]
+[ext_resource type="Texture2D" uid="uid://djtdp2jgwr33a" path="res://assets/ui/heart.png" id="4_vk6x0"]
+[ext_resource type="Texture2D" uid="uid://bfm2yrlcxyo2s" path="res://assets/ui/dash_icon.png" id="5_mjpon"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rv36j"]
-texture = ExtResource("2_oksa8")
-texture_margin_left = 3.0
-texture_margin_top = 3.0
-texture_margin_right = 3.0
-texture_margin_bottom = 3.0
-region_rect = Rect2(4, 20, 8, 8)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfwsf"]
+bg_color = Color(0.14902, 0.168627, 0.266667, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6636q"]
 bg_color = Color(0.458824, 0.890196, 1, 1)
@@ -21,6 +16,14 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rv36j"]
+texture = ExtResource("2_oksa8")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(4, 20, 8, 8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yd42a"]
 bg_color = Color(0.909804, 0.270588, 0.215686, 1)
@@ -52,58 +55,57 @@ script = ExtResource("1_5xxjl")
 [node name="ExperienceContainer" type="PanelContainer" parent="."]
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 176.0
-offset_bottom = 31.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_rv36j")
+offset_right = 189.0
+offset_bottom = 25.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ExperienceContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ExperienceContainer"]
 layout_mode = 2
 
-[node name="ExperienceMarginContainer" type="MarginContainer" parent="ExperienceContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ExperienceContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ExperienceMarginContainer" type="MarginContainer" parent="ExperienceContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 8
 
-[node name="ExperienceProgressBar" type="ProgressBar" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer"]
+[node name="ExperienceProgressBar" type="ProgressBar" parent="ExperienceContainer/MarginContainer/HBoxContainer/ExperienceMarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rfwsf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6636q")
 max_value = 1.0
 value = 0.5
 show_percentage = false
 
-[node name="Control" type="Control" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer"]
+[node name="Control" type="Control" parent="ExperienceContainer/MarginContainer/HBoxContainer/ExperienceMarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="ExperienceContainer/HBoxContainer/ExperienceMarginContainer/Control"]
+[node name="TextureRect" type="TextureRect" parent="ExperienceContainer/MarginContainer/HBoxContainer/ExperienceMarginContainer/Control"]
 layout_mode = 0
 offset_left = -9.0
 offset_top = -5.0
 offset_right = 7.0
 offset_bottom = 11.0
-texture = ExtResource("2_57na8")
+texture = ExtResource("2_lj0r6")
 
-[node name="MarginContainer" type="MarginContainer" parent="ExperienceContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ExperienceContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_constants/margin_right = 5
 
-[node name="ExperienceAmountLabel" type="Label" parent="ExperienceContainer/HBoxContainer/MarginContainer"]
+[node name="ExperienceAmountLabel" type="Label" parent="ExperienceContainer/MarginContainer/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
-theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 7
@@ -111,7 +113,7 @@ text = "100000"
 
 [node name="StatsPanelContainer" type="PanelContainer" parent="."]
 offset_left = 1.0
-offset_top = 317.0
+offset_top = 313.0
 offset_right = 100.0
 offset_bottom = 359.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_rv36j")
@@ -122,8 +124,10 @@ theme_override_constants/separation = 0
 
 [node name="GridMarginContainer" type="MarginContainer" parent="StatsPanelContainer/ExperienceVBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
 
 [node name="GridContainer" type="GridContainer" parent="StatsPanelContainer/ExperienceVBoxContainer/GridMarginContainer"]
 layout_mode = 2
@@ -242,17 +246,14 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="DashPanelContainer/GridContainer/IconMarginContainer/Control"]
 layout_mode = 2
-offset_left = -5.0
-offset_top = -10.0
-offset_right = 27.0
-offset_bottom = 22.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.523598
+offset_left = -10.0
+offset_top = -7.0
+offset_right = 22.0
+offset_bottom = 25.0
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("5_mctbe")
+texture = ExtResource("5_mjpon")
 
 [node name="DashMarginContainer" type="MarginContainer" parent="DashPanelContainer/GridContainer"]
 layout_mode = 2

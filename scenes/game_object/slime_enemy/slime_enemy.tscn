@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bwthytsinp4uh"]
+[gd_scene load_steps=28 format=3 uid="uid://bwthytsinp4uh"]
 
 [ext_resource type="Script" path="res://scenes/game_object/slime_enemy/slime_enemy.gd" id="1_y73lf"]
 [ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_03txx"]
+[ext_resource type="PackedScene" uid="uid://ba86vpyfw4iju" path="res://scenes/enemy_ability/projectile_ability_controller/projectile_ability_controller.tscn" id="2_qtq3b"]
 [ext_resource type="PackedScene" uid="uid://b7py1vjt6exo3" path="res://scenes/component/velocity_component.tscn" id="3_s6qxv"]
 [ext_resource type="PackedScene" uid="uid://gfdaeqcwa4ox" path="res://scenes/component/collectible_drop_component.tscn" id="4_ck48y"]
 [ext_resource type="PackedScene" uid="uid://cj36wbtxyvehs" path="res://scenes/component/hit_flash_component.tscn" id="5_7v4ud"]
@@ -14,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://d0l3gblsphhwu" path="res://assets/audio/footstep_carpet_003.ogg" id="12_huy8v"]
 [ext_resource type="AudioStream" uid="uid://ddswtosvfwiak" path="res://assets/audio/footstep_carpet_004.ogg" id="13_horbr"]
 [ext_resource type="Texture2D" uid="uid://pf7dy53f5jxl" path="res://assets/sprites/monster1.png" id="14_ya1rb"]
+[ext_resource type="Texture2D" uid="uid://cdhhp6mkmm5b5" path="res://assets/props/danger_warning.png" id="15_i0a0n"]
 [ext_resource type="PackedScene" uid="uid://c2s4v64lrud50" path="res://scenes/component/hurtbox_component.tscn" id="15_jc721"]
 
 [sub_resource type="Animation" id="Animation_re6gr"]
@@ -53,6 +55,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ShadowSprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/ShadowSprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.272902, 1, 0.994497, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_dufqq"]
@@ -113,6 +139,30 @@ tracks/3/keys = {
 "method": &"set_is_moving"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/ShadowSprite2D:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2.75, 0.5), Vector2(2.79336, 0.5), Vector2(3.25, 0.5), Vector2(2.5, 0.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/ShadowSprite2D:modulate")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.884199),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.27451, 1, 0.996078, 0.784314), Color(0.27451, 1, 0.996078, 0.823529), Color(0.27451, 1, 0.996078, 0.784314)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rlt0f"]
 _data = {
@@ -133,7 +183,7 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_1vtec"]
 curve = SubResource("Curve_igkxa")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_au4v8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aot53"]
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 30.0
@@ -170,15 +220,22 @@ libraries = {
 }
 autoplay = "walk"
 
+[node name="Abilities" type="Node" parent="."]
+
+[node name="ProjectileAbilityController" parent="Abilities" node_paths=PackedStringArray("health_component") instance=ExtResource("2_qtq3b")]
+health_component = NodePath("../../HealthComponent")
+
 [node name="HealthComponent" parent="." instance=ExtResource("2_03txx")]
-max_health = 30.0
+max_health = 40.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_s6qxv")]
-max_speed = 100
+max_speed = 125
 
 [node name="CollectibleDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_ck48y")]
-drop_percent = 0.35
+drop_percent = 0.8
+quantity = 2
 health_component = NodePath("../HealthComponent")
+can_spawn_health = true
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_7v4ud")]
 health_component = NodePath("../HealthComponent")
@@ -188,7 +245,7 @@ hit_flash_material = SubResource("ShaderMaterial_iqbua")
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("7_5bmjj")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
-particle_process_material = SubResource("ParticleProcessMaterial_au4v8")
+particle_process_material = SubResource("ParticleProcessMaterial_aot53")
 
 [node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("8_khkmq")]
 autoplay = true
@@ -208,6 +265,12 @@ value = 0.5
 show_percentage = false
 
 [node name="Visuals" type="Node2D" parent="."]
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
+modulate = Color(0.272902, 1, 0.994497, 1)
+position = Vector2(-1, 0)
+scale = Vector2(3, 0.5)
+texture = ExtResource("15_i0a0n")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 scale = Vector2(2, 2)

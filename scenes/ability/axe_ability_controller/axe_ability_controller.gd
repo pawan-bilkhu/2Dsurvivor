@@ -9,6 +9,7 @@ var critical_chance: float = 0
 var critical_damage: float = 0
 
 var additional_damage_percent: float = 1
+var additional_critical_chance: float = 0.0
 var base_wait_time: float
 
 var stats: Dictionary = {}
@@ -37,7 +38,7 @@ func _on_timer_timeout() -> void:
 	var axe_ability_instance = axe_ability_scene.instantiate() as AxeAbility
 	foreground_layer.add_child(axe_ability_instance)
 	axe_ability_instance.hitbox_component.damage = base_damage * additional_damage_percent
-	axe_ability_instance.hitbox_component.critical_chance = critical_chance
+	axe_ability_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
 	axe_ability_instance.hitbox_component.critical_damage = critical_damage
 	
 	axe_ability_instance.global_position = player.global_position

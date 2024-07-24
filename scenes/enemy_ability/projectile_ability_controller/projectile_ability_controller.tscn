@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba86vpyfw4iju"]
+[gd_scene load_steps=4 format=3 uid="uid://ba86vpyfw4iju"]
 
 [ext_resource type="Script" path="res://scenes/enemy_ability/projectile_ability_controller/projectile_ability_controller.gd" id="1_mu13h"]
 [ext_resource type="PackedScene" uid="uid://3eetqyjaxx8x" path="res://scenes/enemy_ability/projectile_ability/projectile_ability.tscn" id="2_56lm4"]
+[ext_resource type="PackedScene" uid="uid://d1i70imhi0b3a" path="res://scenes/game_object/danger_warning/danger_warning.tscn" id="3_05hi2"]
 
 [node name="ProjectileAbilityController" type="Node"]
 script = ExtResource("1_mu13h")
 projectile_scene = ExtResource("2_56lm4")
+danger_warning_scene = ExtResource("3_05hi2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 unique_name_in_owner = true

@@ -11,4 +11,4 @@ id = "javelin"
 icon = ExtResource("2_0eljy")
 max_quantity = 1
 name = "Javelin"
-description = "Gain the ability to toss javelins."
+description = "Gain the ability to periodically toss Javelins."

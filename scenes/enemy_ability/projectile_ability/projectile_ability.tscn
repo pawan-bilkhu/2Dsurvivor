@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://3eetqyjaxx8x"]
 
 [ext_resource type="Script" path="res://scenes/enemy_ability/projectile_ability/projectile_ability.gd" id="1_5c6ga"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="2_krvel"]
-[ext_resource type="Texture2D" uid="uid://5bcccd7i5uvg" path="res://assets/weapons/blood_projectile.png" id="3_6oaof"]
+[ext_resource type="Texture2D" uid="uid://cdhhp6mkmm5b5" path="res://assets/props/danger_warning.png" id="2_5cirw"]
 [ext_resource type="Texture2D" uid="uid://dlit23oawsds7" path="res://assets/particle_effects/blood_outer.png" id="3_b235c"]
+[ext_resource type="Texture2D" uid="uid://dlygk2a6rkebm" path="res://assets/weapons/acid_projectile.png" id="4_gh6pd"]
 [ext_resource type="Texture2D" uid="uid://ki0rij6w5e0e" path="res://assets/particle_effects/blood_inner.png" id="5_gsbbv"]
 
 [sub_resource type="Curve" id="Curve_yst22"]
@@ -29,12 +29,12 @@ scale_curve = SubResource("CurveTexture_mwe8j")
 radius = 4.0
 
 [node name="ProjetileAbility" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.994138, 1)
 script = ExtResource("1_5c6ga")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.745098)
-texture = ExtResource("2_krvel")
+modulate = Color(0.27451, 1, 0.996078, 0.784314)
+texture = ExtResource("2_5cirw")
 offset = Vector2(0, 2)
 
 [node name="Visuals" type="Node2D" parent="."]
@@ -52,7 +52,7 @@ interpolate = false
 fract_delta = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("3_6oaof")
+texture = ExtResource("4_gh6pd")
 
 [node name="InnerGPUParticles2D" type="GPUParticles2D" parent="Visuals"]
 unique_name_in_owner = true

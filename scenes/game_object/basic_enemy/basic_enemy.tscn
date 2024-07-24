@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bd7xdlbqnwbaj"]
+[gd_scene load_steps=27 format=3 uid="uid://bd7xdlbqnwbaj"]
 
 [ext_resource type="Texture2D" uid="uid://btetbf74aftjm" path="res://assets/sprites/rat1.png" id="1_ds2im"]
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_xkkyo"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_djsbi"]
 [ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_vklkh"]
 [ext_resource type="PackedScene" uid="uid://gfdaeqcwa4ox" path="res://scenes/component/collectible_drop_component.tscn" id="3_70ypv"]
 [ext_resource type="PackedScene" uid="uid://c2s4v64lrud50" path="res://scenes/component/hurtbox_component.tscn" id="4_n0akw"]
@@ -42,6 +43,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ShadowSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 0.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ShadowSprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/ShadowSprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_74af0"]
 resource_name = "walk"
@@ -54,10 +91,10 @@ tracks/0/path = NodePath("Visuals/Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1, 0), Vector2(-1, 0)]
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, -1), Vector2(-1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -70,6 +107,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.174533, -0.174533, 0.174533, -0.174533]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ShadowSprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.5, 0.75), Vector2(1.6, 0.75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ShadowSprite2D:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(1, 0), Vector2(-1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/ShadowSprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.784314), Color(1, 1, 1, 0.705882), Color(1, 1, 1, 0.784314)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3r60b"]
@@ -130,7 +203,7 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_vklkh")]
-max_health = 14.0
+max_health = 15.0
 
 [node name="CollectibleDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_70ypv")]
 drop_percent = 0.4
@@ -167,6 +240,7 @@ value = 0.5
 show_percentage = false
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("heatlh_component") instance=ExtResource("4_n0akw")]
+visible = false
 heatlh_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -177,6 +251,8 @@ debug_color = Color(0.849542, 0.15867, 0.822389, 0.42)
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
+scale = Vector2(1.5, 0.75)
+texture = ExtResource("2_djsbi")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 texture = ExtResource("1_ds2im")

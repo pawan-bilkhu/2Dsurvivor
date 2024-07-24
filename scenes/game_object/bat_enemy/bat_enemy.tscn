@@ -14,9 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://cenu8ua07yaq4" path="res://assets/audio/footstep_carpet_002.ogg" id="11_oj5mb"]
 [ext_resource type="AudioStream" uid="uid://d0l3gblsphhwu" path="res://assets/audio/footstep_carpet_003.ogg" id="12_a5jb1"]
 [ext_resource type="AudioStream" uid="uid://ddswtosvfwiak" path="res://assets/audio/footstep_carpet_004.ogg" id="13_cs7ku"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="14_duab8"]
 [ext_resource type="Texture2D" uid="uid://bb6nob673xkvj" path="res://assets/sprites/bat.png" id="14_ol6oj"]
 [ext_resource type="PackedScene" uid="uid://c2s4v64lrud50" path="res://scenes/component/hurtbox_component.tscn" id="15_784sq"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="15_hy0gm"]
 
 [sub_resource type="Animation" id="Animation_re6gr"]
 length = 0.001
@@ -209,7 +209,7 @@ health_component = NodePath("../../HealthComponent")
 entity = NodePath("../..")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_r6d1j")]
-max_health = 15.0
+max_health = 18.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_xgsch")]
 max_speed = 95
@@ -251,7 +251,7 @@ show_percentage = false
 [node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
 self_modulate = Color(1, 1, 1, 0.784314)
 scale = Vector2(1, 0.5)
-texture = ExtResource("14_duab8")
+texture = ExtResource("15_hy0gm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 position = Vector2(0, -7)

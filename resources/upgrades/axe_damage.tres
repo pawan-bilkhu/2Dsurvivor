@@ -9,4 +9,4 @@ id = "axe_damage"
 icon = ExtResource("1_17lfk")
 max_quantity = 0
 name = "Axe Damage"
-description = "Increases axe damage by 10%"
+description = "Increases Axe damage by 10%."

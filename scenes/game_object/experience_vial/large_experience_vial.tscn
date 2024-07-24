@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dncwbgkvh8uqy"]
 
-[ext_resource type="Script" path="res://scenes/game_object/experience_vial/large_experience_vial.gd" id="1_himmn"]
+[ext_resource type="Script" path="res://scenes/game_object/experience_vial/experience_vial.gd" id="1_elf4g"]
 [ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="2_1eikp"]
 [ext_resource type="AudioStream" uid="uid://be7kou2y7lplg" path="res://assets/audio/impactGeneric_light_000.ogg" id="3_lwm8k"]
 [ext_resource type="AudioStream" uid="uid://cyrfukla455x5" path="res://assets/audio/impactGeneric_light_001.ogg" id="4_s1g58"]
@@ -50,8 +50,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_rw7a4"]
 radius = 16.0
 
-[node name="ExperienceVial" type="Node2D"]
-script = ExtResource("1_himmn")
+[node name="LargeExperienceVial" type="Node2D" groups=["experience_vial"]]
+script = ExtResource("1_elf4g")
+experience_quantity = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

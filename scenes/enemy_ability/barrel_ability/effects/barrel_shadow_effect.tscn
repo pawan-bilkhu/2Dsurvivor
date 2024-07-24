@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bea1pvkekxg63"]
 
-[ext_resource type="Script" path="res://scenes/enemy_ability/barrel_ability/effects/shadow_effect.gd" id="1_kyvfr"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="3_ftcc2"]
+[ext_resource type="Script" path="res://scenes/enemy_ability/barrel_ability/effects/barrel_shadow_effect.gd" id="1_kyvfr"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_de5jt"]
 
 [sub_resource type="Animation" id="Animation_x248n"]
 length = 0.001
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.05, 0.55, 0.75, 0.95),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(5, 5), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+"values": [Vector2(3, 1.5), Vector2(1, 0.75), Vector2(1.5, 1), Vector2(1, 0.75)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -90,5 +90,5 @@ autoplay = "default"
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 scale = Vector2(3, 3)
-texture = ExtResource("3_ftcc2")
+texture = ExtResource("2_de5jt")
 offset = Vector2(0, -2)

@@ -20,6 +20,7 @@ func _ready() -> void:
 	GameEvents.player_dashed.connect(on_player_dashed)
 	GameEvents.player_dash_cooldown.connect(on_player_dash_cooldown)
 
+
 func set_eliminations_value(value: int) -> void:
 	total_eliminations_value.text = "%d" % value
 

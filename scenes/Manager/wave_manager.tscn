@@ -1,14 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://ddqixned7q02e"]
+[gd_scene load_steps=18 format=3 uid="uid://ddqixned7q02e"]
 
 [ext_resource type="Script" path="res://scenes/manager/wave_manager.gd" id="1_rbqkq"]
 [ext_resource type="PackedScene" uid="uid://bd7xdlbqnwbaj" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="2_fkstn"]
 [ext_resource type="PackedScene" uid="uid://lc25pwulr0b" path="res://scenes/game_object/wizard_enemy/wizard_enemy.tscn" id="3_ml4b6"]
 [ext_resource type="PackedScene" uid="uid://diasdpxec5op7" path="res://scenes/game_object/bat_enemy/bat_enemy.tscn" id="4_bbr4c"]
-[ext_resource type="PackedScene" uid="uid://cob66xj14dupp" path="res://scenes/ui/end_screen.tscn" id="5_8q0n0"]
 [ext_resource type="PackedScene" uid="uid://k8s606i2kxvn" path="res://scenes/game_object/crab_enemy/crab_enemy.tscn" id="5_gxkyh"]
-[ext_resource type="Texture2D" uid="uid://b6e5133rgfm0a" path="res://assets/ui/ui.png" id="6_2snvy"]
 [ext_resource type="PackedScene" uid="uid://bwthytsinp4uh" path="res://scenes/game_object/slime_enemy/slime_enemy.tscn" id="6_8asvi"]
 [ext_resource type="PackedScene" uid="uid://bfjgwxk46gets" path="res://scenes/game_object/cyclops_enemy/cyclops_enemy.tscn" id="7_33gab"]
+[ext_resource type="PackedScene" uid="uid://dknk1e36wn2or" path="res://scenes/component/random_stream_player_component.tscn" id="10_sbth8"]
+[ext_resource type="AudioStream" uid="uid://o0k52yjy3ub7" path="res://assets/jingles/jingles_wave_complete.ogg" id="11_o4yfa"]
+[ext_resource type="AudioStream" uid="uid://c8c6vu3cckkds" path="res://assets/audio/swish-6.wav" id="12_td300"]
+[ext_resource type="AudioStream" uid="uid://cfrgjdfd06f0w" path="res://assets/audio/swish-7.wav" id="13_bqamp"]
+[ext_resource type="AudioStream" uid="uid://75xun643qobx" path="res://assets/audio/swish-8.wav" id="14_sdgr7"]
+[ext_resource type="AudioStream" uid="uid://c7gcvl82472bb" path="res://assets/audio/swish-9.wav" id="15_ngn03"]
 
 [sub_resource type="Animation" id="Animation_awcii"]
 length = 0.001
@@ -126,14 +130,6 @@ _data = {
 "out": SubResource("Animation_4pnd3")
 }
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nrkub"]
-texture = ExtResource("6_2snvy")
-texture_margin_left = 3.0
-texture_margin_top = 3.0
-texture_margin_right = 3.0
-texture_margin_bottom = 3.0
-region_rect = Rect2(4, 20, 8, 8)
-
 [node name="WaveManager" type="Node"]
 script = ExtResource("1_rbqkq")
 basic_enemy_scene = ExtResource("2_fkstn")
@@ -142,7 +138,6 @@ bat_enemy_scene = ExtResource("4_bbr4c")
 crab_enemy_scene = ExtResource("5_gxkyh")
 slime_enemy_scene = ExtResource("6_8asvi")
 cyclops_enemy_scene = ExtResource("7_33gab")
-end_screen_scene = ExtResource("5_8q0n0")
 
 [node name="WaveUI" type="CanvasLayer" parent="."]
 
@@ -188,31 +183,10 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 48
 text = "Wave 1"
 
-[node name="PanelContainer" type="PanelContainer" parent="WaveUI"]
-offset_left = 553.0
-offset_top = 1.0
-offset_right = 639.0
-offset_bottom = 30.0
-size_flags_horizontal = 10
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_nrkub")
+[node name="WaveCompleteStreamPlayer" parent="." instance=ExtResource("10_sbth8")]
+volume_db = -32.165
+streams = Array[AudioStream]([ExtResource("11_o4yfa")])
 
-[node name="EnemeyMarginContainer" type="MarginContainer" parent="WaveUI/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="EnemyCountLabel" type="Label" parent="WaveUI/PanelContainer/EnemeyMarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 8
-text = "Enemies: 1000"
+[node name="WaveStartStreamPlayer" parent="." instance=ExtResource("10_sbth8")]
+volume_db = -14.408
+streams = Array[AudioStream]([ExtResource("12_td300"), ExtResource("13_bqamp"), ExtResource("14_sdgr7"), ExtResource("15_ngn03")])

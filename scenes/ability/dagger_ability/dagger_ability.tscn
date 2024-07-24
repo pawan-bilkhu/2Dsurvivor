@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ability/dagger_ability/dagger_ability.gd" id="1_35v2b"]
 [ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_d563t"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="2_kcis6"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_kcis6"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_jx15n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pqhho"]

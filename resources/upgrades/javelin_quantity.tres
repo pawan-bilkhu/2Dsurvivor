@@ -9,4 +9,4 @@ id = "javelin_quantity"
 icon = ExtResource("1_p6ihy")
 max_quantity = 10
 name = "Javelin Blitz"
-description = "Increases the amount of javelins that spawn during each attack"
+description = "Adds 1 additional Javelin."

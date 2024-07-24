@@ -9,4 +9,4 @@ id = "javelin_damage"
 icon = ExtResource("1_joi0p")
 max_quantity = 0
 name = "Javelin Damage"
-description = "Increases javelin damage by 30%"
+description = "Increases Javelin damage by 30%."

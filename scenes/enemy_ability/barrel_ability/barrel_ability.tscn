@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7dgkmyhubahk"]
+[gd_scene load_steps=20 format=3 uid="uid://c7dgkmyhubahk"]
 
 [ext_resource type="Script" path="res://scenes/enemy_ability/barrel_ability/barrel_ability.gd" id="1_40iiv"]
-[ext_resource type="PackedScene" uid="uid://bea1pvkekxg63" path="res://scenes/enemy_ability/barrel_ability/effects/shadow_effect.tscn" id="2_aoxw0"]
+[ext_resource type="PackedScene" uid="uid://bea1pvkekxg63" path="res://scenes/enemy_ability/barrel_ability/effects/barrel_shadow_effect.tscn" id="2_aoxw0"]
 [ext_resource type="Texture2D" uid="uid://cskyudjbbjmxu" path="res://assets/props/barrel.png" id="2_cuc0f"]
 [ext_resource type="Texture2D" uid="uid://dfdjsp28kahek" path="res://assets/particle_effects/particle.png" id="2_jphwl"]
+[ext_resource type="PackedScene" uid="uid://d1i70imhi0b3a" path="res://scenes/game_object/danger_warning/danger_warning.tscn" id="3_5k6s2"]
 [ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="5_03shk"]
 [ext_resource type="AudioStream" uid="uid://b5b8j3lhgax2t" path="res://assets/audio/impactWood_medium_000.ogg" id="6_rmpmn"]
 [ext_resource type="AudioStream" uid="uid://bcn34pdrwj3qx" path="res://assets/audio/impactWood_medium_001.ogg" id="7_ugt5y"]
@@ -166,6 +167,7 @@ radius = 16.0
 [node name="BarrelAbility" type="Node2D"]
 script = ExtResource("1_40iiv")
 shadow_scene = ExtResource("2_aoxw0")
+danger_warning_scene = ExtResource("3_5k6s2")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, -300)

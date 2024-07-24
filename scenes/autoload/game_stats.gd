@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_FILE_PATH = "user://weapon_stats.json"
+const SAVE_FILE_PATH = "user://weapon_stats.save"
 
 var weapon_stats: Dictionary = {
 	"sword" : {

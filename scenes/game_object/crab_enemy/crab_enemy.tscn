@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://k8s606i2kxvn"]
+[gd_scene load_steps=27 format=3 uid="uid://k8s606i2kxvn"]
 
 [ext_resource type="Script" path="res://scenes/game_object/crab_enemy/crab_enemy.gd" id="1_h1pk0"]
 [ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_4uyke"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://d0l3gblsphhwu" path="res://assets/audio/footstep_carpet_003.ogg" id="12_ucg03"]
 [ext_resource type="AudioStream" uid="uid://ddswtosvfwiak" path="res://assets/audio/footstep_carpet_004.ogg" id="13_yg7oy"]
 [ext_resource type="PackedScene" uid="uid://c2s4v64lrud50" path="res://scenes/component/hurtbox_component.tscn" id="14_vp677"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="15_n64jk"]
 [ext_resource type="Texture2D" uid="uid://xyidgl7uhfwl" path="res://assets/sprites/crab.png" id="15_qmem6"]
 
 [sub_resource type="Animation" id="Animation_bt1ba"]
@@ -22,7 +23,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Visuals/Sprite2D:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -34,7 +35,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -42,11 +43,23 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ShadowSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
 
 [sub_resource type="Animation" id="Animation_74af0"]
 resource_name = "walk"
-length = 0.4
-loop_mode = 1
+length = 0.5
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -54,10 +67,10 @@ tracks/0/path = NodePath("Visuals/Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1, 0), Vector2(-1, 0)]
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -66,10 +79,22 @@ tracks/1/path = NodePath("Visuals/Sprite2D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.174533, -0.174533, 0.174533, -0.174533]
+"values": [0.174533, -0.174533, 0.174533, -0.174533, 0.174533, -0.174533]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ShadowSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -1), Vector2(0.5, -1), Vector2(0, -1), Vector2(-0.5, -1), Vector2(0, -1), Vector2(0.5, -1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3r60b"]
@@ -131,7 +156,6 @@ libraries = {
 autoplay = "walk"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_4uyke")]
-max_health = 8.0
 
 [node name="CollectibleDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_yhkhi")]
 drop_percent = 0.3
@@ -177,6 +201,12 @@ shape = SubResource("CircleShape2D_1ue8r")
 debug_color = Color(0.849542, 0.15867, 0.822389, 0.42)
 
 [node name="Visuals" type="Node2D" parent="."]
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
+modulate = Color(1, 1, 1, 0.784314)
+position = Vector2(0, -3)
+scale = Vector2(1, 0.6)
+texture = ExtResource("15_n64jk")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 scale = Vector2(0.5, 0.5)

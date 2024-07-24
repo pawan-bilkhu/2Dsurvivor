@@ -10,6 +10,7 @@ var critical_chance: float = 0
 var critical_damage: float = 0
 
 var additional_damage_percent: float = 1
+var additional_critical_chance: float = 0.0
 var base_wait_time: float
 var anvil_quantity: int = 0
 
@@ -56,11 +57,15 @@ func _on_timer_timeout() -> void:
 		var anvil_ability = anvil_ability_scene.instantiate() as AnvilAbility
 		foreground.add_child(anvil_ability)
 			
-		anvil_ability.hitbox_component.damage = base_damage
+		anvil_ability.hitbox_component.damage = base_damage*additional_damage_percent
+		anvil_ability.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
+		anvil_ability.hitbox_component.critical_damage = critical_damage
 		anvil_ability.global_position = spawn_position
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:
 	if upgrade.id == "anvil_quantity":
 		anvil_quantity = current_upgrades["anvil_quantity"]["quantity"]
+	if upgrade.id == "anvil_damage":
+		additional_damage_percent = 1 + (current_upgrades["anvil_damage"]["quantity"] * 0.1)
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ability/axe_ability/axe_ability.gd" id="1_jki8x"]
 [ext_resource type="Texture2D" uid="uid://rvcshgbt5dbq" path="res://assets/weapons/double_bladed_axe.png" id="1_sexn2"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="2_ep6nx"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_ep6nx"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_mf5jc"]
 
 [sub_resource type="Animation" id="Animation_f33rx"]

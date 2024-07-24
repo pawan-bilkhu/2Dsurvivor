@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/ability/anvil_ability/anvil_ability.gd" id="1_y5yn0"]
 [ext_resource type="Texture2D" uid="uid://dfdjsp28kahek" path="res://assets/particle_effects/particle.png" id="2_mh3x6"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="2_y7sgk"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/Shadow.png" id="3_h5rwp"]
+[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="3_abihy"]
 [ext_resource type="PackedScene" uid="uid://ce36vngkrj73e" path="res://scenes/component/random_stream_player_2d_component.tscn" id="5_feilr"]
 [ext_resource type="AudioStream" uid="uid://bvnh4fktcea1c" path="res://assets/audio/impactPunch_heavy_000.ogg" id="6_gbtof"]
 [ext_resource type="AudioStream" uid="uid://267567fbv0fq" path="res://assets/audio/impactPunch_heavy_001.ogg" id="7_olrh4"]
@@ -279,7 +279,7 @@ interpolate = false
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.784314)
 scale = Vector2(1.4, 1)
-texture = ExtResource("3_h5rwp")
+texture = ExtResource("3_abihy")
 offset = Vector2(0, -2)
 
 [node name="Visuals" type="Node2D" parent="."]

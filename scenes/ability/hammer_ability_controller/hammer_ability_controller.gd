@@ -10,6 +10,7 @@ var critical_chance: float = 0
 var critical_damage: float = 0
 
 var additional_damage_percent: float = 1
+var additional_critical_chance: float = 0.0
 var base_wait_time: float
 
 var stats: Dictionary = {}
@@ -42,7 +43,7 @@ func _on_timer_timeout() -> void:
 	foreground_layer.add_child(hammer_instance)
 	
 	hammer_instance.hitbox_component.damage = base_damage * additional_damage_percent
-	hammer_instance.hitbox_component.critical_chance = critical_chance
+	hammer_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
 	hammer_instance.hitbox_component.critical_damage = critical_damage
 	
 	var nearest_enemy = enemies[0] as CharacterBody2D

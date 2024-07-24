@@ -9,4 +9,4 @@ id = "hammer_rate"
 icon = ExtResource("1_b7crg")
 max_quantity = 10
 name = "Hammer Quickness"
-description = "Increases hammer attack rate by 5%"
+description = "Increases Hammer attack rate by 5%."

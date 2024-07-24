@@ -9,4 +9,4 @@ id = "dagger_rate"
 icon = ExtResource("1_fa16r")
 max_quantity = 0
 name = "Dagger Swiftness"
-description = "Increases dagger attack rate by 10%"
+description = "Increases Dagger attack rate by 10%"

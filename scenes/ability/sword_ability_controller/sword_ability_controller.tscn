@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://esre1adlxt1m"]
+[gd_scene load_steps=4 format=3 uid="uid://esre1adlxt1m"]
 
 [ext_resource type="Script" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.gd" id="1_tbufy"]
 [ext_resource type="PackedScene" uid="uid://dhub56dlw8cws" path="res://scenes/ability/sword_ability/sword_ability.tscn" id="2_faqhs"]
+[ext_resource type="PackedScene" uid="uid://bkjf3mc1nayia" path="res://scenes/ability/sword_ability/effects/sword_shadow_effect.tscn" id="3_22iqp"]
 
 [node name="SwordAbilityController" type="Node"]
 script = ExtResource("1_tbufy")
 sword_ability = ExtResource("2_faqhs")
+shadow_scene = ExtResource("3_22iqp")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

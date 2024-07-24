@@ -29,8 +29,8 @@ var simulation_speed: float = 10.0
 func _ready() -> void:
 	landed.connect(on_landed)
 	
-	outer_gpu_particles_2d.emitting = true
-	inner_gpu_particles_2d.emitting = true
+	#outer_gpu_particles_2d.emitting = true
+	#inner_gpu_particles_2d.emitting = true
 	shadow_sprite.scale = scale_factor * Vector2.ONE
 	
 	var background_layer = get_tree().get_first_node_in_group("background_layer")

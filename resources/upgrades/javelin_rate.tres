@@ -9,4 +9,4 @@ id = "javelin_rate"
 icon = ExtResource("1_1ails")
 max_quantity = 4
 name = "Javelin Agility"
-description = "Increases javelin attack rate by 20%."
+description = "Increases Javelin attack rate by 20%."

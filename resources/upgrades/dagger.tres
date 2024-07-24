@@ -11,4 +11,4 @@ id = "dagger"
 icon = ExtResource("1_15aft")
 max_quantity = 1
 name = "Dagger"
-description = "Gain the ability to slash enemies with a dagger."
+description = "Gain the ability to strike enemies from above with a Dagger."

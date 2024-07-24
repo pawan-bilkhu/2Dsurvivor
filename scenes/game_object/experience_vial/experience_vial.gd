@@ -5,6 +5,7 @@ extends Node2D
 @onready var random_stream_player_2d_component: AudioStreamPlayer2D = $RandomStreamPlayer2DComponent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@export var experience_quantity: int = 1
 
 func tween_collect(percent: float, start_position: Vector2) -> void:
 	var player = get_tree().get_first_node_in_group("player") as Node2D
@@ -18,7 +19,7 @@ func tween_collect(percent: float, start_position: Vector2) -> void:
 
 
 func collect() -> void:
-	GameEvents.emit_experience_vial_collected(1)
+	GameEvents.emit_experience_vial_collected(experience_quantity)
 	queue_free()
 
 

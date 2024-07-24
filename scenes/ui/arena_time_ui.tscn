@@ -1,27 +1,113 @@
-[gd_scene load_steps=2 format=3 uid="uid://3olnnkslbd7"]
+[gd_scene load_steps=5 format=3 uid="uid://3olnnkslbd7"]
 
 [ext_resource type="Script" path="res://scenes/ui/arena_time_ui.gd" id="1_gg4rw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uparj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6lhj"]
+bg_color = Color(0.14902, 0.168627, 0.266667, 1)
+border_color = Color(0.14902, 0.168627, 0.266667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj2r2"]
+bg_color = Color(0.262745, 0.882353, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.14902, 0.168627, 0.266667, 1)
 
 [node name="ArenaTimeUI" type="CanvasLayer"]
 script = ExtResource("1_gg4rw")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="TimeWaveContainer" type="PanelContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = 1.0
+offset_right = 56.0
+offset_bottom = 26.0
 grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_top = 8
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TimeWaveContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_bottom = 2
+
+[node name="HboxContainer" type="HBoxContainer" parent="TimeWaveContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="TimeLabel" type="Label" parent="TimeWaveContainer/MarginContainer/HboxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
-theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 6
 text = "test"
+
+[node name="Control" type="Control" parent="TimeWaveContainer/MarginContainer/HboxContainer"]
+layout_mode = 2
+
+[node name="VerticalSeparatorIcon" type="TextureRect" parent="TimeWaveContainer/MarginContainer/HboxContainer/Control"]
+modulate = Color(0.14902, 0.168627, 0.266667, 1)
+layout_mode = 2
+offset_left = -1.5
+offset_top = -4.0
+offset_right = 0.5
+offset_bottom = 11.0
+scale = Vector2(1.16, 1.4)
+texture = SubResource("CanvasTexture_uparj")
+
+[node name="CurrentWaveLabel" type="Label" parent="TimeWaveContainer/MarginContainer/HboxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+text = "Wave: 00"
+
+[node name="EnemyPanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -92.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 26.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EnemyPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyPanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrentEnemyCountLabel" type="Label" parent="EnemyPanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_colors/font_outline_color = Color(0.14902, 0.168627, 0.266667, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+text = "Wave Progress"
+
+[node name="WaveProgressBar" type="ProgressBar" parent="EnemyPanelContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_f6lhj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fj2r2")
+max_value = 1.0
+show_percentage = false

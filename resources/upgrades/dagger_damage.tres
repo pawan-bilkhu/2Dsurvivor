@@ -9,4 +9,4 @@ id = "dagger_damage"
 icon = ExtResource("1_3m5v8")
 max_quantity = 0
 name = "Dagger Damage"
-description = "Increases dagger damage by 20%"
+description = "Increases Dagger damage by 20%."

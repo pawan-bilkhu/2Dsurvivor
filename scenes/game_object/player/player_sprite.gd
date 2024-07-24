@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
 
+enum PlayerStates { 
+	WALK,
+	IDLE,
+	DASH,
+	}
+
 @export var arena_time_manager: Node
 
 @onready var health_component: HealthComponent = $HealthComponent
@@ -20,6 +26,7 @@ var base_speed: float = 0.0
 var is_dashing: bool = false
 var can_dash: bool = true
 
+var current_state: PlayerStates = PlayerStates.IDLE
 
 
 func _ready() -> void:
@@ -46,17 +53,36 @@ func _process(delta: float) -> void:
 	else:
 		velocity_component.accelerate_in_direction(direction_vector)
 	
+	
 	velocity_component.move(self)
 	
 	if movement_vector.length_squared() > 0:
-		animation_player.play("walk")
+		change_current_state(PlayerStates.WALK)
 	else:
-		animation_player.play("RESET")
+		change_current_state(PlayerStates.IDLE)
+		
+	
+	set_current_animation()
 	
 	var move_sign: int = sign(movement_vector.x)
 	if move_sign != 0:
 		visuals.scale = Vector2(move_sign, 1)
 
+
+func set_current_animation() -> void:
+	if current_state == PlayerStates.WALK:
+		animation_player.play("walk")
+	elif current_state == PlayerStates.IDLE:
+		animation_player.play("RESET")
+	elif current_state == PlayerStates.DASH:
+		animation_player.play("dash")
+
+
+func change_current_state(new_state: PlayerStates) -> void:
+	if new_state == current_state:
+		return
+	
+	current_state = new_state
 
 
 func get_movement_vector() -> Vector2:
@@ -69,6 +95,8 @@ func check_dash() -> void:
 	if not can_dash || is_dashing || direction_vector == Vector2.ZERO:
 		return
 	if Input.is_action_just_pressed("dash"):
+		change_current_state(PlayerStates.DASH)
+		set_current_animation()
 		set_can_dash(false)
 		set_is_dashing(true)
 		var dash_duration: float = 0.3
