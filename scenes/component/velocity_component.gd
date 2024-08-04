@@ -30,10 +30,10 @@ func accelerate_in_direction(direction: Vector2) -> void:
 	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
 
 
-func dash_in_direction(direction: Vector2, dash_magnitude: float) -> void:
-	var dash_velocity: Vector2 = direction * dash_magnitude * max_speed
+func dash_in_direction(direction: Vector2, dash_force: float) -> void:
+	var dash_velocity: Vector2 = direction * dash_force * max_speed
 	velocity = dash_velocity
-	accelerate_in_direction(direction)
+	decelerate()
 
 
 func decelerate() -> void:

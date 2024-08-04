@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://daj0y3enig6ig"]
+[gd_scene load_steps=8 format=3 uid="uid://daj0y3enig6ig"]
 
 [ext_resource type="Script" path="res://scenes/ability/axe_ability/axe_ability.gd" id="1_jki8x"]
 [ext_resource type="Texture2D" uid="uid://rvcshgbt5dbq" path="res://assets/weapons/double_bladed_axe.png" id="1_sexn2"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_ep6nx"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_mf5jc"]
 
 [sub_resource type="Animation" id="Animation_f33rx"]
@@ -14,6 +13,18 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -31,6 +42,18 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -55,12 +78,11 @@ libraries = {
 autoplay = "default"
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.784314)
-position = Vector2(0, 11)
-rotation = 0.00029629
-scale = Vector2(1.75, 1)
-texture = ExtResource("2_ep6nx")
-offset = Vector2(0, -1)
+self_modulate = Color(0, 0, 0, 0.784314)
+position = Vector2(0, 17)
+scale = Vector2(1.25, 1)
+texture = ExtResource("1_sexn2")
+offset = Vector2(0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sexn2")

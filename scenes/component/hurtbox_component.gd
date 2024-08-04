@@ -2,9 +2,11 @@ extends Area2D
 class_name HurtboxComponent
 
 signal hit
+signal knockback(direction: Vector2)
 
 @export var heatlh_component: Node
 @export var floating_text_scene: PackedScene
+
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -37,8 +39,12 @@ func _on_area_entered(area: Area2D) -> void:
 	floating_damage_text.start(format_string(damage_amount))
 	
 	
-	if hitbox_component.is_in_group("javelin"):
+	if hitbox_component.is_in_group("throwable"):
 		hitbox_component.owner.destroy()
+	
+	if hitbox_component.is_in_group("knockback"):
+		var direction: Vector2 = owner.global_position.direction_to(hitbox_component.owner.global_position)
+		knockback.emit(direction)
 	
 	hit.emit()
 

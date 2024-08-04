@@ -4,6 +4,7 @@ extends Node
 
 @onready var timer: Timer = $Timer
 
+var axe_quantity: int = 1
 var base_damage: float = 0.0
 var critical_chance: float = 0
 var critical_damage: float = 0
@@ -12,19 +13,20 @@ var additional_damage_percent: float = 1
 var additional_critical_chance: float = 0.0
 var base_wait_time: float
 
-var stats: Dictionary = {}
+var stats: WeaponStats
 
 func _ready() -> void:
-	stats = GameStats.get_weapon_stats("axe")
+	stats = GameStats.get_weapon_stats_resource("axe")
 	
-	if not stats.is_empty():
-		base_damage = stats["damage"]["magnitude"]
-		critical_chance = min(stats["critical_chance"]["magnitude"], 1.0)
-		critical_damage = stats["critical_damage"]["magnitude"]
-		base_wait_time = max(stats["attack_interval"]["magnitude"], 0.05)
-		timer.wait_time = base_wait_time
+	if stats != null:
+		base_damage = stats.damage
+		critical_chance = min(stats.critical_chance, 1.0)
+		critical_damage = stats.critical_damage
+		base_wait_time = max(stats.attack_interval, 0.05)
 		
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+	timer.start()
+
 
 func _on_timer_timeout() -> void:
 	var player = get_tree().get_first_node_in_group("player") as Node2D
@@ -35,13 +37,18 @@ func _on_timer_timeout() -> void:
 	if not foreground_layer:
 		return
 	
-	var axe_ability_instance = axe_ability_scene.instantiate() as AxeAbility
-	foreground_layer.add_child(axe_ability_instance)
-	axe_ability_instance.hitbox_component.damage = base_damage * additional_damage_percent
-	axe_ability_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
-	axe_ability_instance.hitbox_component.critical_damage = critical_damage
+	var separation_angle: float = TAU/axe_quantity
+	var base_rotation: Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU))
 	
-	axe_ability_instance.global_position = player.global_position
+	for i in axe_quantity:
+		var axe_ability_instance = axe_ability_scene.instantiate() as AxeAbility
+		axe_ability_instance.base_rotation = base_rotation.rotated(i*separation_angle) 
+		axe_ability_instance.died.connect(timer.start)
+		foreground_layer.add_child(axe_ability_instance)
+		axe_ability_instance.hitbox_component.damage = base_damage * additional_damage_percent
+		axe_ability_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
+		axe_ability_instance.hitbox_component.critical_damage = critical_damage
+		axe_ability_instance.global_position = player.marker_2d.global_position
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:

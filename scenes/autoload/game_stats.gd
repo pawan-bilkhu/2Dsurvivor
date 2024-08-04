@@ -1,6 +1,17 @@
 extends Node
 
 const SAVE_FILE_PATH = "user://weapon_stats.save"
+const RESOURCE_SAVE_FILE = "user://weapon_stats_resource.save"
+
+@export var sword_stats: WeaponStats = WeaponStats.new()
+@export var axe_stats: WeaponStats = WeaponStats.new()
+@export var hammer_stats: WeaponStats = WeaponStats.new()
+@export var dagger_stats: WeaponStats = WeaponStats.new()
+@export var javelin_stats: WeaponStats = WeaponStats.new()
+@export var anvil_stats: WeaponStats = WeaponStats.new()
+
+var weapon_stats_resources: Dictionary
+
 
 var weapon_stats: Dictionary = {
 	"sword" : {
@@ -53,13 +64,13 @@ var weapon_stats: Dictionary = {
 			"current_upgrade_quantity" : 0,
 		},
 		"attack_interval" :  {
-			"magnitude" : 10.0,
+			"magnitude" : 4.0,
 			"current_upgrade_quantity" : 0,
 		},
 	},
 	"dagger" : {
 		"damage" : { 
-			"magnitude" : 1.0,
+			"magnitude" : 4.0,
 			"current_upgrade_quantity" : 0,
 		},
 		"critical_chance" : {
@@ -77,7 +88,7 @@ var weapon_stats: Dictionary = {
 	},
 	"javelin" : {
 		"damage" : { 
-			"magnitude" : 1.0,
+			"magnitude" : 3.0,
 			"current_upgrade_quantity" : 0,
 		},
 		"critical_chance" : {
@@ -115,9 +126,15 @@ var weapon_stats: Dictionary = {
 
 
 func _ready() -> void:
-	load_weapon_stats()
+	load_weapon_stats_resource(sword_stats)
+	load_weapon_stats_resource(axe_stats)
+	load_weapon_stats_resource(hammer_stats)
+	load_weapon_stats_resource(dagger_stats)
+	load_weapon_stats_resource(javelin_stats)
+	load_weapon_stats_resource(anvil_stats)
 
 
+# weapon stats as dictionary
 func load_weapon_stats() -> void:
 	if not FileAccess.file_exists(SAVE_FILE_PATH):
 		save_weapon_stats()
@@ -150,3 +167,31 @@ func get_weapon_stats(weapon_id: String) -> Dictionary:
 	if weapon_stats.has(weapon_id):
 		stats = weapon_stats[weapon_id]
 	return stats
+
+
+# weapon stats as a resource
+func load_weapon_stats_resource(weapon_resource: WeaponStats) -> void:
+	var save_path = get_save_path(weapon_resource.id)
+	if ResourceLoader.exists(save_path):
+		var loaded_resource: Resource = ResourceLoader.load(save_path, "", ResourceLoader.CACHE_MODE_REPLACE)
+		weapon_stats_resources[weapon_resource.id] = loaded_resource
+		print(save_path + " loaded")
+	else:
+		weapon_stats_resources[weapon_resource.id] = weapon_resource
+		save_weapon_stats_resource(weapon_resource)
+
+
+func save_weapon_stats_resource(weapon_resource: WeaponStats) -> void:
+	ResourceSaver.save(weapon_resource, get_save_path(weapon_resource.id))
+
+
+func get_weapon_stats_resource(weapon_id: String) -> WeaponStats:
+	var stats: WeaponStats = null
+	if weapon_stats_resources.has(weapon_id):
+		stats = weapon_stats_resources[weapon_id]
+	return stats
+
+
+func get_save_path(weapon_id: String) -> String:
+	var path: String = "user://%s_stats.tres" % [weapon_id]
+	return path

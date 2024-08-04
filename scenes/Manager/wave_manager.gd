@@ -6,12 +6,14 @@ signal remaining_enemies_updated(remaining_enemies: int, total_enemies: int)
 
 const SPAWN_RADIUS: float = 350
 
+@export var is_testing: bool = false
 @export var basic_enemy_scene: PackedScene
 @export var wizard_enemy_scene: PackedScene
 @export var bat_enemy_scene: PackedScene
 @export var crab_enemy_scene: PackedScene
 @export var slime_enemy_scene: PackedScene
 @export var cyclops_enemy_scene: PackedScene
+
 
 @onready var margin_container: MarginContainer = %MarginContainer
 @onready var current_wave_label: Label = %CurrentWaveLabel
@@ -83,35 +85,38 @@ func wave_start() -> void:
 
 
 func generate_wave() -> void:
-	current_wave_capacity = wave_growth_rate * current_wave
-	
-	if current_wave == 2:
-		enemy_table.add_item(wizard_enemy_scene, 17)
+	if not is_testing:
+		current_wave_capacity = wave_growth_rate * current_wave
 		
-	if current_wave == 6:
-		enemy_table.add_item(bat_enemy_scene, 13)
-	
-	if current_wave == 11:
-		enemy_table.add_item(slime_enemy_scene, 15)
-	
-	if current_wave == 15:
-		enemy_table.add_item(cyclops_enemy_scene, 10)
-	
-	if current_wave % 5 == 0:
-		additional_enemy_health_percent += 0.10
-		
-		var boss_quantity: int = int(current_wave/5)
-		
-		while enemies_in_wave.size() < boss_quantity:
-			enemies_in_wave.append(cyclops_enemy_scene)
+		if current_wave == 2:
+			enemy_table.add_item(wizard_enemy_scene, 17)
 			
-		if current_wave % 10 == 0:
-			while enemies_in_wave.size() < 3*boss_quantity:
-				enemies_in_wave.append(slime_enemy_scene)
+		if current_wave == 6:
+			enemy_table.add_item(bat_enemy_scene, 13)
+		
+		if current_wave == 11:
+			enemy_table.add_item(slime_enemy_scene, 15)
+		
+		if current_wave == 15:
+			enemy_table.add_item(cyclops_enemy_scene, 10)
+		
+		if current_wave % 5 == 0:
+			additional_enemy_health_percent += 0.10
+			
+			var boss_quantity: int = int(current_wave/5)
+			
+			while enemies_in_wave.size() < boss_quantity:
+				enemies_in_wave.append(cyclops_enemy_scene)
+				
+			if current_wave % 10 == 0:
+				while enemies_in_wave.size() < 3*boss_quantity:
+					enemies_in_wave.append(slime_enemy_scene)
+		else:
+			while enemies_in_wave.size() < current_wave_capacity:
+				enemies_in_wave.append(enemy_table.pick_item())
 	else:
-		while enemies_in_wave.size() < current_wave_capacity:
-			enemies_in_wave.append(enemy_table.pick_item())
-	
+		while enemies_in_wave.size() < 25:
+			enemies_in_wave.append(bat_enemy_scene)
 	
 	var entities_layer: Node2D = get_tree().get_first_node_in_group("entities_layer") as Node2D
 	

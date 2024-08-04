@@ -337,7 +337,7 @@ libraries = {
 }
 autoplay = "smash"
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_53jnq")]
+[node name="HitboxComponent" parent="." groups=["knockback"] instance=ExtResource("3_53jnq")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_fibu1")

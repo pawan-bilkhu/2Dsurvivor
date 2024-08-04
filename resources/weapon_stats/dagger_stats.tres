@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://csnegfm1s77a8"]
+
+[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_6t7it"]
+
+[resource]
+script = ExtResource("1_6t7it")
+id = "dagger"
+damage = 20.0
+critical_chance = 0.03
+critical_damage = 1.1
+attack_interval = 3.0

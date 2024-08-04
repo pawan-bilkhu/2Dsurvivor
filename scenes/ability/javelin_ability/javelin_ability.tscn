@@ -3,25 +3,33 @@
 [ext_resource type="Texture2D" uid="uid://bui4e41btndqk" path="res://assets/weapons/javelin.png" id="1_3fdwj"]
 [ext_resource type="Script" path="res://scenes/ability/javelin_ability/javelin_ability.gd" id="1_jm15i"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="2_5tgjm"]
-[ext_resource type="Texture2D" uid="uid://cx6bcdyt6pod8" path="res://assets/props/shadow.png" id="2_67d2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsuix"]
+size = Vector2(16, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbvpq"]
-size = Vector2(6, 16)
+size = Vector2(16, 8)
 
-[node name="JavelinAbility" type="Node2D"]
+[node name="JavelinAbility" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_jm15i")
 
-[node name="ShadowSprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.784314)
-position = Vector2(7, -2.53399e-05)
-rotation = 1.5708
-scale = Vector2(1.25, 0.5)
-texture = ExtResource("2_67d2p")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nsuix")
+debug_color = Color(0.99992, 0, 0.096263, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 9)
+rotation = 1.5708
+scale = Vector2(1, 1.1)
 texture = ExtResource("1_3fdwj")
 
-[node name="HitboxComponent" parent="." groups=["javelin"] instance=ExtResource("2_5tgjm")]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_3fdwj")
+
+[node name="HitboxComponent" parent="." groups=["throwable"] instance=ExtResource("2_5tgjm")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_hbvpq")

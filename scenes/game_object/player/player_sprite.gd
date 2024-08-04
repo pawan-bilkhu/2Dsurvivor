@@ -7,6 +7,7 @@ enum PlayerStates {
 	DASH,
 	}
 
+
 @export var arena_time_manager: Node
 
 @onready var health_component: HealthComponent = $HealthComponent
@@ -16,6 +17,7 @@ enum PlayerStates {
 @onready var visuals: Node2D = $Visuals
 @onready var velocity_component: Node = $VelocityComponent
 @onready var hit_random_stream_player_2d_component: AudioStreamPlayer2D = $HitRandomStreamPlayer2DComponent
+@onready var marker_2d: Marker2D = $Marker2D
 
 @onready var dash_timer: Timer = $DashTimer
 
@@ -26,6 +28,7 @@ var base_speed: float = 0.0
 var is_dashing: bool = false
 var can_dash: bool = true
 
+var facing_direction: Vector2 = Vector2.UP
 var current_state: PlayerStates = PlayerStates.IDLE
 
 
@@ -45,6 +48,10 @@ func _process(delta: float) -> void:
 	
 	if not is_dashing:
 		direction_vector = movement_vector.normalized()
+	
+	if direction_vector.length_squared() > 0:
+		facing_direction = direction_vector
+	
 	
 	check_dash()
 	
@@ -83,6 +90,10 @@ func change_current_state(new_state: PlayerStates) -> void:
 		return
 	
 	current_state = new_state
+
+
+func get_facing_direction() -> Vector2:
+	return facing_direction
 
 
 func get_movement_vector() -> Vector2:
@@ -131,6 +142,10 @@ func check_deal_damage() -> void:
 	health_component.damage(1)
 	damage_interval_timer.start()
 	# print(health_component.current_health)
+
+
+func get_current_abilitis() -> Array:
+	return abilities.get_children()
 
 
 func on_health_decreased() -> void:

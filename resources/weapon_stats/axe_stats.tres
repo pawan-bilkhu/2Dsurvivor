@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://dn8rx5vhuugra"]
+
+[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_3wwcn"]
+
+[resource]
+script = ExtResource("1_3wwcn")
+id = "axe"
+damage = 14.0
+critical_chance = 0.08
+critical_damage = 1.15
+attack_interval = 7.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://du75mkal03gfk"]
+
+[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_lg8k1"]
+
+[resource]
+script = ExtResource("1_lg8k1")
+id = "javelin"
+damage = 18.0
+critical_chance = 0.05
+critical_damage = 1.05
+attack_interval = 5.0

@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3b0nkckxvffo"]
+[gd_scene load_steps=8 format=3 uid="uid://c3b0nkckxvffo"]
 
 [ext_resource type="Script" path="res://scenes/autoload/game_stats.gd" id="1_1vmtt"]
+[ext_resource type="Resource" uid="uid://eob4v4ef7len" path="res://resources/weapon_stats/sword_stats.tres" id="2_1sa27"]
+[ext_resource type="Resource" uid="uid://dn8rx5vhuugra" path="res://resources/weapon_stats/axe_stats.tres" id="3_qch68"]
+[ext_resource type="Resource" uid="uid://hc40mmoxhlja" path="res://resources/weapon_stats/hammer_stats.tres" id="4_rmgi3"]
+[ext_resource type="Resource" uid="uid://csnegfm1s77a8" path="res://resources/weapon_stats/dagger_stats.tres" id="5_7vf4m"]
+[ext_resource type="Resource" uid="uid://du75mkal03gfk" path="res://resources/weapon_stats/javelin_stats.tres" id="6_usr7i"]
+[ext_resource type="Resource" uid="uid://chdsvllccvkkw" path="res://resources/weapon_stats/anvil_stats.tres" id="7_mk4le"]
 
-[node name="WeaponStats" type="Node"]
+[node name="GameStats" type="Node"]
 script = ExtResource("1_1vmtt")
+sword_stats = ExtResource("2_1sa27")
+axe_stats = ExtResource("3_qch68")
+hammer_stats = ExtResource("4_rmgi3")
+dagger_stats = ExtResource("5_7vf4m")
+javelin_stats = ExtResource("6_usr7i")
+anvil_stats = ExtResource("7_mk4le")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://hc40mmoxhlja"]
+
+[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_8m8ok"]
+
+[resource]
+script = ExtResource("1_8m8ok")
+id = "hammer"
+damage = 55.0
+critical_chance = 0.12
+critical_damage = 2.0
+attack_interval = 10.0
