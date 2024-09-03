@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy6e13i4emuq6"]
+
+[ext_resource type="Texture2D" uid="uid://dpbypdh8ghd1x" path="res://assets/weapons/round_bomb.png" id="1_40an0"]
+[ext_resource type="Script" path="res://scenes/ability/bomb_ability/bomb_ability.gd" id="1_ynfd6"]
+
+[sub_resource type="Animation" id="Animation_0r8yg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uvwqs"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hiwns"]
+_data = {
+"RESET": SubResource("Animation_0r8yg"),
+"default": SubResource("Animation_uvwqs")
+}
+
+[node name="BombAbility" type="Node2D"]
+script = ExtResource("1_ynfd6")
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.745098)
+position = Vector2(0, 19)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_40an0")
+offset = Vector2(0, -1)
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_40an0")
+offset = Vector2(0, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hiwns")
+}
+autoplay = "default"

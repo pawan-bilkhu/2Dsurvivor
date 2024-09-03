@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cia6866cdbxgf"]
+
+[ext_resource type="Script" path="res://scenes/component/area_of_affect_component.gd" id="1_mprvs"]
+
+[node name="AreaOfEffectComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_mprvs")
+
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+
+[node name="DamageDurationTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="timeout" from="DamageDurationTimer" to="." method="_on_damage_duration_timer_timeout"]

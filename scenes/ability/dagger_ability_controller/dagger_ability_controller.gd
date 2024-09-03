@@ -39,7 +39,7 @@ func _on_timer_timeout() -> void:
 		
 		var direction: Vector2 = Vector2.ZERO
 		
-		dagger_instance.direction = player.get_facing_direction()
+		dagger_instance.direction = player.get_aim_direction().normalized()
 		dagger_instance.global_position = player.marker_2d.global_position
 		
 		foreground_layer.add_child(dagger_instance)

@@ -1,59 +1,52 @@
 extends Node
 
-@export var axe_ability_scene: PackedScene
+@export var orbital_marker_scene: PackedScene = preload("res://scenes/ability/axe_ability_controller/orbital_marker_2d/orbital_marker.tscn")
+@onready var orbital_layer: Node2D = $OrbitalLayer
 
-@onready var timer: Timer = $Timer
+var orbital_group: Array[Node2D] = []
 
-var axe_quantity: int = 1
-var base_damage: float = 0.0
-var critical_chance: float = 0
-var critical_damage: float = 0
+var max_quantity: int = 10
+var total_quantity: int = 1
+var current_quantity: int = 0
 
-var additional_damage_percent: float = 1
-var additional_critical_chance: float = 0.0
-var base_wait_time: float
-
-var stats: WeaponStats
+var orbital_position: Array[int] = []
 
 func _ready() -> void:
-	stats = GameStats.get_weapon_stats_resource("axe")
-	
-	if stats != null:
-		base_damage = stats.damage
-		critical_chance = min(stats.critical_chance, 1.0)
-		critical_damage = stats.critical_damage
-		base_wait_time = max(stats.attack_interval, 0.05)
-		
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
-	timer.start()
+	for i in max_quantity:
+		orbital_position.append(i)
+	
+	generate_orbit()
 
 
-func _on_timer_timeout() -> void:
-	var player = get_tree().get_first_node_in_group("player") as Node2D
-	if not player:
+func generate_orbit() -> void:
+	var base_direction: Vector2
+	var base_rotation_rate: float = PI
+	var separation_angle: float = TAU/max_quantity
+	
+	if orbital_group.size() == 0:
+		base_direction = Vector2.RIGHT
+		create_orbital_markers(base_direction, base_rotation_rate, separation_angle)
 		return
-	
-	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer") as Node2D
-	if not foreground_layer:
-		return
-	
-	var separation_angle: float = TAU/axe_quantity
-	var base_rotation: Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU))
-	
-	for i in axe_quantity:
-		var axe_ability_instance = axe_ability_scene.instantiate() as AxeAbility
-		axe_ability_instance.base_rotation = base_rotation.rotated(i*separation_angle) 
-		axe_ability_instance.died.connect(timer.start)
-		foreground_layer.add_child(axe_ability_instance)
-		axe_ability_instance.hitbox_component.damage = base_damage * additional_damage_percent
-		axe_ability_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
-		axe_ability_instance.hitbox_component.critical_damage = critical_damage
-		axe_ability_instance.global_position = player.marker_2d.global_position
+
+	create_orbital_markers(orbital_group[0].get_current_direction(), base_rotation_rate, separation_angle)
+
+
+func create_orbital_markers(direction: Vector2, rotation_rate: float, separation_angle: float) -> void:
+	while orbital_group.size() < total_quantity:
+		var orbital_marker = orbital_marker_scene.instantiate()
+		orbital_marker.set_current_direction(
+			direction.rotated(
+				orbital_position.pop_at(randi() % orbital_position.size()) * separation_angle
+				)
+			)
+		orbital_marker.set_rotation_rate(rotation_rate)
+		orbital_layer.add_child(orbital_marker)
+		orbital_group.append(orbital_marker)
+		current_quantity += 1
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:
-	if upgrade.id == "axe_damage":
-		additional_damage_percent = 1 + (current_upgrades["axe_damage"]["quantity"] * 0.1)
-	if upgrade.id == "axe_rate":
-		var percent_reduction = current_upgrades["axe_rate"]["quantity"] * 0.05
-		timer.wait_time =  max(base_wait_time * (1 - percent_reduction), 0.05)
+	if upgrade.id == "axe_quantity":
+		total_quantity = max(total_quantity + current_upgrades["axe_quantity"]["quantity"], max_quantity)
+		generate_orbit()

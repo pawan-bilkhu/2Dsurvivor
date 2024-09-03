@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://lgpnx0f8po2r"]
+
+[ext_resource type="PackedScene" uid="uid://cia6866cdbxgf" path="res://scenes/component/area_of_affect_component.tscn" id="1_abthb"]
+[ext_resource type="Script" path="res://scenes/game_object/fire_aoe/fire_aoe.gd" id="1_hbnu2"]
+[ext_resource type="Texture2D" uid="uid://30cpmkuw5ify" path="res://assets/props/burn_shape.png" id="3_3a4rr"]
+
+[sub_resource type="Shader" id="Shader_bhgmp"]
+code = "shader_type canvas_item;
+
+uniform sampler2D NOISE_PATTERN: repeat_enable;
+uniform bool is_paused = false;
+uniform vec2 noise_scale1 = vec2(1,1);
+uniform vec2 noise_scale2 = vec2(1,1);
+uniform vec2 scroll = vec2(0.15, -0.15);
+uniform vec2 scroll2 = vec2(0.05, 0.05);
+uniform sampler2D TONE_MAPPING;
+uniform float blur: hint_range(0.0, 20.0) = 3.0;
+uniform float base_intensity: hint_range(0.0, 0.5) = 0.1;
+uniform float intensity_factor: hint_range(0.0, 5.0) = 1.5;
+
+void fragment() {
+	float texture_alpha = texture(TEXTURE, UV, blur).a;
+	float time = 0.0;
+	if (!is_paused) {
+		time += TIME;
+	}
+		
+	float pattern_intensity = texture(NOISE_PATTERN, UV * noise_scale1 + time * scroll).r;
+	float pattern_intensity2 = texture(NOISE_PATTERN, UV * noise_scale2 + time * scroll2).r;
+	float intensity = texture_alpha * intensity_factor *
+		(pattern_intensity * pattern_intensity2 + base_intensity);
+	COLOR = texture(TONE_MAPPING, vec2(intensity));
+}"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d75q3"]
+noise_type = 2
+frequency = 0.0036
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yp8k1"]
+seamless = true
+seamless_blend_skirt = 0.891
+noise = SubResource("FastNoiseLite_d75q3")
+
+[sub_resource type="Gradient" id="Gradient_kyoed"]
+offsets = PackedFloat32Array(0, 0.154028, 0.462085, 0.805687, 1)
+colors = PackedColorArray(0.690196, 0, 0, 0, 0.909804, 0.160784, 0.0156863, 1, 0.741176, 0.423529, 0.0313726, 1, 0.996078, 0.956863, 0.203922, 1, 1, 1, 0.364706, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kvcwd"]
+gradient = SubResource("Gradient_kyoed")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1r66w"]
+resource_local_to_scene = true
+shader = SubResource("Shader_bhgmp")
+shader_parameter/is_paused = false
+shader_parameter/noise_scale1 = Vector2(1, 5)
+shader_parameter/noise_scale2 = Vector2(1.25, 1)
+shader_parameter/scroll = Vector2(0.4, 0.3)
+shader_parameter/scroll2 = Vector2(-0.2, 0.1)
+shader_parameter/blur = 3.0
+shader_parameter/base_intensity = 0.1
+shader_parameter/intensity_factor = 2.17
+shader_parameter/NOISE_PATTERN = SubResource("NoiseTexture2D_yp8k1")
+shader_parameter/TONE_MAPPING = SubResource("GradientTexture1D_kvcwd")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5nu61"]
+radius = 46.0
+
+[sub_resource type="Gradient" id="Gradient_wilrw"]
+offsets = PackedFloat32Array(0, 0.459168, 0.876733, 1)
+colors = PackedColorArray(0.603922, 0, 0, 1, 0.8, 0.721569, 0.498039, 1, 0.00202987, 0.00202986, 1.88011e-10, 0.627451, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qn871"]
+gradient = SubResource("Gradient_wilrw")
+
+[sub_resource type="Curve" id="Curve_y4w4c"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.528804, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hdh4u"]
+curve = SubResource("Curve_y4w4c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f1ryq"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 52.63
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, -30, 0)
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_hdh4u")
+color_ramp = SubResource("GradientTexture1D_qn871")
+
+[node name="FireAOE" type="Node2D"]
+script = ExtResource("1_hbnu2")
+
+[node name="BurnSprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1r66w")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_3a4rr")
+
+[node name="AreaOfEffectComponent" parent="." instance=ExtResource("1_abthb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaOfEffectComponent"]
+shape = SubResource("CircleShape2D_5nu61")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 75
+process_material = SubResource("ParticleProcessMaterial_f1ryq")
+lifetime = 2.0
+speed_scale = 1.75
+fixed_fps = 0
+interpolate = false
+fract_delta = false

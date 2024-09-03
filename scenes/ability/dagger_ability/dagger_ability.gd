@@ -6,9 +6,10 @@ class_name DaggerAbility
 @onready var collision_shape_2d: CollisionShape2D = $HitboxComponent/CollisionShape2D
 @onready var shadow_sprite: Sprite2D = $ShadowSprite2D
 @onready var visuals: Node2D = $Visuals
+@onready var health_component: Node = $ExtendedHealthComponent
 
 
-var speed: float = 50.0
+var speed: float = 250.0
 var direction: Vector2
 var can_move: bool = false
 var is_dead: bool = false
@@ -16,6 +17,7 @@ var tween: Tween
 
 
 func _ready() -> void:
+	health_component.died.connect(destroy)
 	
 	global_transform = Transform2D(direction.angle(), Vector2.ONE, 0, global_position)
 	

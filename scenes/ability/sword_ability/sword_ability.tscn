@@ -42,6 +42,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShadowNode2D/ShadowSprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShadowNode2D/ShadowSprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShadowNode2D/ShadowSprite2D:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
 
 [sub_resource type="Animation" id="Animation_6wlyx"]
 resource_name = "swing"
@@ -97,6 +133,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ShadowNode2D/ShadowSprite2D:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1.68179, 1),
+"update": 0,
+"values": [0.0, -0.174533, 3.14159, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ShadowNode2D/ShadowSprite2D:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.35, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 5.85634, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(2.25, 2.25), Vector2(1.25, 1.25), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ShadowNode2D/ShadowSprite2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6q3ss"]
 _data = {
@@ -110,15 +182,22 @@ size = Vector2(30, 30)
 [node name="SwordAbility" type="Node2D"]
 script = ExtResource("1_kmbm5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_r6xhd")
-offset = Vector2(0, -4)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6q3ss")
 }
 autoplay = "swing"
+
+[node name="ShadowNode2D" type="Node2D" parent="."]
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="ShadowNode2D"]
+self_modulate = Color(0, 0, 0, 0.784314)
+texture = ExtResource("1_r6xhd")
+offset = Vector2(0, -4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r6xhd")
+offset = Vector2(0, -4)
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_f0ip6")]
 

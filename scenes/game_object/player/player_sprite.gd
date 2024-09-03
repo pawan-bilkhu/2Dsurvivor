@@ -18,6 +18,7 @@ enum PlayerStates {
 @onready var velocity_component: Node = $VelocityComponent
 @onready var hit_random_stream_player_2d_component: AudioStreamPlayer2D = $HitRandomStreamPlayer2DComponent
 @onready var marker_2d: Marker2D = $Marker2D
+@onready var direction_indicator: Node2D = $DirectionIndicator
 
 @onready var dash_timer: Timer = $DashTimer
 
@@ -29,6 +30,7 @@ var is_dashing: bool = false
 var can_dash: bool = true
 
 var facing_direction: Vector2 = Vector2.UP
+var aim_direction: Vector2 = Vector2.ZERO
 var current_state: PlayerStates = PlayerStates.IDLE
 
 
@@ -41,9 +43,15 @@ func _ready() -> void:
 	health_component.health_decreased.connect(on_health_decreased)
 	health_component.health_changed.connect(on_health_changed)
 	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+	
+	remove_child(direction_indicator)
+	var background_layer: Node2D = get_tree().get_first_node_in_group("background_layer")
+	
+	background_layer.add_child(direction_indicator)
 
 
 func _process(delta: float) -> void:
+	set_aim_direction()
 	movement_vector = get_movement_vector()
 	
 	if not is_dashing:
@@ -96,10 +104,34 @@ func get_facing_direction() -> Vector2:
 	return facing_direction
 
 
+func get_player_center_position() ->  Vector2:
+	return marker_2d.global_position
+
+func set_aim_direction() -> void:
+	aim_direction = get_global_mouse_position() - get_player_center_position()
+	var radius: float = 20
+	var desired_direction: Vector2 = radius*Vector2.RIGHT.rotated(aim_direction.angle())
+	desired_direction += get_player_center_position()
+	direction_indicator.global_transform = Transform2D(aim_direction.angle() + PI/2, Vector2.ONE, 0, desired_direction)
+
+
+func get_aim_direction() -> Vector2:
+	return aim_direction
+
+
 func get_movement_vector() -> Vector2:
 	var direction_x: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var direction_y: float = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	return Vector2(direction_x, direction_y)
+	return Vector2(direction_x , direction_y)
+
+
+func get_mouse_relative_movement_vector() -> Vector2:
+	var forward_direction: float = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var strafe_direction: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var parallel_direction: Vector2 = -forward_direction*get_aim_direction()
+	var orthogonal_direction: Vector2 = -strafe_direction*get_aim_direction().orthogonal()
+	
+	return parallel_direction + orthogonal_direction
 
 
 func check_dash() -> void:

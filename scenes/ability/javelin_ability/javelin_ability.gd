@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	shadow_sprite.position += Vector2(0, 10)
 	
 	shadow_sprite.rotation = rotation + PI/2
-	
+	\
 	
 	if is_on_wall() || is_on_ceiling() || is_on_floor():
 		destroy()

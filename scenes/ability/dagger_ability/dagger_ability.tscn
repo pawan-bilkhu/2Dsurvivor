@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7mtu04g72wtn"]
+[gd_scene load_steps=8 format=3 uid="uid://b7mtu04g72wtn"]
 
 [ext_resource type="Script" path="res://scenes/ability/dagger_ability/dagger_ability.gd" id="1_35v2b"]
 [ext_resource type="Texture2D" uid="uid://bekyrxcbhghut" path="res://assets/weapons/dagger.png" id="1_d563t"]
+[ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_mdxuv"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_jx15n"]
+[ext_resource type="Script" path="res://scenes/component/dagger_health_component.gd" id="3_wissn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgid5"]
 size = Vector2(13.5, 8)
@@ -13,6 +15,10 @@ size = Vector2(12, 8.5)
 [node name="DaggerAbility" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_35v2b")
+
+[node name="ExtendedHealthComponent" parent="." instance=ExtResource("2_mdxuv")]
+script = ExtResource("3_wissn")
+max_health = 4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cgid5")

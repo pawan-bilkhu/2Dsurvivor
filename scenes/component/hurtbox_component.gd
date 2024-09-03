@@ -16,6 +16,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if not heatlh_component:
 		return
 	
+	
 	var hitbox_component = area as HitboxComponent
 	
 	var damage_amount = hitbox_component.damage
@@ -40,7 +41,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	
 	if hitbox_component.is_in_group("throwable"):
-		hitbox_component.owner.destroy()
+		hitbox_component.owner.health_component.damage(1)
 	
 	if hitbox_component.is_in_group("knockback"):
 		var direction: Vector2 = owner.global_position.direction_to(hitbox_component.owner.global_position)

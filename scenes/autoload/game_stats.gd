@@ -9,6 +9,8 @@ const RESOURCE_SAVE_FILE = "user://weapon_stats_resource.save"
 @export var dagger_stats: WeaponStats = WeaponStats.new()
 @export var javelin_stats: WeaponStats = WeaponStats.new()
 @export var anvil_stats: WeaponStats = WeaponStats.new()
+@export var bomb_stats: WeaponStats = WeaponStats.new()
+@export var aoe_fire_stats: WeaponStats = WeaponStats.new()
 
 var weapon_stats_resources: Dictionary
 
@@ -132,6 +134,8 @@ func _ready() -> void:
 	load_weapon_stats_resource(dagger_stats)
 	load_weapon_stats_resource(javelin_stats)
 	load_weapon_stats_resource(anvil_stats)
+	load_weapon_stats_resource(bomb_stats)
+	load_weapon_stats_resource(aoe_fire_stats)
 
 
 # weapon stats as dictionary

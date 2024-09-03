@@ -18,7 +18,7 @@ var intial_angle : float
 
 var time: float = 0.0
 var starting_position: Vector2
-var target_position: Vector2
+
 var target_direction: Vector2
 
 var z_axis: float = 0.0
@@ -39,20 +39,7 @@ func _ready() -> void:
 	background_layer.add_child(shadow_sprite)
 	
 	
-	#var tween = create_tween()
-	#tween.set_parallel()
-	#tween.tween_property(self, "global_position", target_position, 3.0)
-	#tween.tween_method(tween_method.bind(target_direction), 0.0, 1.0, 5.0)\
-	#.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	#tween.tween_property(self, "scale", Vector2.ZERO, 0.2).set_delay(0.8)
-	#tween.chain()
-	#tween.tween_callback(destroy)
-	#
 
-#func tween_method(percent: float, target_direction: Vector2) -> void:
-	#global_position = global_position.lerp(target_direction, percent)
-	#shadow_sprite.global_position = global_position
-	#shadow_sprite.scale = scale
 
 
 func _process(delta: float) -> void:

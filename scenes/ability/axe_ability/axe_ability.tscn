@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://daj0y3enig6ig"]
+[gd_scene load_steps=10 format=3 uid="uid://daj0y3enig6ig"]
 
 [ext_resource type="Script" path="res://scenes/ability/axe_ability/axe_ability.gd" id="1_jki8x"]
 [ext_resource type="Texture2D" uid="uid://rvcshgbt5dbq" path="res://assets/weapons/double_bladed_axe.png" id="1_sexn2"]
+[ext_resource type="PackedScene" uid="uid://dsv7kr7ql7bs0" path="res://scenes/component/health_component.tscn" id="2_lkd14"]
+[ext_resource type="Script" path="res://scenes/component/axe_health_component.gd" id="3_jgyll"]
 [ext_resource type="PackedScene" uid="uid://dqo8ia45ytqjm" path="res://scenes/component/hitbox_component.tscn" id="3_mf5jc"]
 
 [sub_resource type="Animation" id="Animation_f33rx"]
@@ -77,6 +79,10 @@ libraries = {
 }
 autoplay = "default"
 
+[node name="ExtendedHealthComponent" parent="." instance=ExtResource("2_lkd14")]
+script = ExtResource("3_jgyll")
+max_health = 2.0
+
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.784314)
 position = Vector2(0, 17)
@@ -87,7 +93,7 @@ offset = Vector2(0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sexn2")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_mf5jc")]
+[node name="HitboxComponent" parent="." groups=["throwable"] instance=ExtResource("3_mf5jc")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_2yqbw")

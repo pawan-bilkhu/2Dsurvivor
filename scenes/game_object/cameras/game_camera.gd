@@ -37,7 +37,7 @@ func aquire_target() -> void:
 	var player_nodes: Array = get_tree().get_nodes_in_group("player")
 	if player_nodes.size() > 0:
 		var player: CharacterBody2D = player_nodes[0] as CharacterBody2D
-		target_position = player.global_position
+		target_position = player.marker_2d.global_position
 
 
 func random_offset() -> Vector2:

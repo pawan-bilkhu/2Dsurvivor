@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cy4abug66bilv" path="res://scenes/ui/floating_text.tscn" id="2_0w3y6"]
 
 [node name="HurtboxComponent" type="Area2D"]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_753cl")
 floating_text_scene = ExtResource("2_0w3y6")

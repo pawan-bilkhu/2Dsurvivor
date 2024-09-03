@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://eob4v4ef7len"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://bcevqevy4gfu2"]
 
-[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_80w0b"]
+[ext_resource type="Script" path="res://resources/weapon_stats/base_weapon/weapon_stats.gd" id="1_qartt"]
 
 [resource]
-script = ExtResource("1_80w0b")
+script = ExtResource("1_qartt")
 id = "sword"
 damage = 25.0
 critical_chance = 0.05

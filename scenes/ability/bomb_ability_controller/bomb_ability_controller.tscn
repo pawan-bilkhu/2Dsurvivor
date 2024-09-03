@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cot75rrug1ign"]
+
+[ext_resource type="Script" path="res://scenes/ability/bomb_ability_controller/bomb_ability_controller.gd" id="1_tfsak"]
+[ext_resource type="PackedScene" uid="uid://cy6e13i4emuq6" path="res://scenes/ability/bomb_ability/bomb_ability.tscn" id="2_ewket"]
+
+[node name="BombAbilityController" type="Node"]
+script = ExtResource("1_tfsak")
+bomb_scene = ExtResource("2_ewket")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

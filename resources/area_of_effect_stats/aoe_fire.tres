@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AOEStats" load_steps=2 format=3 uid="uid://noh1drqlebl2"]
+
+[ext_resource type="Script" path="res://resources/area_of_effect_stats/base_area_of_effect/area_of_effect_stats.gd" id="1_skx73"]
+
+[resource]
+script = ExtResource("1_skx73")
+damage_duration = 10.0
+id = "aoe_fire"
+damage = 8.0
+critical_chance = 0.05
+critical_damage = 1.2
+attack_interval = 0.2

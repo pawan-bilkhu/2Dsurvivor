@@ -2,7 +2,6 @@ extends Node
 
 @export var max_range: float = 150
 @export var sword_ability: PackedScene
-@export var shadow_scene: PackedScene
 
 @onready var timer: Timer = $Timer
 
@@ -41,25 +40,19 @@ func _on_timer_timeout() -> void:
 	
 	var sword_instance = sword_ability.instantiate() as SwordAbility
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+
 	foreground_layer.add_child(sword_instance)
 	sword_instance.hitbox_component.damage = base_damage * additional_damage_percent
 	sword_instance.hitbox_component.critical_chance = min(critical_chance + additional_critical_chance, 1.0)
 	sword_instance.hitbox_component.critical_damage = critical_damage
 	
 	sword_instance.global_position = enemies[0].global_position
-	sword_instance.global_position += Vector2.RIGHT.rotated((randf_range(0, TAU))) * 4
+	var random_direction: Vector2 = Vector2.RIGHT.rotated((randf_range(0, TAU))) * 4
+	sword_instance.global_position += random_direction
 	
 	var enemy_direction: Vector2 = enemies[0].global_position - sword_instance.global_position
 	sword_instance.rotation = enemy_direction.angle()
-	
-	var background_layer = get_tree().get_first_node_in_group("background_layer")
-	
-	var shadow_instance: Node2D = shadow_scene.instantiate()
-	
-	background_layer.add_child(shadow_instance)
-	shadow_instance.global_position = sword_instance.global_position
-	shadow_instance.position.y += 15
-	sword_instance.shadow_instance = shadow_instance
+	sword_instance.set_shadow_properties(enemies[0].global_position + random_direction, enemy_direction.angle())
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary) -> void:

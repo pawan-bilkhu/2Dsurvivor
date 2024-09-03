@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://chdsvllccvkkw"]
 
-[ext_resource type="Script" path="res://resources/weapon_stats/weapon_stats.gd" id="1_vi67i"]
+[ext_resource type="Script" path="res://resources/weapon_stats/base_weapon/weapon_stats.gd" id="1_pe1he"]
 
 [resource]
-script = ExtResource("1_vi67i")
+script = ExtResource("1_pe1he")
 id = "anvil"
-damage = 0.0
-critical_chance = 0.0
-critical_damage = 0.0
-attack_interval = 0.0
+damage = 40.0
+critical_chance = 0.08
+critical_damage = 2.5
+attack_interval = 5.0

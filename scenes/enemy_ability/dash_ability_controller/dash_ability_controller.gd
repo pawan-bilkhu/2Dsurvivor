@@ -18,7 +18,6 @@ var danger_warning_instance: Node2D
 
 func _ready() -> void:
 	
-	
 	timer.start(randf_range(4.0, 7.0))
 	
 	var background_layer = get_tree().get_first_node_in_group("background_layer")
@@ -76,4 +75,5 @@ func tween_stop(percent: float) -> void:
 
 func reset() -> void:
 	entity.set_can_dash(true)
+	
 	

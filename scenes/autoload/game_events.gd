@@ -13,6 +13,9 @@ signal player_dash_cooldown(wait_time: float)
 signal player_current_health_updated
 
 signal camera_shake(global_position: Vector2)
+signal game_paused
+
+signal game_unpaused
 
 signal damage_dealt(damage_amount: float)
 
@@ -49,6 +52,14 @@ func emit_player_current_health_updated(current_health: float) -> void:
 
 func emit_camera_shake(global_positon: Vector2) -> void:
 	camera_shake.emit(global_positon)
+
+
+func emit_game_paused() -> void:
+	game_paused.emit()
+
+
+func emit_game_unpaused() -> void:
+	game_unpaused.emit()
 
 
 func emit_damage_dealt(damage_amount: float) -> void:
